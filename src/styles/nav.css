@@ -1,0 +1,49 @@
+.apartados{
+text-decoration: none;
+display: flex;
+justify-content:center;
+font-size:large;
+}
+.apartados>p{
+padding: 10px;
+}
+.apartados>p:hover{
+    color: green;
+}
+.imagenes{
+padding-top: 10px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+}
+.imagenes>div{
+    padding-top: 4px;
+    padding-left: 10px;
+}
+.imagenes>div>button{
+    color: white;
+background:#F8485E;
+padding-left: 15px;
+padding-right: 15px;
+border-radius: 19px;
+}
+Nav{
+    
+    padding-top: 8px;
+    padding-bottom: 8px;
+    background-color:white;
+    position:static;
+    display: flex;
+    justify-content:space-evenly;
+
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.235);
+padding-right: 100px;
+}
+.logoEmpresa{
+    margin: 0;
+ 
+}
+.logoEmpresa>img{
+  width: 150px;
+  height: 50px;
+}

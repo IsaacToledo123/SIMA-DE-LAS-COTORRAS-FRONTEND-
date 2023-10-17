@@ -1,0 +1,59 @@
+.formulario {
+    display: flex;
+    flex-direction: column;
+    max-width: 650px;
+    margin: 0 auto;
+    padding-bottom: 50px;
+}
+
+.parrafo {
+    margin-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-size: 20px;
+    font-weight: Inter;
+    color: rgba(0, 0, 0, 0.463);
+    margin-bottom: 5px;
+}
+
+input {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.55);
+    background-color: rgba(250, 235, 215, 0.178);
+    border-radius: 5px;
+    height: 60px;
+}
+
+.botonCrear {
+   color: white;
+   font-weight: Inter;
+    
+    font-size: 35px;
+    border: 1px solid rgba(0, 0, 0, 0.55);
+    background-color:rgba(248, 72, 94, 1);
+    border-radius: 10px;
+    height: 60px;
+    width:550px ;
+}
+.adjuntarImagen{
+padding-bottom: 100px;
+padding-left: 150px;
+
+}
+.img{
+   
+    height: 300px;
+    width: 300px;
+}
+.img:hover{
+    transform: scale(1.1);
+}
+.botonCrear:hover{
+    transform: scale(1.01);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+

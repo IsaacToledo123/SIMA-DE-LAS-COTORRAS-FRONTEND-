@@ -1,0 +1,12 @@
+.titulo1{
+
+    width: 800px;
+    height: 80px;
+    background-color: rgba(114, 9, 9, 0.463);
+    color: white;
+    border-radius: 3px;
+} 
+.titulo1>h1{
+    font-size:40px;
+    padding-left: 220px;
+}
