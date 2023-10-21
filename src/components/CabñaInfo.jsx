@@ -35,7 +35,7 @@ const CabñaInfo = () => {
         </div>
         <div className="flex justify-center ">
           <div className="pr-10">
-            <div className="flex border border-black border-2 p-2">
+            <div className="flex border border-black  border-2 p-2">
               <h2 className="text-2xl">Acepta Mascota</h2>
               <img src={Bañera} className="h-7 pl-2" />
             </div>

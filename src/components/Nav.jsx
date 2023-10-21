@@ -3,7 +3,7 @@ import Style from "../styles/nav.css";
 import ModalComponent from "./IniciarSesion";
 import { Outlet } from "react-router-dom";
 import Usuarios from "../img/usuarios.png";
-import LogoEmpresa from '../img/logoEmpresa.jpeg'
+import LogoEmpresa from '../img/logoP.png'
 const Nav = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
