@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import ImagenPrincipal from "../img/img1.png";
 import ImagenSecundaria from "../img/img2.png";
 import Cabañas from "../img/cabañas1.png";
-import Añadir from "../img/añadir.png";
 import Aventura from "../img/aventura.png";
+import OpcionServicio from "./OpcionServicio";
+import { AventuraContext } from "../context/AventuraContext"
+
 const Reservas = () => {
+
+  const { aventuras } = useContext(AventuraContext);
+
   return (
     <>
       <div class="bg-gray-200 p-20 text-center">
@@ -34,24 +39,11 @@ const Reservas = () => {
               Cabañas
             </h1>
           </div>
-          <div className="flex items-center pb-10">
-            <div className="bg-gray-200 pl-4 h-10 w-60"></div>
-            <div>
-              <img src={Añadir} className="h-10 w-10 ml-4 hover:animate-spin" />
-            </div>
-          </div>
-          <div className="flex items-center pb-10">
-            <div className="bg-gray-200 pl-4 h-10 w-60"></div>
-            <div>
-              <img src={Añadir} className="h-10 w-10 ml-4 hover:animate-spin" />
-            </div>
-          </div>
-          <div className="flex items-center pb-10">
-            <div className="bg-gray-200 pl-4 h-10 w-60"></div>
-            <div>
-              <img src={Añadir} className="h-10 w-10 ml-4 hover:animate-spin" />
-            </div>
-          </div>
+
+          <OpcionServicio />
+          <OpcionServicio />
+          <OpcionServicio />
+
         </div>
 
         <div className="flex flex-col items-center">
@@ -63,24 +55,17 @@ const Reservas = () => {
               Aventura
             </h1>
           </div>
-          <div className="flex items-center pb-10">
-            <div className="bg-gray-200 pl-4 h-10 w-60"></div>
-            <div>
-              <img src={Añadir} className="h-10 w-10 ml-4 hover:animate-spin" />
-            </div>
-          </div>
-          <div className="flex items-center pb-10">
-            <div className="bg-gray-200 pl-4 h-10 w-60"></div>
-            <div>
-              <img src={Añadir} className="h-10 w-10 ml-4 hover:animate-spin" />
-            </div>
-          </div>
-          <div className="flex items-center pb-10">
-            <div className="bg-gray-200 pl-4 h-10 w-60 "></div>
-            <div>
-              <img src={Añadir} className="h-10 w-10 ml-4 hover:animate-spin" />
-            </div>
-          </div>
+
+          {aventuras.map(aventura => {
+
+            const {id, nombre} = aventura;
+
+            return (
+
+              <OpcionServicio aventura = {nombre} key = {id}/>
+            )
+
+          })}
         </div>
       </div>
     </>

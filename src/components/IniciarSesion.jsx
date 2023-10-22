@@ -2,6 +2,8 @@ import React from "react";
 import Modal from "react-modal";
 import Contrseña from "../img/contraseña.png";
 import Correo from '../img/correo.png'
+import { useState } from "react";
+
 const customStyles = {
   content: {
     width: "40%",
@@ -16,6 +18,9 @@ const ModalComponent = ({ isOpen, onRequestClose }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Lógica de manejo del formulario
+  
+
+
   };
 
   return (
@@ -40,18 +45,18 @@ const ModalComponent = ({ isOpen, onRequestClose }) => {
 
         {/* Formulario */}
         <form onSubmit={handleSubmit} className="mt-4 p-5">
-        <div className="flex flex-col items-center mb-4">
+          <div className="flex flex-col items-center mb-4">
             <div className="flex mb-4 relative">
               <img
-                src={Correo} 
-               
+                src={Correo}
                 className="absolute left-0 top-2 w-10 h-10 p-2"
               />
               <input
                 type="email"
                 id="email"
                 name="email"
-                className="pl-8 pr-8 border p-2" 
+                className="pl-8 pr-8 border p-2"
+                
               />
             </div>
           </div>
@@ -59,7 +64,7 @@ const ModalComponent = ({ isOpen, onRequestClose }) => {
           <div className="flex flex-col items-center mb-4">
             <div className="flex mb-4 relative">
               <img
-                src={Contrseña} 
+                src={Contrseña}
                 alt="Icono de Contraseña"
                 className="absolute left-0 top-2 w-10 h-10 p-2"
               />
@@ -68,6 +73,7 @@ const ModalComponent = ({ isOpen, onRequestClose }) => {
                 id="password"
                 name="password"
                 className="pl-8 pr-8 border p-2" // Añadir padding izquierdo para dar espacio a la imagen
+                
               />
             </div>
           </div>
