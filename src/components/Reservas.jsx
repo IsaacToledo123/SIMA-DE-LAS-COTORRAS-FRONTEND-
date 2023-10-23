@@ -4,24 +4,58 @@ import ImagenSecundaria from "../img/img2.png";
 import Cabañas from "../img/cabañas1.png";
 import Aventura from "../img/aventura.png";
 import OpcionServicio from "./OpcionServicio";
-import { AventuraContext } from "../context/AventuraContext"
+import { AventuraContext } from "../context/AventuraContext";
+import { motion } from "framer-motion";
 
 const Reservas = () => {
+  //configuraciones de animacion
+  const sublogo = {
+    hidden: { opacity: 0, x: 50 },
+    visible: { opacity: 1, x: 0 },
+  };
+  const tituloAjustes = {
+    hidden: { opacity: 0, y: -50 },
+    visible: { opacity: 1, y: 0 },
+  };
+  const sublogo2 = {
+    hidden: { opacity: 0, x: -50 },
+    visible: { opacity: 1, x: 0 },
+  };
 
   const { aventuras } = useContext(AventuraContext);
 
   return (
     <>
-      <div class="bg-gray-200 p-20 text-center">
-        <h1 class="capitalize md:uppercase text-5xl">Menus de Servicios</h1>
-      </div>
-
+      <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={tituloAjustes}
+        transition={{ duration: 0.3 }}
+      >
+        <div class="bg-gray-200 p-20 text-center">
+          <h1 class="capitalize md:uppercase text-5xl">Menus de Servicios</h1>
+        </div>
+      </motion.div>
       <div className="flex pt-4 pb-10">
         <div className="w-full mx-4">
-          <img src={ImagenPrincipal} alt="" className="w-full h-auto" />
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={sublogo2}
+            transition={{ duration: 0.3 }}
+          >
+            <img src={ImagenPrincipal} alt="" className="w-full h-auto" />
+          </motion.div>
         </div>
         <div className="w-full mx-4">
-          <img src={ImagenSecundaria} alt="" className="w-full h-auto" />
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={sublogo}
+            transition={{ duration: 0.3 }}
+          >
+            <img src={ImagenSecundaria} alt="" className="w-full h-auto" />
+          </motion.div>
         </div>
       </div>
       <div className="flex p-10">
@@ -43,7 +77,6 @@ const Reservas = () => {
           <OpcionServicio />
           <OpcionServicio />
           <OpcionServicio />
-
         </div>
 
         <div className="flex flex-col items-center">
@@ -56,15 +89,10 @@ const Reservas = () => {
             </h1>
           </div>
 
-          {aventuras.map(aventura => {
+          {aventuras.map((aventura) => {
+            const { id, nombre } = aventura;
 
-            const {id, nombre} = aventura;
-
-            return (
-
-              <OpcionServicio aventura = {nombre} key = {id}/>
-            )
-
+            return <OpcionServicio aventura={nombre} key={id} />;
           })}
         </div>
       </div>

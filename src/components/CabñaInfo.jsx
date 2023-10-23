@@ -1,17 +1,42 @@
 import React from "react";
 import CabañaInfor from "../img/cabañaInfo.png";
 import Bañera from "../img/bañera.png";
+import {motion} from 'framer-motion'
 const CabñaInfo = () => {
+  const container = {
+    hidden: { opacity: 0, x: -50 },
+    visible: { opacity: 1, x: 0 },
+  };
+  const tituloAjustes = {
+    hidden: { opacity: 0, y:-50 },
+    visible: { opacity: 1, y: 0 },
+  };
   return (
+
+    
     <div>
+      <motion.div
+       initial="hidden"
+       animate="visible"
+       variants={tituloAjustes}
+       transition={{ duration: 0.3 }}
+      >
       <div class="bg-red-800 p-5 text-center">
         <h1 class="capitalize md:uppercase text-4xl text-white font-inter ">
           Informacion de la Cabaña
         </h1>
       </div>
+      </motion.div>
+      <motion.div
+       initial="hidden"
+       animate="visible"
+       variants={container}
+       transition={{ duration: 0.3 }}
+      >
       <div className="pt-10">
         <img src={CabañaInfor} alt="" />
       </div>
+      </motion.div>
       <div className="">
         <div className="flex justify-center p-8">
           <div className="pr-10">

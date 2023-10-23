@@ -4,25 +4,47 @@ import Style from "../styles/ladingPage.css";
 import Calendario from "../img/calendario.png";
 import Ubicacion from "../img/ubicacion.png";
 import Foto1 from "../img/foto1.png";
-import Mapa from '../img/mapa.png'
+import Mapa from "../img/mapa.png";
 import Foto2 from "../img/foto2.png";
+import { motion } from "framer-motion";
 const LadingPage = () => {
+  const container = {
+    hidden: { opacity: 0, x: -50 },
+    visible: { opacity: 1, x: 0 },
+  };
+  const botonesAjustes = {
+    hidden: { opacity: 0, y:-50 },
+    visible: { opacity: 1, y: 0 },
+  };
   return (
     <div>
-      <div class="imagenPrincipal">
-        <img src={ImagenLading} class="imagenLading" />
-      </div>
-      <div className="flex mx-20 ">
-        
-        <button className="bg-gray-200 p-5 rounded-md hover:shadow-xl">Informacion</button>
-        <div className="pl-5"> 
-        <button className="bg-gray-200 p-5 rounded-md hover:shadow-xl">
-          <img src={Mapa} className="h-10 w-10" />
-        </button>
+      <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={container}
+        transition={{ duration: 0.3 }}
+      >
+        <div class="imagenPrincipal">
+          <img src={ImagenLading} class="imagenLading" />
         </div>
-   
-      </div>
-
+      </motion.div>
+      <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={botonesAjustes}
+        transition={{ duration: 0.3 }}
+      >
+        <div className="flex mx-20 ">
+          <button className="bg-gray-200 p-5 rounded-md hover:shadow-xl">
+            Informacion
+          </button>
+          <div className="pl-5">
+            <button className="bg-gray-200 p-5 rounded-md hover:shadow-xl">
+              <img src={Mapa} className="h-10 w-10" />
+            </button>
+          </div>
+        </div>
+      </motion.div>
       <div class="contenido">
         <div class="titulo">
           <div>

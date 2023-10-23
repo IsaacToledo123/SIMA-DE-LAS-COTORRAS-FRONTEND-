@@ -7,11 +7,11 @@ import { motion } from "framer-motion";
 
 const Registro = () => {
   const container = {
-    hidden: { opacity: 0, x: -500 }, 
+    hidden: { opacity: 0, x: -50 }, 
     visible: { opacity: 1, x: 0 },
   };
   const container1 = {
-    hidden: { opacity: 0, x: 500 }, 
+    hidden: { opacity: 0, x: 50 }, 
     visible: { opacity: 1, x: 0 },
   };
 
@@ -35,6 +35,8 @@ const Registro = () => {
                 initial="hidden"
                 animate="visible"
                 variants={container}
+                transition={{ duration: 0.3}}
+
               >
                 <div class="parrafo">
                   <label htmlFor="">Nombre:</label>
@@ -68,6 +70,7 @@ const Registro = () => {
                 initial="hidden"
                 animate="visible"
                 variants={container1}
+                transition={{ duration: 0.3}}
               >
                 <div class="adjuntarImagen">
                   <img src={Adjuntar} class="img" />

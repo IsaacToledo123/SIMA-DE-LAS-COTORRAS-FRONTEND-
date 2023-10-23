@@ -3,6 +3,7 @@ import Modal from "react-modal";
 import Contrseña from "../img/contraseña.png";
 import Correo from '../img/correo.png'
 import { useState } from "react";
+import {motion} from 'framer-motion'
 
 const customStyles = {
   content: {
@@ -30,6 +31,13 @@ const ModalComponent = ({ isOpen, onRequestClose }) => {
       contentLabel="Ejemplo Modal"
       style={customStyles}
     >
+       <motion.div
+       initial={{ opacity: 0, y: -50 }}
+       animate={{ opacity: 1, y: 0 }}
+       exit={{ opacity: 0, y: -50 }}
+       transition={{ duration: 0.3 }}
+       className="modal"
+       >
       <div className="p-4 text-center">
         <div className="pl-20 pr-20 pb-4">
           <div className="bg-red-700 text-white opacity-70 p-2">
@@ -93,6 +101,7 @@ const ModalComponent = ({ isOpen, onRequestClose }) => {
       >
         Cerrar
       </button>
+      </motion.div>
     </Modal>
   );
 };

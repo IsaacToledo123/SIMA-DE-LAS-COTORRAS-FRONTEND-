@@ -19,6 +19,8 @@ const Titulo = () => {
         animate='visible'
         variants={containerVariants}
         className='flex justify-center p-5 rounded-lg bg-red-800 opacity-90'
+        transition={{ duration: 0.3}}
+
       >
         <motion.h1
           initial='hidden'
