@@ -4,6 +4,8 @@ import Contrseña from "../img/contraseña.png";
 import Correo from '../img/correo.png'
 import { useState } from "react";
 import {motion} from 'framer-motion'
+import { UsuarioContext } from "../context/UsuarioContext";
+import {useContext} from "react";
 
 const customStyles = {
   content: {
@@ -17,7 +19,10 @@ const customStyles = {
 
 const ModalComponent = ({ isOpen, onRequestClose }) => {
   const handleSubmit = (e) => {
+
+    
     e.preventDefault();
+    console.log("hola");
     // Lógica de manejo del formulario
   
 

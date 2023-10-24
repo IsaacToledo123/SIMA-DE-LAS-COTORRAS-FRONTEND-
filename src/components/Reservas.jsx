@@ -5,7 +5,7 @@ import Cabañas from "../img/cabañas1.png";
 import Aventura from "../img/aventura.png";
 import OpcionServicio from "./OpcionServicio";
 import { AventuraContext } from "../context/AventuraContext";
-import { motion } from "framer-motion";
+  import { motion } from "framer-motion";
 
 const Reservas = () => {
   //configuraciones de animacion

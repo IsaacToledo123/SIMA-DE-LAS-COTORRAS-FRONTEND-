@@ -7,10 +7,12 @@ import Foto1 from "../img/foto1.png";
 import Mapa from "../img/mapa.png";
 import Foto2 from "../img/foto2.png";
 import { motion } from "framer-motion";
-import { ComentarioContext } from "../context/ComentarioContext";
-
+import { UsuarioContext } from "../context/UsuarioContext";
+import Comentario from "../components/Comentario"
 
 const LadingPage = () => {
+
+  const { comentarios } = useContext(UsuarioContext);
 
   const container = {
     hidden: { opacity: 0, x: -50 },
@@ -158,8 +160,7 @@ const LadingPage = () => {
       </div>
 
       {/* Sección para crear un nuevo comentario */}
-      <div className="bg-gray-200 text-black grid place-items-center">
-
+      <div className="bg-gray-200 text-black grid place-items-center mx-10">
 
         <div className="p-10">
           <h1 className="text-3xl">Comentarios: </h1>
@@ -178,15 +179,15 @@ const LadingPage = () => {
             cols="60"
             rows="7"
             placeholder="Escribe un comentario..."
-            className="placeholder:text-black pl-3 bg-stone-300 text-xl p-5"
-            onChange={e => setComentario(e.target.value)}
-            >
+            className="placeholder:text-black pl-3 bg-stone-200 text-xl p-5"
+          //onChange={e => setComentario(e.target.value)}
+          >
           </textarea>
 
         </form>
 
         <div className="p-5">
-          <button className="bg-emerald-700 px-5 py-2 rounded-md text-white text-xl">Listo!</button>
+          <button className="bg-emerald-700 px-5 py-2 rounded-md text-white text-xl hover:bg-emerald-800">Listo!</button>
         </div>
 
       </div>
@@ -195,7 +196,13 @@ const LadingPage = () => {
 
       <div>
 
+        {comentarios.map((comentario, index) => {
 
+          const { username, userphoto, comment, date } = comentario;
+
+          return <Comentario username = {username} userphoto = {userphoto} comment = {comment} date = {date} key={index}/>
+
+        })}
 
       </div>
 

@@ -1,11 +1,16 @@
-import React from "react";
+import {useContext} from "react";
 import Titulo from "./Titulo";
 import Style from "../styles/registro.css";
 import Adjuntar from "../img/adjuntarImagen.png";
 import { CSSTransition } from "react-transition-group";
 import { motion } from "framer-motion";
 
+
 const Registro = () => {
+
+
+
+
   const container = {
     hidden: { opacity: 0, x: -50 }, 
     visible: { opacity: 1, x: 0 },

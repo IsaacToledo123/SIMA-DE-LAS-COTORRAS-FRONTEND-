@@ -6,7 +6,7 @@ export const AventuraContext = createContext()
 
 export function AventuraContextProvider(props) {
 
-      const [aventuras, setAventuras] = useState([])
+      const [aventuras, setAventuras] = useState([]);
 
       useEffect(() => {
 
