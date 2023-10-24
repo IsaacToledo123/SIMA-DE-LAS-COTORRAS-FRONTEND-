@@ -10,7 +10,7 @@ const Titulo = () => {
   const textVariants = {
     hidden: { x: -20, opacity: 0 },
     visible: { x: 0, opacity: 1 },
-  };
+  }; 
 
   return (
     <div className='pl-20 pr-20'>

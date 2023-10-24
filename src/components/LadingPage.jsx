@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useContext, useEffect } from "react";
 import ImagenLading from "../img/imagenLading.png";
 import Style from "../styles/ladingPage.css";
 import Calendario from "../img/calendario.png";
@@ -7,13 +7,17 @@ import Foto1 from "../img/foto1.png";
 import Mapa from "../img/mapa.png";
 import Foto2 from "../img/foto2.png";
 import { motion } from "framer-motion";
+import { ComentarioContext } from "../context/ComentarioContext";
+
+
 const LadingPage = () => {
+
   const container = {
     hidden: { opacity: 0, x: -50 },
     visible: { opacity: 1, x: 0 },
   };
   const botonesAjustes = {
-    hidden: { opacity: 0, y:-50 },
+    hidden: { opacity: 0, y: -50 },
     visible: { opacity: 1, y: 0 },
   };
   return (
@@ -152,6 +156,49 @@ const LadingPage = () => {
           </li>
         </ul>
       </div>
+
+      {/* Sección para crear un nuevo comentario */}
+      <div className="bg-gray-200 text-black grid place-items-center">
+
+
+        <div className="p-10">
+          <h1 className="text-3xl">Comentarios: </h1>
+        </div>
+
+
+        <form>
+
+          <div className="pb-5">
+            <label htmlFor="commentid" className="text-2xl">Dejar un comentario: </label>
+          </div>
+
+          <textarea
+            id="commentid"
+            type="text"
+            cols="60"
+            rows="7"
+            placeholder="Escribe un comentario..."
+            className="placeholder:text-black pl-3 bg-stone-300 text-xl p-5"
+            onChange={e => setComentario(e.target.value)}
+            >
+          </textarea>
+
+        </form>
+
+        <div className="p-5">
+          <button className="bg-emerald-700 px-5 py-2 rounded-md text-white text-xl">Listo!</button>
+        </div>
+
+      </div>
+
+      {/* Sección para ver todos los comentarios del sitio */}
+
+      <div>
+
+
+
+      </div>
+
     </div>
   );
 };
