@@ -1,6 +1,5 @@
 import {useContext} from "react";
 import Titulo from "./Titulo";
-import Style from "../styles/registro.css";
 import Adjuntar from "../img/adjuntarImagen.png";
 import { CSSTransition } from "react-transition-group";
 import { motion } from "framer-motion";
@@ -33,7 +32,7 @@ const Registro = () => {
           <Titulo></Titulo>
         </div>
 
-        <form class="formulario" action="">
+        <form class="flex flex-col" action="">
           <div className="flex justify-center ">
             <div className="p-10">
               <motion.div
@@ -43,29 +42,29 @@ const Registro = () => {
                 transition={{ duration: 0.3}}
 
               >
-                <div class="parrafo">
-                  <label htmlFor="">Nombre:</label>
-                  <input type="text" />
+                <div class="mb-5 flex flex-col">
+                  <label class="text-2xl font-inter text-gray-600 mb-1" htmlFor="">Nombre:</label>
+                  <input class="p-2 text-base border border-gray-500 bg-yellow-50 rounded-md h-14 w-96" type="text" />
                 </div>
-                <div class="parrafo">
-                  <label htmlFor="">Apellidos:</label>
-                  <input type="text" />
+                <div  class="mb-5 flex flex-col">
+                  <label class="text-2xl font-inter text-gray-600 mb-1" htmlFor="">Apellidos:</label>
+                  <input class="p-2 text-base border border-gray-500 bg-yellow-50 rounded-md h-14 w-96" type="text" />
                 </div>
-                <div class="parrafo">
-                  <label htmlFor="">Numero de telefono:</label>
-                  <input type="text" />
+                <div  class="mb-5 flex flex-col">
+                  <label class="text-2xl font-inter text-gray-600 mb-1"  htmlFor="">Numero de telefono:</label>
+                  <input class="p-2 text-base border border-gray-500 bg-yellow-50 rounded-md h-14 w-96" type="text" />
                 </div>
-                <div class="parrafo">
-                  <label htmlFor="">Correo electronico:</label>
-                  <input type="email" />
+                <div  class="mb-5 flex flex-col">
+                  <label class="text-2xl font-inter text-gray-600 mb-1" htmlFor="">Correo electronico:</label>
+                  <input class="p-2 text-base border border-gray-500 bg-yellow-50 rounded-md h-14 w-96" type="email" />
                 </div>
-                <div class="parrafo">
-                  <label htmlFor="">Usuario:</label>
-                  <input type="text" />
+                <div  class="mb-5 flex flex-col">
+                  <label class="text-2xl font-inter text-gray-600 mb-1" htmlFor="">Usuario:</label>
+                  <input class="p-2 text-base border border-gray-500 bg-yellow-50 rounded-md h-14 w-96" type="text" />
                 </div>
-                <div class="parrafo">
-                  <label htmlFor="">Contraseña:</label>
-                  <input type="password" />
+                <div  class="mb-5 flex flex-col">
+                  <label class="text-2xl font-inter text-gray-600 mb-1" htmlFor="">Contraseña:</label>
+                  <input class="p-2 text-base border border-gray-500 bg-yellow-50 rounded-md h-14 w-98" type="password" />
                 </div>
               </motion.div>
             </div>
@@ -77,10 +76,10 @@ const Registro = () => {
                 variants={container1}
                 transition={{ duration: 0.3}}
               >
-                <div class="adjuntarImagen">
-                  <img src={Adjuntar} class="img" />
+                <div class="flex justify-center">
+                  <img src={Adjuntar} class="w-3/4 hover:scale-105 " />
                 </div>
-                <div class="flex justify-center ">
+                <div class="flex justify-center pt-10 ">
                   <button class="capitalize md:uppercase text-white text-2xl bg-red-800 opacity-90 rounded-lg h-20 w-3/4 hover:opacity-100">
                     Crear Cuenta
                   </button>
