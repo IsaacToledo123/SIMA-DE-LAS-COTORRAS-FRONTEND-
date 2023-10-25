@@ -3,9 +3,9 @@ import Modal from "react-modal";
 import Contrseña from "../img/contraseña.png";
 import Correo from '../img/correo.png'
 import { useState } from "react";
-import {motion} from 'framer-motion'
+import { motion } from 'framer-motion'
 import { UsuarioContext } from "../context/UsuarioContext";
-import {useContext} from "react";
+import { useContext } from "react";
 
 const customStyles = {
   content: {
@@ -18,13 +18,22 @@ const customStyles = {
 };
 
 const ModalComponent = ({ isOpen, onRequestClose }) => {
-  const handleSubmit = (e) => {
 
-    
+  const { autenticarUsuario } = useContext(UsuarioContext);
+
+  const [user, setUser] = useState("")
+  const [password, setPassword] = useState("")
+
+  const handleSubmit = e => {
     e.preventDefault();
-    console.log("hola");
-    // Lógica de manejo del formulario
-  
+
+    const credenciales = {
+      username: user,
+      password: password
+    }
+
+    autenticarUsuario(credenciales);
+
 
 
   };
@@ -36,76 +45,77 @@ const ModalComponent = ({ isOpen, onRequestClose }) => {
       contentLabel="Ejemplo Modal"
       style={customStyles}
     >
-       <motion.div
-       initial={{ opacity: 0, y: -50 }}
-       animate={{ opacity: 1, y: 0 }}
-       exit={{ opacity: 0, y: -50 }}
-       transition={{ duration: 0.3 }}
-       className="modal"
-       >
-      <div className="p-4 text-center">
-        <div className="pl-20 pr-20 pb-4">
-          <div className="bg-red-700 text-white opacity-70 p-2">
-            <h1 className="capitalize md:uppercase text-2xl ">
-              Bienvenido de nuevo !
-            </h1>
+      <motion.div
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -50 }}
+        transition={{ duration: 0.3 }}
+        className="modal"
+      >
+        <div className="p-4 text-center">
+          <div className="pl-20 pr-20 pb-4">
+            <div className="bg-red-700 text-white opacity-70 p-2">
+              <h1 className="capitalize md:uppercase text-2xl ">
+                Bienvenido de nuevo !
+              </h1>
+            </div>
           </div>
+
+          <h2 className="capitalize md:uppercase text-xl opacity-70">
+            Iniciar Sesión
+          </h2>
+
+          {/* Formulario */}
+          <form onSubmit={handleSubmit} className="mt-4 p-5">
+            <div className="flex flex-col items-center mb-4">
+              <div className="flex mb-4 relative">
+                <img
+                  src={Correo}
+                  className="absolute left-0 top-2 w-10 h-10 p-2"
+                />
+                <input
+                  type="text"
+                  id="email"
+                  name="email"
+                  className="pl-8 pr-8 border p-2"
+                  onChange={e => setUser(e.target.value)}
+                />
+              </div>
+            </div>
+
+            <div className="flex flex-col items-center mb-4">
+              <div className="flex mb-4 relative">
+                <img
+                  src={Contrseña}
+                  alt="Icono de Contraseña"
+                  className="absolute left-0 top-2 w-10 h-10 p-2"
+                />
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  className="pl-8 pr-8 border p-2"
+                  onChange={e => setPassword(e.target.value)}
+                />
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              className="bg-green-700 opacity-70 text-white p-2 pl-5 pr-5 rounded text-2xl"
+              onClick={handleSubmit}
+            >
+              Login
+            </button>
+          </form>
         </div>
 
-        <h2 className="capitalize md:uppercase text-xl opacity-70">
-          Iniciar Sesión
-        </h2>
-
-        {/* Formulario */}
-        <form onSubmit={handleSubmit} className="mt-4 p-5">
-          <div className="flex flex-col items-center mb-4">
-            <div className="flex mb-4 relative">
-              <img
-                src={Correo}
-                className="absolute left-0 top-2 w-10 h-10 p-2"
-              />
-              <input
-                type="email"
-                id="email"
-                name="email"
-                className="pl-8 pr-8 border p-2"
-                
-              />
-            </div>
-          </div>
-
-          <div className="flex flex-col items-center mb-4">
-            <div className="flex mb-4 relative">
-              <img
-                src={Contrseña}
-                alt="Icono de Contraseña"
-                className="absolute left-0 top-2 w-10 h-10 p-2"
-              />
-              <input
-                type="password"
-                id="password"
-                name="password"
-                className="pl-8 pr-8 border p-2" // Añadir padding izquierdo para dar espacio a la imagen
-                
-              />
-            </div>
-          </div>
-
-          <button
-            type="submit"
-            className="bg-green-700 opacity-70 text-white p-2 pl-5 pr-5 rounded text-2xl"
-          >
-            Login
-          </button>
-        </form>
-      </div>
-
-      <button
-        onClick={onRequestClose}
-        className="absolute bottom-4 right-4 p-2 bg-red-500 rounded"
-      >
-        Cerrar
-      </button>
+        <button
+          onClick={onRequestClose}
+          className="absolute bottom-4 right-4 p-2 bg-red-500 rounded"
+        >
+          Cerrar
+        </button>
       </motion.div>
     </Modal>
   );

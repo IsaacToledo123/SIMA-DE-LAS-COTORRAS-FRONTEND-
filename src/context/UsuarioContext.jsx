@@ -20,12 +20,32 @@ export function UsuariosContextProvider(props) {
 
       const autenticarUsuario = credenciales => {
 
-            console.log("Hola estamos autenticando usaurio");
+            axios.post(`${API_URL}/api/usuarios/`, credenciales)
 
-            axios.post(`${API_URL}/api/usuarios/`, {credenciales})
-                  .then(e => console.log(e))
-                  .catch(e => console.log(e));
-            
+                  .then(e => console.log(e.data.message))
+                  .catch(error => {
+
+                        if (error.message) {
+
+                              if (error.response.status === 401) {
+
+                                    console.log('Credenciales incorrectas. Por favor, inténtalo de nuevo.');
+
+                              } else {
+
+                                    console.log('Error de respuesta del servidor:', error.response.status, error.response.data);
+                              }
+
+                        } else if (error.request) {
+                              
+                              console.error('Error de solicitud sin respuesta:', error.request);
+
+                            } else {
+                              
+                              console.error('Error de configuración de la solicitud:', error.message);
+                            }
+
+                  });
 
       }
 
@@ -33,8 +53,8 @@ export function UsuariosContextProvider(props) {
 
             <UsuarioContext.Provider value={{
 
-                  comentarios : comentarios,
-                  autenticarUsuario : autenticarUsuario
+                  comentarios: comentarios,
+                  autenticarUsuario: autenticarUsuario
 
             }}>
 
