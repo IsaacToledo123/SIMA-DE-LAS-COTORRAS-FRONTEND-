@@ -45,19 +45,19 @@ const CabñaInfo = () => {
       <div className="">
         <div className="flex justify-center p-8">
           <div className="pr-10">
-            <div className="flex border border-black border-2 p-2">
+            <div className="flex border border-black p-2">
               <h2 className="text-2xl">Bañera</h2>
               <img src={Bañera} className="h-7 pl-2" />
             </div>
           </div>
           <div className="pr-10">
-            <div className="flex border border-black border-2 p-2">
+            <div className="flex border border-black p-2">
               <h2 className="text-2xl">wifi gratis</h2>
               <img src={Wifi} className="h-7 pl-2" />
             </div>
           </div>
           <div className="pr-10">
-            <div className="flex border border-black border-2 p-2 ">
+            <div className="flex border border-black p-2 ">
               <h2 className="text-2xl">Estacionamiento</h2>
               <img src={Estacionamiento} className="h-7 pl-2" />
             </div>
@@ -65,13 +65,13 @@ const CabñaInfo = () => {
         </div>
         <div className="flex justify-center ">
           <div className="pr-10">
-            <div className="flex border border-black  border-2 p-2">
+            <div className="flex border border-black  p-2">
               <h2 className="text-2xl">Acepta Mascota</h2>
               <img src={Mascotas} className="h-7 pl-2" />
             </div>
           </div>
           <div className="pr-10">
-            <div className="flex border border-black border-2 p-2 ">
+            <div className="flex border border-black p-2 ">
               <h2 className="text-2xl">120 m^2 superficie</h2>
               <img src={Tamaño} className="h-7 pl-2" />
             </div>

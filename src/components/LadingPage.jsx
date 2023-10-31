@@ -8,9 +8,44 @@ import Foto2 from "../img/foto2.png";
 import { motion } from "framer-motion";
 import { UsuarioContext } from "../context/UsuarioContext";
 import Comentario from "../components/Comentario";
+import ModalComponent from "./IniciarSesion";
+import Swal from "sweetalert2";
+
 
 const LadingPage = () => {
-  const { comentarios } = useContext(UsuarioContext);
+
+  const { comentarios, publicarComentario } = useContext(UsuarioContext);
+  const [comentario, setComentario] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+
+  const handleIngresarClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleSubmit = async () => {
+
+    try {
+
+      const response = await publicarComentario(comentario);
+
+      if (response == "User is not autenticated") {
+
+        handleIngresarClick();
+
+      }
+
+    } catch (error) {
+
+      console.log("Error: ", error);
+
+    }
+
+  }
 
   const container = {
     hidden: { opacity: 0, x: -50 },
@@ -93,12 +128,12 @@ const LadingPage = () => {
           </li>
         </ul>
 
-        
+
       </div>
       <div class="flex justify-around pl-20 pr-20">
-          <img src={Foto1} class="w-2/5" />
-          <img src={Foto2} class="w-2/5" />
-        </div>
+        <img src={Foto1} class="w-2/5" />
+        <img src={Foto2} class="w-2/5" />
+      </div>
       <div class="mt-4  ">
         <div class="pt-10 mx-auto max-w-xl flex items-center justify-center">
           <div class="text-center">
@@ -113,7 +148,7 @@ const LadingPage = () => {
         <ul>
           <li className="pb-20" >
             <h2 className="pb-10">Auto</h2>
-            
+
             <ul class="list-disc">
               <li className="pb-7">
                 Para llegar a la Sima de las Cotorras, sólo hay que caminar unos
@@ -138,7 +173,7 @@ const LadingPage = () => {
             </ul>
           </li>
           <li>
-          <h2 className="pb-10">Tour</h2>
+            <h2 className="pb-10">Tour</h2>
             <ul class="list-disc">
               <li className="pb-7" >
                 Tour: Hay diferentes agencias tanto en la Plaza de la Marimba de
@@ -161,7 +196,7 @@ const LadingPage = () => {
       </div>
 
       {/* Sección para crear un nuevo comentario */}
-      
+
       <div className="bg-gray-200  text-black grid place-items-center mx-40">
         <div className="p-10">
           <h1 className="text-3xl">Comentarios: </h1>
@@ -170,7 +205,7 @@ const LadingPage = () => {
         <form>
           <div className="pb-5">
             <label htmlFor="commentid" className="text-2xl">
-              Dejar un comentario:{" "}
+              Dejar un comentario:
             </label>
           </div>
 
@@ -181,12 +216,12 @@ const LadingPage = () => {
             rows="7"
             placeholder="Escribe un comentario..."
             className="placeholder:text-black pl-3 bg-stone-200 text-xl p-5"
-            //onChange={e => setComentario(e.target.value)}
+            onChange={e => setComentario(e.target.value)}
           ></textarea>
         </form>
 
         <div className="p-5">
-          <button className="bg-emerald-700 px-5 py-2 rounded-md text-white text-xl hover:bg-emerald-800">
+          <button className="bg-emerald-700 px-5 py-2 rounded-md text-white text-xl hover:bg-emerald-800" onClick={handleSubmit}>
             Listo!
           </button>
         </div>
@@ -209,6 +244,9 @@ const LadingPage = () => {
           );
         })}
       </div>
+
+      <ModalComponent isOpen={isModalOpen} onRequestClose={handleModalClose} />
+
     </div>
   );
 };

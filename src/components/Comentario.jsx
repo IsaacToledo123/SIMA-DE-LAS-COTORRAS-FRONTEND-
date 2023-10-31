@@ -4,10 +4,10 @@ function Comentario({ username, userphoto, comment, date }) {
 
             <div className="p-10">
 
-                  <div className="p-10 bg-emerald-700 text-white flex justify-center">
+                  <div className="p-10 flex justify-center">
                         <div>
                               <h1 className="text-xl">{username}</h1>
-                              <p className="text-green-500">{date}</p>
+                              <p className="text-green-600 font-bold">{date}</p>
                               <img src={userphoto} alt="Foto del usuario" width={100} />
 
                         </div>

@@ -1,6 +1,6 @@
-import EgresosOption from "./EgresosOpcion";
 import GraficasOption from "./GraficasOpcion";
 import IngresosOption from "./IngresosOpcion";
+import EgresosOption from "./EgresosOpcion";
 import MetasOption from "./MetasOpcion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDollarSign } from "@fortawesome/free-solid-svg-icons";
