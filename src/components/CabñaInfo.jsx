@@ -1,6 +1,11 @@
 import React from "react";
 import CabañaInfor from "../img/cabañaInfo.png";
+
 import Bañera from "../img/bañera.png";
+import Estacionamiento from "../img/estacionamiento.png";
+import Wifi from "../img/wifi.png";
+import Tamaño from "../img/tamaño.png";
+import Mascotas from "../img/mascotas.png";
 import {motion} from 'framer-motion'
 const CabñaInfo = () => {
   const container = {
@@ -48,13 +53,13 @@ const CabñaInfo = () => {
           <div className="pr-10">
             <div className="flex border border-black border-2 p-2">
               <h2 className="text-2xl">wifi gratis</h2>
-              <img src={Bañera} className="h-7 pl-2" />
+              <img src={Wifi} className="h-7 pl-2" />
             </div>
           </div>
           <div className="pr-10">
             <div className="flex border border-black border-2 p-2 ">
               <h2 className="text-2xl">Estacionamiento</h2>
-              <img src={Bañera} className="h-7 pl-2" />
+              <img src={Estacionamiento} className="h-7 pl-2" />
             </div>
           </div>
         </div>
@@ -62,13 +67,13 @@ const CabñaInfo = () => {
           <div className="pr-10">
             <div className="flex border border-black  border-2 p-2">
               <h2 className="text-2xl">Acepta Mascota</h2>
-              <img src={Bañera} className="h-7 pl-2" />
+              <img src={Mascotas} className="h-7 pl-2" />
             </div>
           </div>
           <div className="pr-10">
             <div className="flex border border-black border-2 p-2 ">
               <h2 className="text-2xl">120 m^2 superficie</h2>
-              <img src={Bañera} className="h-7 pl-2" />
+              <img src={Tamaño} className="h-7 pl-2" />
             </div>
           </div>
         </div>

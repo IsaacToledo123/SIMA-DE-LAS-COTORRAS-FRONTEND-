@@ -38,7 +38,7 @@ const EgresosOption = () => {
         <FontAwesomeIcon icon={faMoneyBillAlt} size="3x" />
       </div>
       <button
-        className="mt-2 text-red-600 font-bold cursor-pointer"
+        className="mt-2 text-red-500 font-bold cursor-pointer hover:text-red-700"
         onClick={openModal}
       >
         Agregar Egreso

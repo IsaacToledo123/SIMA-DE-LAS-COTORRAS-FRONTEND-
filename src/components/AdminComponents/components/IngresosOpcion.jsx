@@ -93,12 +93,12 @@ const IngresosOption = () => {
   ];
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center ">
       <div className="w-20 h-20 bg-green-600 rounded-full flex items-center justify-center text-white">
         <FontAwesomeIcon icon={faDollarSign} size="3x" />
       </div>
       <button
-        className="mt-2 font-semibold text-green-700 cursor-pointer"
+        className="mt-2 font-semibold text-green-500 cursor-pointer hover:text-green-700"
         onClick={openModal}
       >
         Agregar Ingreso

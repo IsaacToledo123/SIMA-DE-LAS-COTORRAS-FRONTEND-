@@ -79,7 +79,7 @@ const Reservas = () => {
           <OpcionServicio />
         </div>
 
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center ">
           <div className="pb-10 h-80 w-80">
             <img src={Aventura} alt="" className="w-full h-full object-cover" />
           </div>

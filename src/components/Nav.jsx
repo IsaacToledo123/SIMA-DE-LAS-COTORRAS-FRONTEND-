@@ -27,9 +27,6 @@ const Nav = () => {
             <a href="/">Informacion</a>
           </p>
           <p>
-            <a href="">Ubicacion</a>
-          </p>
-          <p>
             <a href="/cabañasInfo">Menus</a>
           </p>
           <p>
