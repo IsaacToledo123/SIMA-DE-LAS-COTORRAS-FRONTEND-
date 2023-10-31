@@ -9,9 +9,9 @@ export function UsuariosContextProvider(props) {
       const [usuarios, setUsuarios] = useState([]);
       const [comentarios, setComentarios] = useState([]);
       const [autenticacion, setAutenticacion] = useState({});
+      
 
       useEffect(() => {
-
 
             axios.get(`${API_URL}/api/usuarios/${1}`)
                   .then(e => console.log(e.data))
