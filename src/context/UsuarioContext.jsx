@@ -11,39 +11,71 @@ export function UsuariosContextProvider(props) {
       const [autenticacion, setAutenticacion] = useState({});
 
       useEffect(() => {
-            // Obteniendo todos los comentarios de la pagina
+
+
+            axios.get(`${API_URL}/api/usuarios/${1}`)
+                  .then(e => console.log(e.data))
+                  .catch(e => console.log(e))
+
+
             axios.get(`${API_URL}/api/usuarios-opinions/`)
                   .then(e => setComentarios(e.data.comments))
                   .catch(e => console.log(e))
 
+
+
       }, []);
+
+
+      const publicarComentario = comentario => {
+
+            return axios.post(`${API_URL}/api/usuarios-opinions/`, comentario)
+
+                  .then(e => {
+
+                        return e.data.message
+
+                  })
+                  .catch(error => {
+
+                        return e.data.message
+                  })
+
+
+      }
 
       const autenticarUsuario = credenciales => {
 
-            axios.post(`${API_URL}/api/usuarios/`, credenciales)
+            return axios.post(`${API_URL}/api/usuarios/`, credenciales)
 
-                  .then(e => console.log(e.data.message))
+                  .then(e => {
+                        return e.data.message
+                  })
                   .catch(error => {
 
                         if (error.message) {
 
-                              if (error.response.status === 401) {
+                              if (error.response.status === 200) {
 
-                                    console.log('Credenciales incorrectas. Por favor, inténtalo de nuevo.');
+                                    return 'Credenciales incorrectas. Por favor, inténtalo de nuevo.'
+
+                              } else if (error.response.status === 201) {
+
+                                    return "Credenciales incorrectas. Por favor, inténtalo de nuevo."
 
                               } else {
 
-                                    console.log('Error de respuesta del servidor:', error.response.status, error.response.data);
+                                    return 'Error de respuesta del servidor:', error.response.status, error.response.data;
                               }
 
                         } else if (error.request) {
-                              
-                              console.error('Error de solicitud sin respuesta:', error.request);
 
-                            } else {
-                              
-                              console.error('Error de configuración de la solicitud:', error.message);
-                            }
+                              return 'Error de solicitud sin respuesta:', error.request;
+
+                        } else {
+
+                              return 'Error de configuración de la solicitud:', error.message;
+                        }
 
                   });
 
@@ -54,7 +86,8 @@ export function UsuariosContextProvider(props) {
             <UsuarioContext.Provider value={{
 
                   comentarios: comentarios,
-                  autenticarUsuario: autenticarUsuario
+                  autenticarUsuario: autenticarUsuario,
+                  publicarComentario
 
             }}>
 

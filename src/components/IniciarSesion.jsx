@@ -6,6 +6,7 @@ import { useState } from "react";
 import { motion } from 'framer-motion'
 import { UsuarioContext } from "../context/UsuarioContext";
 import { useContext } from "react";
+import Swal from "sweetalert2";
 
 const customStyles = {
   content: {
@@ -24,16 +25,34 @@ const ModalComponent = ({ isOpen, onRequestClose }) => {
   const [user, setUser] = useState("")
   const [password, setPassword] = useState("")
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
 
-    const credenciales = {
-      username: user,
-      password: password
+    try {
+
+      const credenciales = {
+
+        username: user,
+        password: password
+
+      }
+  
+      const {message} = await autenticarUsuario(credenciales);
+
+      if (message == "El usuario se ha autenticado correctamente") {
+
+        Swal.fire('Excelente 🤩', "Credenciales correctas" ,'Success')
+
+      } else {
+
+        Swal.fire('Ojito ahí 🤔', message, 'error');
+
+      }
+      
+      
+    } catch (error) {
+      
     }
-
-    autenticarUsuario(credenciales);
-
 
 
   };
