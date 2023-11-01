@@ -8,9 +8,6 @@ import Foto2 from "../img/foto2.png";
 import { motion } from "framer-motion";
 import { UsuarioContext } from "../context/UsuarioContext";
 import Comentario from "../components/Comentario";
-import ModalComponent from "./IniciarSesion";
-import Swal from "sweetalert2";
-
 
 const LadingPage = () => {
 
@@ -251,9 +248,7 @@ const LadingPage = () => {
             />
           );
         })}
-      </div>
-
-      <ModalComponent isOpen={isModalOpen} onRequestClose={handleModalClose} />
+      </div>      
 
     </div>
   );

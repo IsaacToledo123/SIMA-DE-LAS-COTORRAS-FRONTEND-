@@ -82,8 +82,8 @@ const Reservas = () => {
         variants={tituloAjustes}
         transition={{ duration: 0.3 }}
       >
-        <div class="bg-gray-200 md:p-20 p-10 text-center md:m-10 m-5">
-          <h1 class="capitalize md:uppercase md:text-5xl text-2xl text-center font-bold">Menus de Servicios</h1>
+        <div className="bg-gray-200 md:p-20 p-10 text-center md:m-10 m-5">
+          <h1 className="capitalize md:uppercase md:text-5xl text-2xl text-center font-bold">Menus de Servicios</h1>
         </div>
       </motion.div>
       <div className="flex pt-4 pb-10">
@@ -169,7 +169,9 @@ const Reservas = () => {
       </div>
 
       <div ref={componenteOcultoRef}>
+
         {mostrarCabaña ? <CabñaInfo titulo={titulo} descripcion={descripcion} precio={precio} /> : ""}
+
       </div>
 
     </>

@@ -98,11 +98,11 @@ const Nav = () => {
         <ul
           className={`md:flex md:justify-between md:px-10 shadow-md pb-10 ${isOpen ? 'block' : 'hidden'} pt-1 md:pt-0`}>
 
-          <li class={`pt-2 flex justify-center`}>
+          <li className={`pt-2 flex justify-center`}>
             <img src={LogoEmpresa} alt="logo de la empresa" width="300px" />
           </li>
 
-          <li class="grid lg:grid-cols-4 md:pt-10 md:text-2xl grid-cols-1 text-center font-bold p-2 text-xl">
+          <li className="grid lg:grid-cols-4 md:pt-10 md:text-2xl grid-cols-1 text-center font-bold p-2 text-xl">
             <p className="p-2">
               <a href="/">Informacion</a>
             </p>
@@ -117,7 +117,7 @@ const Nav = () => {
             </p>
           </li>
 
-          <li class="grid lg:grid-cols-3 grid-cols-1 text-center md:text-2xl font-bold p-2 text-xl">
+          <li className="grid lg:grid-cols-3 grid-cols-1 text-center md:text-2xl font-bold p-2 text-xl">
 
             <div className="pt-8 md:grid flex justify-center">
               <img src={Usuarios} alt="Foto de perfil" width="50px" />
