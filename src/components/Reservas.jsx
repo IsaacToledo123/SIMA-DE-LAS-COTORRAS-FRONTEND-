@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import ImagenPrincipal from "../img/img1.png";
 import ImagenSecundaria from "../img/img2.png";
 import Cabañas from "../img/cabañas1.png";
@@ -30,15 +30,17 @@ const Reservas = () => {
   const [descripcion, setDescripcion] = useState("");
   const [precio, setPrecio] = useState("");
 
+  const componenteOcultoRef = useRef(null);
+
   const verServicio = servicio => {
-    
+
     //¿Cabaña o aventura?
     let servicioSeleccionado = aventuras.find(aventura => aventura.nombre == servicio)
 
     if (servicioSeleccionado === undefined) {
 
       servicioSeleccionado = cabañas.find(cabaña => cabaña.nombre == servicio);
-      
+
       cambiarEstado(servicioSeleccionado);
 
     } else {
@@ -47,11 +49,23 @@ const Reservas = () => {
 
     }
 
+    scrollToComponent();
     setMostrarCabaña(true);
+
 
   }
 
-  const cambiarEstado = ({nombre, precio, descripcion}) => {
+  const scrollToComponent = () => {
+
+    if (componenteOcultoRef.current) {
+
+      componenteOcultoRef.current.scrollIntoView({ behavior : 'smooth'})
+
+    }
+
+  }
+
+  const cambiarEstado = ({ nombre, precio, descripcion }) => {
 
     setTitulo(nombre);
     setDescripcion(descripcion);
@@ -68,8 +82,8 @@ const Reservas = () => {
         variants={tituloAjustes}
         transition={{ duration: 0.3 }}
       >
-        <div class="bg-gray-200 p-20 text-center">
-          <h1 class="capitalize md:uppercase text-5xl">Menus de Servicios</h1>
+        <div class="bg-gray-200 md:p-20 p-10 text-center md:m-10 m-5">
+          <h1 class="capitalize md:uppercase md:text-5xl text-2xl text-center font-bold">Menus de Servicios</h1>
         </div>
       </motion.div>
       <div className="flex pt-4 pb-10">
@@ -118,12 +132,12 @@ const Reservas = () => {
 
           {cabañas.map(cabaña => {
 
-            const { id, nombre} =  cabaña;
+            const { id, nombre } = cabaña;
 
-            return <OpcionServicio aventura = {nombre} verServicio={verServicio} key={id}/>
+            return <OpcionServicio aventura={nombre} verServicio={verServicio} key={id} />
 
           })}
-          
+
         </div>
 
         <div className="items-center">
@@ -131,10 +145,10 @@ const Reservas = () => {
 
           <div className="md:w-96 w-72 pb-10">
 
-            <img src={Aventura} alt=""/>
-            
+            <img src={Aventura} alt="" />
+
           </div>
-          
+
           <div>
             <h1 className="capitalize md:uppercase text-4xl pb-20 text-gray-800 opacity-50">
               Aventura
@@ -144,17 +158,19 @@ const Reservas = () => {
           {aventuras.map((aventura) => {
 
             const { id, nombre } = aventura;
-    
 
-            return <OpcionServicio aventura={nombre} verServicio={verServicio} key={id}/>;
+
+            return <OpcionServicio aventura={nombre} verServicio={verServicio} key={id} />;
 
           })}
 
-        </div>                  
+        </div>
 
       </div>
 
-      {mostrarCabaña ? <CabñaInfo titulo={titulo} descripcion={descripcion} precio={precio}/> : ""}
+      <div ref={componenteOcultoRef}>
+        {mostrarCabaña ? <CabñaInfo titulo={titulo} descripcion={descripcion} precio={precio} /> : ""}
+      </div>
 
     </>
   );
