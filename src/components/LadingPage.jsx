@@ -221,7 +221,7 @@ const LadingPage = () => {
               cols="60"
               rows="5"
               placeholder="Escribe un comentario..."
-              className="placeholder:text-black md:pl-3 bg-stone-200 md:text-xl md:w-full md:p-5 w-96 text-center"
+              className="placeholder:text-black md:pl-3 bg-stone-200 md:text-xl md:w-full md:p-3 w-80 text-center"
               onChange={e => setComentario(e.target.value)}
             ></textarea>
           </div>

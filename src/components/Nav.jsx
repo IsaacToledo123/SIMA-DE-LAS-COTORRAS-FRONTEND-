@@ -54,7 +54,7 @@ const Nav = () => {
       <nav>
 
         <ul
-          className={`md:flex md:justify-between md:px-10 shadow-md pb-10 md:font-mono ${isOpen ? 'block' : 'hidden'} pt-1 md:pt-0`}>
+          className={`md:flex md:justify-between md:px-10 shadow-md pb-10 ${isOpen ? 'block' : 'hidden'} pt-1 md:pt-0`}>
 
           <li class={`pt-2 flex justify-center`}>
             <img src={LogoEmpresa} alt="logo de la empresa" width="300px"/>
