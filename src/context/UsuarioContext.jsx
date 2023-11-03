@@ -1,8 +1,11 @@
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
-import { API_URL } from "../config";
+import { API_URL } from "../config";      
 
 export const UsuarioContext = createContext();
+
+const token = localStorage.getItem('token');
+
 
 export function UsuariosContextProvider(props) {
 
@@ -29,16 +32,26 @@ export function UsuariosContextProvider(props) {
 
       const publicarComentario = comentario => {
 
-            return axios.post(`${API_URL}/api/usuarios-opinions/`, comentario)
+            // Le enviaremos el cuerpo y el token para autenticar si el usuario ha iniciado sesión
+            return axios.post(`${API_URL}/api/usuarios-opinions/`, comentario, {
+
+                  headers : {
+
+                        Authorization :`${token}`
+                  },
+
+             })
 
                   .then(e => {
 
-                        return e.data.message
+                        console.log(e.data)
+
+                        return e    
 
                   })
                   .catch(error => {
 
-                        return e.data.message
+                        return error
                   })
 
 
@@ -49,7 +62,9 @@ export function UsuariosContextProvider(props) {
             return axios.post(`${API_URL}/api/usuarios/`, credenciales)
 
                   .then(e => {
-                        return e.data.message
+
+                        return e.data
+                        
                   })
                   .catch(error => {
 

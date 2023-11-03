@@ -46,18 +46,18 @@ const Nav = () => {
 
       }
 
-      const { message } = await autenticarUsuario(credenciales);
+      const {message, token} = await autenticarUsuario(credenciales);
 
       if (message == "El usuario se ha autenticado correctamente") {
 
-        Swal.fire('Excelente 🤩', "Credenciales correctas", 'Success')
+        Swal.fire('Excelente 🤩', "Credenciales correctas", 'success');
+        localStorage.setItem("token", token);
 
       } else {
 
         Swal.fire('Ojito ahí 🤔', message, 'error');
 
       }
-
 
     } catch (error) {
 

@@ -26,7 +26,7 @@ const LadingPage = () => {
 
   const handleSubmit = async () => {
 
-    try {
+    try {      
 
       const response = await publicarComentario(comentario);
 
