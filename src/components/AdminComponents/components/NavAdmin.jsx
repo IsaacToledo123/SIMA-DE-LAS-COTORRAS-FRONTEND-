@@ -1,35 +1,36 @@
-import {useState} from "react";
+import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import Usuarios from "../../../img/usuarios.png";
-import LogoEmpresa from '../../../img/logoP.png'
+import LogoEmpresa from "../../../img/logoP.png";
 const Nav = () => {
-
-
   return (
     <div>
-       <nav className="flex justify-between px-10 shadow-md pb-10">
-        <div class="pt-2">
+      <nav className="flex justify-between px-10 shadow-md ">
+        <div class="pt-2 pl-16">
           <img src={LogoEmpresa} alt="logo de la empresa" width="200px" />
         </div>
-        <div class="grid grid-cols-4 my-auto text-2xl">
-        <p className="pr-5  hover:font-semibold">
+        <div class=" flex   text-2xl">
+          <p className="pr-5 flex my-auto hover:font-semibold">
             <a href="/admin/MenuPrincipal">Vista Previa</a>
           </p>
-          <p className=" hover:hover:font-semibold">
+          <p className="flex my-auto hover:font-semibold">
             <a href="/admin/Menu">Menu</a>
           </p>
         </div>
+
         <div class="grid grid-cols-3">
-          <div className="pt-8">
-            <img src={Usuarios} alt="Foto de perfil" width="50px" />
-          </div>
+      
+            <img src={Usuarios} alt="Foto de perfil" width="50px" className="flex my-auto"/>
           
-          <div className="pt-10">
-            <button className="hover:shadow-xl text-xl"><a href="/registro">Registrase</a></button>
-          </div>
+
+         
+            <button className="hover:shadow-md   text-xl ">
+              <a href="/registro">Registrase</a>
+            </button>
+      
         </div>
       </nav>
-      < Outlet/>
+      <Outlet />
     </div>
   );
 };
