@@ -12,20 +12,30 @@ export function UsuariosContextProvider(props) {
       const [usuarios, setUsuarios] = useState([]);
       const [comentarios, setComentarios] = useState([]);
       const [autenticacion, setAutenticacion] = useState({});
+      const [usuarioAutenticado, setUsuarioAutenticado] = useState({});
       
 
       useEffect(() => {
 
-            axios.get(`${API_URL}/api/usuarios/${1}`)
-                  .then(e => console.log(e.data))
-                  .catch(e => console.log(e))
+            // axios.get(`${API_URL}/api/usuarios/${1}`)
+            //       .then(e => console.log(e.data))
+            //       .catch(e => console.log(e))
 
-
+            //Obtener los comentarios de los usuarios
             axios.get(`${API_URL}/api/usuarios-opinions/`)
                   .then(e => setComentarios(e.data.comments))
                   .catch(e => console.log(e))
 
+            //Verificar si el usuario está autenticado
+            axios.get(`${API_URL}/api/verificar-sesion/`, {
 
+                  headers : {
+
+                        Authorization : `${token}`
+                  }
+            })
+                  .then(e => setUsuarioAutenticado(e.data.usuario))
+                  .catch(e => console.log(e))
 
       }, []);
 
@@ -39,12 +49,14 @@ export function UsuariosContextProvider(props) {
 
                         Authorization :`${token}`
                   },
+                  
 
              })
 
                   .then(e => {
 
                         console.log(e.data)
+                        console.log(token)
 
                         return e    
 
@@ -102,7 +114,8 @@ export function UsuariosContextProvider(props) {
 
                   comentarios: comentarios,
                   autenticarUsuario: autenticarUsuario,
-                  publicarComentario
+                  publicarComentario,
+                  usuarioAutenticado
 
             }}>
 

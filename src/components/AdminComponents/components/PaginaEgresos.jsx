@@ -22,7 +22,11 @@ const EgresosView = () => {
 
   return (
     <div className="container mx-auto p-4">
+<<<<<<< HEAD
       <h1 className="text-3xl font-extrabold text-purple-600 mb-6">Egresos</h1>
+=======
+      <h1 className="text-3xl font-extrabold text-red-500 mb-6 hover:text-red-700">Egresos</h1>
+>>>>>>> a42ead03dfb60c3f3ace1443b251e3b03f617ef5
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {egresos.map((egreso) => (
           <div key={egreso.id} className="bg-purple-100 rounded-lg p-4">

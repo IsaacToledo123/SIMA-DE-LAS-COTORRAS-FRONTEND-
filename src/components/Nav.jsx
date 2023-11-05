@@ -8,7 +8,9 @@ import Swal from "sweetalert2";
 
 const Nav = () => {
 
-  const { autenticarUsuario } = useContext(UsuarioContext);
+  const { autenticarUsuario, usuarioAutenticado } = useContext(UsuarioContext);
+
+  console.log(usuarioAutenticado)
 
   // NavNar Responsive
   const [isOpen, setIsOpen] = useState(false);
@@ -46,7 +48,7 @@ const Nav = () => {
 
       }
 
-      const {message, token} = await autenticarUsuario(credenciales);
+      const { message, token } = await autenticarUsuario(credenciales);
 
       if (message == "El usuario se ha autenticado correctamente") {
 
@@ -102,72 +104,87 @@ const Nav = () => {
             <img src={LogoEmpresa} alt="logo de la empresa" width="300px" />
           </li>
 
-          <li className="grid lg:grid-cols-4 md:pt-10 md:text-2xl grid-cols-1 text-center font-bold p-2 text-xl">
-            <p className="p-2">
+          <li className="grid lg:grid-cols-4 md:pt-10 md:text-3xl grid-cols-1 text-center   font-semibold p-2 text-xl">
+            <p className="p-4">
               <a href="/">Informacion</a>
             </p>
-            <p className="p-2">
+            <p className="p-4">
               <a href="/reservas">Ubicacion</a>
             </p>
-            <p className="p-2">
+            <p className="p-4">
               <a href="/cabañasInfo">Menus</a>
             </p>
-            <p className="p-2">
+            <p className="p-4">
               <a href="reservas">Reservas</a>
             </p>
           </li>
 
-          <li className="grid lg:grid-cols-3 grid-cols-1 text-center md:text-2xl font-bold p-2 text-xl">
-
+          {/* Sección principal */}
+          <li className="grid lg:grid-cols-3 grid-cols-1 text-center md:text-2xl  font-semibold p-2 text-xl">
+            {/* Foto de perfil */}
             <div className="pt-8 md:grid flex justify-center">
-              <img src={Usuarios} alt="Foto de perfil" width="50px" />
+              {usuarioAutenticado
+                ?
+                <img src={usuarioAutenticado.photo} alt="Foto de perfil" width="85px" />
+                :
+                <img src={Usuarios} alt="Foto de perfil" width="85px" />
+              }
+
             </div>
-            <div className="pt-10">
 
-              <button className="hover:shadow-xl text-xl" onClick={e => { setInicioSesionModal(true) }}>Ingresar</button>
+            {/* Botón de ingreso */}
+            {!usuarioAutenticado && (
+              <div className="pt-10">
 
-              <Modal isOpen={inicioSesionModal} onClose={e => { setInicioSesionModal(false) }}>
+                <button className="hover:shadow-xl text-xl" onClick={e => { setInicioSesionModal(true) }}>Ingresar</button>
 
-                {/* Cuerpo del inicio de sesión */}
+                <Modal isOpen={inicioSesionModal} onClose={e => { setInicioSesionModal(false) }}>
 
-                <h1 className="bg-red-700 rounded-md text-white p-5 text-center mb-10">Bienvenido de nuevo!</h1>
+                  {/* Cuerpo del inicio de sesión */}
 
-                <h1 className="text-center mb-10">Inicio de Sesión</h1>
+                  <h1 className="bg-red-700 rounded-md text-white p-5 text-center mb-10">Bienvenido de nuevo!</h1>
 
-                <div>
-                  <input
-                    type="text"
-                    placeholder="Ingresa tu nombre de usuario"
-                    onChange={e => setUser(e.target.value)}
-                    className="px-5 py-3 border w-full mb-10"
-                  />
-                  <input 
-                  type="password" 
-                  placeholder="Ingresa tu contraseña" 
-                  onChange={e => setPassword(e.target.value)} 
-                  className="px-5 py-3 border w-full mb-10"
-                  />
-                </div>
+                  <h1 className="text-center mb-10">Inicio de Sesión</h1>
 
-                <div className="flex items-center justify-center">
-                  <div
-                    className="bg-green-700 rounded-md text-white py-2 hover:bg-green-800 hover:cursor-pointer p-4 m-auto"
-                  >
-                    <button onClick={handleSubmit}>Login</button>
-
+                  <div>
+                    <input
+                      type="text"
+                      placeholder="Ingresa tu nombre de usuario"
+                      onChange={e => setUser(e.target.value)}
+                      className="px-5 py-3 border w-full mb-10"
+                    />
+                    <input
+                      type="password"
+                      placeholder="Ingresa tu contraseña"
+                      onChange={e => setPassword(e.target.value)}
+                      className="px-5 py-3 border w-full mb-10"
+                    />
                   </div>
-                </div>
 
-              </Modal>
+                  <div className="flex items-center justify-center">
+                    <div
+                      className="bg-green-700 rounded-md text-white py-2 hover:bg-green-800 hover:cursor-pointer p-4 m-auto"
+                    >
+                      <button onClick={handleSubmit}>Login</button>
 
-            </div>
+                    </div>
+                  </div>
 
-            <div className="pt-10">
+                </Modal>
 
-              <button className="hover:shadow-xl text-xl"><a href="/registro">Registrase</a></button>
+              </div>
+            )}
 
-            </div>
 
+            {/* Botón de registro */}
+            {!usuarioAutenticado && (
+              <div className="pt-10">
+
+                <button className="hover:shadow-xl text-xl"><a href="/registro">Registrase</a></button>
+
+              </div>
+
+            )}
           </li>
 
         </ul>

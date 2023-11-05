@@ -8,31 +8,34 @@ import Foto2 from "../img/foto2.png";
 import { motion } from "framer-motion";
 import { UsuarioContext } from "../context/UsuarioContext";
 import Comentario from "../components/Comentario";
+import Swal from "sweetalert2";
+import Modal from "./Modal";
 
 const LadingPage = () => {
 
   const { comentarios, publicarComentario } = useContext(UsuarioContext);
   const [comentario, setComentario] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
-
-  const handleIngresarClick = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleModalClose = () => {
-    setIsModalOpen(false);
-  };
 
   const handleSubmit = async () => {
 
     try {      
 
-      const response = await publicarComentario(comentario);
+      const dataComment = {'comment' : comentario}
 
-      if (response == "User is not autenticated") {
+      const {data, status} = await publicarComentario(dataComment);
 
-        handleIngresarClick();
+      console.log(data)
+      console.log(status)
+
+      if (status == 200) {
+
+        Swal.fire('Excelente 🤩', "Comentario publicado correctamente", 'success');
+
+      } else {
+
+        //Aquí se abre el modal
+        Swal.fire('No puede comentar 😆', 'Por favor, inicie sesión primero', 'error');
 
       }
 
@@ -85,7 +88,7 @@ const LadingPage = () => {
       <div class="mt-4 ">
         <div class="pt-10 mx-auto max-w-xl flex items-center justify-center px-10">
           <div class="text-center">
-            <h1 class="md:text-5xl text-3xl font-bold">Cuando ir a la Sima de las Cotorras</h1>
+            <h1 class="md:text-5xl text-3xl ">Cuando ir a la Sima de las Cotorras</h1>
           </div>
           <div class="pl-5 flex">
             <img src={Calendario} class="pt-10" width="200px" />
@@ -93,7 +96,7 @@ const LadingPage = () => {
         </div>
       </div>
 
-      <div className="font-bold md:p-20 md:text-3xl p-10 text-xl ">
+      <div className=" md:p-40 md:text-3xl p-10 text-xl ">
 
         <div class="text-justify opacity-60">
           <ul>
@@ -193,13 +196,14 @@ const LadingPage = () => {
               </ul>
             </li>
           </ul>
-        </div>
+        </div>  
+
       </div>
 
 
       {/* Sección para crear un nuevo comentario */}
 
-      <div className="bg-gray-200  text-black grid place-items-center font-bold m-10">
+      <div className="bg-gray-200  text-black grid place-items-center  m-10">
         <div className="p-10">
           <h1 className="md:text-3xl text-xl">Comentarios: </h1>
         </div>
@@ -235,7 +239,9 @@ const LadingPage = () => {
       {/* Sección para ver todos los comentarios del sitio */}
 
       <div>
+
         {comentarios.map((comentario, index) => {
+          
           const { username, userphoto, comment, date } = comentario;
 
           return (

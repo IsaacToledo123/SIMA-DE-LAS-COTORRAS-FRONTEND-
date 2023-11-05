@@ -1,6 +1,11 @@
 import React from "react";
 import CabañaInfor from "../img/cabañaInfo.png";
+
 import Bañera from "../img/bañera.png";
+import Estacionamiento from "../img/estacionamiento.png";
+import Wifi from "../img/wifi.png";
+import Tamaño from "../img/tamaño.png";
+import Mascotas from "../img/mascotas.png";
 import { motion } from 'framer-motion'
 
 const CabñaInfo = ({ titulo, descripcion, precio }) => {
@@ -27,7 +32,7 @@ const CabñaInfo = ({ titulo, descripcion, precio }) => {
       >
         <div class="bg-red-800 p-5 text-center">
           <h1 class="capitalize md:uppercase text-4xl text-white font-inter font-bold">
-            {titulo}
+            Informacion
           </h1>
         </div>
       </motion.div>
