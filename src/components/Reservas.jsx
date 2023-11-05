@@ -1,11 +1,12 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import ImagenPrincipal from "../img/img1.png";
 import ImagenSecundaria from "../img/img2.png";
 import Cabañas from "../img/cabañas1.png";
 import Aventura from "../img/aventura.png";
 import OpcionServicio from "./OpcionServicio";
 import { AventuraContext } from "../context/AventuraContext";
-  import { motion } from "framer-motion";
+import { motion } from "framer-motion";
+import CabñaInfo from "../components/CabñaInfo"
 
 const Reservas = () => {
   //configuraciones de animacion
@@ -22,7 +23,56 @@ const Reservas = () => {
     visible: { opacity: 1, x: 0 },
   };
 
-  const { aventuras } = useContext(AventuraContext);
+  const { aventuras, cabañas } = useContext(AventuraContext);
+  const [mostrarCabaña, setMostrarCabaña] = useState(false)
+
+  const [titulo, setTitulo] = useState("");
+  const [descripcion, setDescripcion] = useState("");
+  const [precio, setPrecio] = useState("");
+
+  const componenteOcultoRef = useRef(null);
+
+  const verServicio = servicio => {
+
+    //¿Cabaña o aventura?
+    let servicioSeleccionado = aventuras.find(aventura => aventura.nombre == servicio)
+
+    if (servicioSeleccionado === undefined) {
+
+      servicioSeleccionado = cabañas.find(cabaña => cabaña.nombre == servicio);
+
+      cambiarEstado(servicioSeleccionado);
+
+    } else {
+
+      cambiarEstado(servicioSeleccionado);
+
+    }
+
+    scrollToComponent();
+    setMostrarCabaña(true);
+
+
+  }
+
+  const scrollToComponent = () => {
+
+    if (componenteOcultoRef.current) {
+
+      componenteOcultoRef.current.scrollIntoView({ behavior : 'smooth'})
+
+    }
+
+  }
+
+  const cambiarEstado = ({ nombre, precio, descripcion }) => {
+
+    setTitulo(nombre);
+    setDescripcion(descripcion);
+    setPrecio(precio);
+
+  }
+
 
   return (
     <>
@@ -32,8 +82,8 @@ const Reservas = () => {
         variants={tituloAjustes}
         transition={{ duration: 0.3 }}
       >
-        <div class="bg-gray-200 p-20 text-center">
-          <h1 class="capitalize md:uppercase text-5xl">Menus de Servicios</h1>
+        <div className="bg-gray-200 md:p-20 p-10 text-center md:m-10 m-5">
+          <h1 className="capitalize md:uppercase md:text-5xl text-2xl text-center font-bold">Menus de Servicios</h1>
         </div>
       </motion.div>
       <div className="flex pt-4 pb-10">
@@ -63,26 +113,42 @@ const Reservas = () => {
         <div className="bg-red-500 pl-20 h-20 w-full"></div>
         <div className="bg-green-500 pl-20 h-20 w-full"></div>
       </div>
-      <div className="flex justify-around items-center p-40 ">
-        <div className="flex flex-col items-center">
-          <div className="pb-10 h-80 w-80">
-            <img src={Cabañas} alt="" className="w-full h-full object-cover" />
+
+
+      <div className="grid grid-cols-1 md:grid-cols-2 place-items-center text-center">
+
+        {/* Sección cabañas */}
+        <div className=" items-center pb-44">
+
+          <div className="md:w-96 w-72 pb-10">
+            <img src={Cabañas} alt="" />
           </div>
+
           <div>
             <h1 className="capitalize md:uppercase text-4xl pb-20 text-gray-800 opacity-50">
               Cabañas
             </h1>
           </div>
 
-          <OpcionServicio />
-          <OpcionServicio />
-          <OpcionServicio />
+          {cabañas.map(cabaña => {
+
+            const { id, nombre } = cabaña;
+
+            return <OpcionServicio aventura={nombre} verServicio={verServicio} key={id} />
+
+          })}
+
         </div>
 
-        <div className="flex flex-col items-center ">
-          <div className="pb-10 h-80 w-80">
-            <img src={Aventura} alt="" className="w-full h-full object-cover" />
+        <div className="items-center">
+          {/* Sección aventuras */}
+
+          <div className="md:w-96 w-72 pb-10">
+
+            <img src={Aventura} alt="" />
+
           </div>
+
           <div>
             <h1 className="capitalize md:uppercase text-4xl pb-20 text-gray-800 opacity-50">
               Aventura
@@ -90,12 +156,24 @@ const Reservas = () => {
           </div>
 
           {aventuras.map((aventura) => {
+
             const { id, nombre } = aventura;
 
-            return <OpcionServicio aventura={nombre} key={id} />;
+
+            return <OpcionServicio aventura={nombre} verServicio={verServicio} key={id} />;
+
           })}
+
         </div>
+
       </div>
+
+      <div ref={componenteOcultoRef}>
+
+        {mostrarCabaña ? <CabñaInfo titulo={titulo} descripcion={descripcion} precio={precio} /> : ""}
+
+      </div>
+
     </>
   );
 };

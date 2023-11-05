@@ -8,34 +8,34 @@ import Foto2 from "../img/foto2.png";
 import { motion } from "framer-motion";
 import { UsuarioContext } from "../context/UsuarioContext";
 import Comentario from "../components/Comentario";
-import ModalComponent from "./IniciarSesion";
 import Swal from "sweetalert2";
-
+import Modal from "./Modal";
 
 const LadingPage = () => {
 
   const { comentarios, publicarComentario } = useContext(UsuarioContext);
   const [comentario, setComentario] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
-
-  const handleIngresarClick = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleModalClose = () => {
-    setIsModalOpen(false);
-  };
 
   const handleSubmit = async () => {
 
-    try {
+    try {      
 
-      const response = await publicarComentario(comentario);
+      const dataComment = {'comment' : comentario}
 
-      if (response == "User is not autenticated") {
+      const {data, status} = await publicarComentario(dataComment);
 
-        handleIngresarClick();
+      console.log(data)
+      console.log(status)
+
+      if (status == 200) {
+
+        Swal.fire('Excelente 🤩', "Comentario publicado correctamente", 'success');
+
+      } else {
+
+        //Aquí se abre el modal
+        Swal.fire('No puede comentar 😆', 'Por favor, inicie sesión primero', 'error');
 
       }
 
@@ -196,7 +196,8 @@ const LadingPage = () => {
               </ul>
             </li>
           </ul>
-        </div>
+        </div>  
+
       </div>
 
 
@@ -221,7 +222,7 @@ const LadingPage = () => {
               cols="60"
               rows="5"
               placeholder="Escribe un comentario..."
-              className="placeholder:text-black md:pl-3 bg-stone-200 md:text-xl md:w-full md:p-5 w-96 text-center"
+              className="placeholder:text-black md:pl-3 bg-stone-200 md:text-xl md:w-full md:p-3 w-80 text-center"
               onChange={e => setComentario(e.target.value)}
             ></textarea>
           </div>
@@ -238,7 +239,9 @@ const LadingPage = () => {
       {/* Sección para ver todos los comentarios del sitio */}
 
       <div>
+
         {comentarios.map((comentario, index) => {
+          
           const { username, userphoto, comment, date } = comentario;
 
           return (
@@ -251,9 +254,7 @@ const LadingPage = () => {
             />
           );
         })}
-      </div>
-
-      <ModalComponent isOpen={isModalOpen} onRequestClose={handleModalClose} />
+      </div>      
 
     </div>
   );

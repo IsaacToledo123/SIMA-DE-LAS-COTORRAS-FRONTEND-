@@ -7,11 +7,17 @@ export const AventuraContext = createContext()
 export function AventuraContextProvider(props) {
 
       const [aventuras, setAventuras] = useState([]);
+      const [cabañas, setCabañas] = useState([]);
 
       useEffect(() => {
 
             axios.get(`${API_URL}/api/aventuras/`)
                   .then(e => setAventuras(e.data.aventuras))
+                  .catch(e => console.log(e))
+
+
+            axios.get(`${API_URL}/api/cabañas/`)
+                  .then(e => setCabañas(e.data.message))
                   .catch(e => console.log(e))
 
       }, []);
@@ -20,8 +26,8 @@ export function AventuraContextProvider(props) {
 
             <AventuraContext.Provider value={{
 
-                  aventuras : aventuras
-
+                  aventuras : aventuras,
+                  cabañas : cabañas
 
             }}>
 
