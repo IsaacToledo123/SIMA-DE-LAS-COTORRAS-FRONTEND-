@@ -8,31 +8,34 @@ import Foto2 from "../img/foto2.png";
 import { motion } from "framer-motion";
 import { UsuarioContext } from "../context/UsuarioContext";
 import Comentario from "../components/Comentario";
+import Swal from "sweetalert2";
+import Modal from "./Modal";
 
 const LadingPage = () => {
 
   const { comentarios, publicarComentario } = useContext(UsuarioContext);
   const [comentario, setComentario] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
-
-  const handleIngresarClick = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleModalClose = () => {
-    setIsModalOpen(false);
-  };
 
   const handleSubmit = async () => {
 
     try {      
 
-      const response = await publicarComentario(comentario);
+      const dataComment = {'comment' : comentario}
 
-      if (response == "User is not autenticated") {
+      const {data, status} = await publicarComentario(dataComment);
 
-        handleIngresarClick();
+      console.log(data)
+      console.log(status)
+
+      if (status == 200) {
+
+        Swal.fire('Excelente 🤩', "Comentario publicado correctamente", 'success');
+
+      } else {
+
+        //Aquí se abre el modal
+        Swal.fire('No puede comentar 😆', 'Por favor, inicie sesión primero', 'error');
 
       }
 
@@ -193,7 +196,8 @@ const LadingPage = () => {
               </ul>
             </li>
           </ul>
-        </div>
+        </div>  
+
       </div>
 
 
@@ -235,7 +239,9 @@ const LadingPage = () => {
       {/* Sección para ver todos los comentarios del sitio */}
 
       <div>
+
         {comentarios.map((comentario, index) => {
+          
           const { username, userphoto, comment, date } = comentario;
 
           return (
