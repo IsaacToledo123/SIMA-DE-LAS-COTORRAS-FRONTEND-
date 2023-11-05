@@ -32,7 +32,7 @@ const CabñaInfo = ({ titulo, descripcion, precio }) => {
       >
         <div class="bg-red-800 p-5 text-center">
           <h1 class="capitalize md:uppercase text-4xl text-white font-inter font-bold">
-            {titulo}
+            Informacion
           </h1>
         </div>
       </motion.div>

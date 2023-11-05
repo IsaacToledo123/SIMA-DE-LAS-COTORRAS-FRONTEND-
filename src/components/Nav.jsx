@@ -104,23 +104,23 @@ const Nav = () => {
             <img src={LogoEmpresa} alt="logo de la empresa" width="300px" />
           </li>
 
-          <li className="grid lg:grid-cols-4 md:pt-10 md:text-2xl grid-cols-1 text-center font-bold p-2 text-xl">
-            <p className="p-2">
+          <li className="grid lg:grid-cols-4 md:pt-10 md:text-3xl grid-cols-1 text-center   font-semibold p-2 text-xl">
+            <p className="p-4">
               <a href="/">Informacion</a>
             </p>
-            <p className="p-2">
+            <p className="p-4">
               <a href="/reservas">Ubicacion</a>
             </p>
-            <p className="p-2">
+            <p className="p-4">
               <a href="/cabañasInfo">Menus</a>
             </p>
-            <p className="p-2">
+            <p className="p-4">
               <a href="reservas">Reservas</a>
             </p>
           </li>
 
           {/* Sección principal */}
-          <li className="grid lg:grid-cols-3 grid-cols-1 text-center md:text-2xl font-bold p-2 text-xl">
+          <li className="grid lg:grid-cols-3 grid-cols-1 text-center md:text-2xl  font-semibold p-2 text-xl">
             {/* Foto de perfil */}
             <div className="pt-8 md:grid flex justify-center">
               {usuarioAutenticado

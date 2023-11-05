@@ -88,7 +88,7 @@ const LadingPage = () => {
       <div class="mt-4 ">
         <div class="pt-10 mx-auto max-w-xl flex items-center justify-center px-10">
           <div class="text-center">
-            <h1 class="md:text-5xl text-3xl font-bold">Cuando ir a la Sima de las Cotorras</h1>
+            <h1 class="md:text-5xl text-3xl ">Cuando ir a la Sima de las Cotorras</h1>
           </div>
           <div class="pl-5 flex">
             <img src={Calendario} class="pt-10" width="200px" />
@@ -96,7 +96,7 @@ const LadingPage = () => {
         </div>
       </div>
 
-      <div className="font-bold md:p-20 md:text-3xl p-10 text-xl ">
+      <div className=" md:p-40 md:text-3xl p-10 text-xl ">
 
         <div class="text-justify opacity-60">
           <ul>
@@ -203,7 +203,7 @@ const LadingPage = () => {
 
       {/* Sección para crear un nuevo comentario */}
 
-      <div className="bg-gray-200  text-black grid place-items-center font-bold m-10">
+      <div className="bg-gray-200  text-black grid place-items-center  m-10">
         <div className="p-10">
           <h1 className="md:text-3xl text-xl">Comentarios: </h1>
         </div>

@@ -3,14 +3,10 @@ import { useState } from "react";
 import Añadir from "../img/añadir.png";
 import CabñaInfo from "./CabñaInfo";
 
-<<<<<<< HEAD
 function OpcionServicio({ aventura }) {
   const [mostrar, setMostrar] = useState(false);
-=======
-function OpcionServicio({aventura, verServicio}) {
->>>>>>> fa10a0a449413301910f288129a06b2709c2bc8c
 
-function OpcionServicio({aventura, verServicio}) {
+
 
       return (
 
