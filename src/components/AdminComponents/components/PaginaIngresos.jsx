@@ -55,7 +55,7 @@ const IngresosView = () => {
         </div>
       </div>
       <div className="text-center mt-8">
-        <div className="bg-indigo-200 rounded-lg p-8 inline-block"> {/* Modifica el padding y aumenta el ancho */}
+        <div className="bg-indigo-200 rounded-lg p-8 inline-block">
           <h2 className="text-xl uppercase font-semibold text-gray-400 flex items-center justify-center mb-2">
             <FontAwesomeIcon icon={faWallet} className="mr-2" />
             Total:
