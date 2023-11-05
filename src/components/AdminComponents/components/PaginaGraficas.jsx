@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChartPie } from '@fortawesome/free-solid-svg-icons';
 import { PieChart, Pie, BarChart, Bar, Cell, XAxis, YAxis, Tooltip, Legend } from 'recharts';
@@ -6,7 +6,7 @@ import { PieChart, Pie, BarChart, Bar, Cell, XAxis, YAxis, Tooltip, Legend } fro
 const GraficasView = () => {
   const [chartType, setChartType] = useState('ingresos');
 
-  // Datos de ejemplo para ingresos y egresos
+  
   const datosIngresos = [
     { name: 'Cocina', monto: 500 },
     { name: 'Aventuras', monto: 300 },

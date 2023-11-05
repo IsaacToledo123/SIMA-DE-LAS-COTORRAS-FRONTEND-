@@ -1,5 +1,4 @@
-
-import React, { useState } from "react";
+import { useState } from "react";
 
 const ModalMeta = ({ isOpen, onClose, title, fields }) => {
 

@@ -1,7 +1,5 @@
-
-import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUtensils, faCar, faHome, faHiking } from '@fortawesome/free-solid-svg-icons';
+import { faUtensils, faCar, faHome, faHiking, faWallet } from '@fortawesome/free-solid-svg-icons';
 
 const IngresosView = () => {
   const ingresos = [
@@ -14,43 +12,55 @@ const IngresosView = () => {
   const subtotales = {};
   ingresos.forEach((ingreso) => {
     const categoria = ingreso.nombre;
-    subtotales[categoria] = (subtotales[categoria] || 0) + ingreso.monto;
+    subtotales[categoria] = subtotales[categoria] || { total: 0, fechas: [] };
+    subtotales[categoria].total += ingreso.monto;
+    subtotales[categoria].fechas.push(ingreso.fecha);
   });
 
   const totalIngresos = ingresos.reduce((total, ingreso) => total + ingreso.monto, 0);
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-extrabold text-green-600 mb-6">Ingresos</h1>
+      <h1 className="text-3xl font-extrabold text-blue-600 mb-6">Ingresos</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {ingresos.map((ingreso) => (
-          <div key={ingreso.id} className="bg-green-100 rounded-lg p-4">
-            <div className="text-3xl mb-4 text-green-600">
+          <div key={ingreso.id} className="bg-blue-100 rounded-lg p-4">
+            <div className="text-3xl mb-4 text-blue-600">
               <FontAwesomeIcon icon={ingreso.icon} />
             </div>
             <div>
-              <p className="text-lg font-semibold text-green-800">{ingreso.nombre}</p>
-              <p className="text-sm text-gray-500">{ingreso.fecha}</p>
-              <p className="text-lg text-green-800">Monto: ${ingreso.monto}</p>
+              <p className="text-lg font-semibold text-blue-800">{ingreso.nombre}</p>
             </div>
           </div>
         ))}
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 mt-8 gap-4">
-        <div className="bg-green-500 rounded-lg p-4">
-          <h2 className="text-2xl font-semibold text-white">Subtotales por Categoría</h2>
-          <ul className="text-lg">
-            {Object.entries(subtotales).map(([categoria, subtotal]) => (
-              <li key={categoria} className="flex justify-between items-center py-2">
-                <span className="text-green-800">{categoria}:</span>
-                <span className="text-gray-300">${subtotal}</span>
-              </li>
-            ))}
-          </ul>
+      <div className="bg-blue-500 rounded-lg p-4 mt-8">
+        <h2 className="text-2xl font-semibold text-white mb-4">Subtotales por Categoría</h2>
+        <div className="text-white">
+          {Object.entries(subtotales).map(([categoria, subtotal]) => (
+            <div key={categoria} className="py-2">
+              <p className="text-blue-800 font-semibold">{categoria}</p>
+              <table className="w-full text-sm">
+                <tbody>
+                  {subtotal.fechas.map((fecha, index) => (
+                    <tr key={index} className="border-b border-gray-400">
+                      <td className="py-2">{fecha}</td>
+                      <td className="text-right py-2">${subtotal.total}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ))}
         </div>
-        <div className="bg-green-700 rounded-lg p-4">
-          <h2 className="text-2xl font-semibold text-white">Total de Ingresos</h2>
-          <p className="text-3xl text-gray-300">Total: ${totalIngresos}</p>
+      </div>
+      <div className="text-center mt-8">
+        <div className="bg-indigo-200 rounded-lg p-8 inline-block"> {/* Modifica el padding y aumenta el ancho */}
+          <h2 className="text-xl uppercase font-semibold text-gray-400 flex items-center justify-center mb-2">
+            <FontAwesomeIcon icon={faWallet} className="mr-2" />
+            Total:
+          </h2>
+          <p className="text-2xl text-gray-600 font-semibold">${totalIngresos}</p>
         </div>
       </div>
     </div>
