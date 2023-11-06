@@ -7,6 +7,11 @@ import {
   faCalendarAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import ModalMeta from "./ModalMeta";
+import { Route, Routes } from 'react-router-dom';
+import ReservasView from "./PaginaReservas";
+import IngresosView from "./PaginaIngresos";
+import EgresosView from "./PaginaEgresos";
+import GraficosSeccionados from "./PaginaGraficas";
 
 const AdminVista = () => {
   const [showModal, setShowModal] = useState(false);
@@ -42,10 +47,14 @@ const AdminVista = () => {
       "ver-ingresos": {
         title: "Ver Ingresos",
         fields: [],
+        path: '/admin/paginaIngresos',
+        component: <IngresosView /> 
       },
       reservas: {
         title: "Reservas",
         fields: [],
+        path: '/admin/Reservas',
+        component: <ReservasView/>
       },
       egreso: {
         title: "Agregar Egreso",
@@ -62,15 +71,25 @@ const AdminVista = () => {
       "ver-egresos": {
         title: "Ver Egresos",
         fields: [],
+        path: '/admin/paginaEgresos',
+        component: <EgresosView/>
       },
       graficas: {
         title: "Ver Gráficas",
         fields: [],
+        path: '/admin/Graficas',
+        component: <GraficosSeccionados/>
       },
     };
 
     const action = actionMap[type];
-    openModal(type, action.title, action.fields);
+    if (action.path) {
+      history.push(action.path); // Redirecciona a la ruta definida
+    }
+    if (action.component) {
+      // Renderiza el componente relacionado con la acción seleccionada
+      return action.component;
+    }
   };
 
   /*const [ingresosTotales, setIngresosTotales] = useState(0);
