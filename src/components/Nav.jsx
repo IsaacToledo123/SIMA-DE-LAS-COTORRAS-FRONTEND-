@@ -5,17 +5,17 @@ import LogoEmpresa from '../img/logoP.png'
 import Modal from "./Modal";
 import { UsuarioContext } from "../context/UsuarioContext";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const Nav = () => {
 
   const { autenticarUsuario, usuarioAutenticado } = useContext(UsuarioContext);
 
-  console.log(usuarioAutenticado)
-
   // NavNar Responsive
   const [isOpen, setIsOpen] = useState(false);
 
   const [inicioSesionModal, setInicioSesionModal] = useState(false);
+  const [verDatos, setVerDatos] = useState(false);
   const [user, setUser] = useState("")
   const [password, setPassword] = useState("")
 
@@ -104,33 +104,80 @@ const Nav = () => {
             <img src={LogoEmpresa} alt="logo de la empresa" width="300px" />
           </li>
 
-          <li className="grid lg:grid-cols-4 md:pt-10 md:text-2xl grid-cols-1 text-center font-bold p-2 text-xl">
+          <li className="grid lg:grid-cols-4 md:pt-10 md:text-2xl grid-cols-1 text-center font-extralight p-2 text-xl">
+
             <p className="p-2">
-              <a href="/">Informacion</a>
+
+              <Link to="/">Información</Link>
+
             </p>
+
             <p className="p-2">
-              <a href="/reservas">Ubicacion</a>
+
+              <Link to="/ubicacion">Ubicación</Link>
+
             </p>
+
             <p className="p-2">
-              <a href="/cabañasInfo">Menus</a>
+
+              <Link to="/reservas">Reservas</Link>
+
             </p>
+
             <p className="p-2">
-              <a href="reservas">Reservas</a>
+
+              <p>Actividad</p>
+
             </p>
           </li>
 
           {/* Sección principal */}
           <li className="grid lg:grid-cols-3 grid-cols-1 text-center md:text-2xl font-bold p-2 text-xl">
             {/* Foto de perfil */}
-            <div className="pt-8 md:grid flex justify-center">
+            <div className="pt-6 md:grid flex justify-center">
+
               {usuarioAutenticado
                 ?
-                <img src={usuarioAutenticado.photo} alt="Foto de perfil" width="85px" />
+                <img
+                  src={usuarioAutenticado.photo}
+                  alt="Foto de perfil"
+                  width="85px"
+                  className="rounded-full cursor-pointer"
+                  onClick={e => { setVerDatos(true) }}
+                />
                 :
                 <img src={Usuarios} alt="Foto de perfil" width="85px" />
               }
 
             </div>
+
+            {/* Modal para que el usuario vea sus datos y así poder actualizarlos */}
+
+            <Modal isOpen={verDatos} onClose={e => { setVerDatos(false) }}>
+
+              {/* Cuerpo del inicio de sesión */}
+              <div className="font-bold">
+
+                <h1 className="bg-green-700 rounded-md text-white p-5 text-center mb-10">Bienvenido {usuarioAutenticado.username}</h1>
+
+                <h1 className="text-center mb-10 text-gray-600">Información acerca de ti</h1>
+                <div className="flex justify-center">
+                  <img src={usuarioAutenticado.photo} alt="foto de perfil" className="w-64" />
+                </div>
+                <div className="pt-5 pb-5">
+                  <p className="text-gray-600 pb-2"><span className="text-green-800">Nombre de usuario: </span> {usuarioAutenticado.username}</p>
+                  <p className="text-gray-600 pb-2"><span className="text-green-800">Email: </span>{usuarioAutenticado.email}</p>
+                  <p className="text-gray-600 pb-2"><span className="text-green-800">Teléfono: </span> {usuarioAutenticado.phone}</p>
+                </div>
+
+              </div>
+
+              <button
+                onClick={e => setVerDatos(false)}
+                className="bg-red-700 text-white px-5 py-2 rounded-md my-3"
+              >Cerrar</button>
+
+            </Modal>
 
             {/* Botón de ingreso */}
             {!usuarioAutenticado && (

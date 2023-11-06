@@ -10,6 +10,7 @@ import { UsuarioContext } from "../context/UsuarioContext";
 import Comentario from "../components/Comentario";
 import Swal from "sweetalert2";
 import Modal from "./Modal";
+import imagen_principal from "../img/sima_cotorras_principañ.webp"
 
 const LadingPage = () => {
 
@@ -64,41 +65,24 @@ const LadingPage = () => {
         transition={{ duration: 0.3 }}
       >
         <div className="flex justify-center items-center pb-20 pt-10 mx-10">
-          <img src={ImagenLading} class="" />
+          <img src={imagen_principal} alt="Sima de las cotorras logo" />
         </div>
       </motion.div>
-      <motion.div
-        initial="hidden"
-        animate="visible"
-        variants={botonesAjustes}
-        transition={{ duration: 0.3 }}
-        class="bg-white shadow-md pb-1-mt-4"
-      >
-        <div className="flex mx-20 ">
-          <button className="bg-gray-200 p-5 rounded-md hover:shadow-xl">
-            Informacion
-          </button>
-          <div className="pl-5">
-            <button className="bg-gray-200 p-5 rounded-md hover:shadow-xl">
-              <img src={Mapa} className="h-10 w-10" />
-            </button>
+
+      <div className="mt-4 ">
+        <div className="pt-10 mx-auto max-w-xl flex items-center justify-center px-10">
+          <div className="text-center">
+            <h1 className="md:text-5xl text-3xl font-bold">Cuando ir a la Sima de las Cotorras</h1>
           </div>
-        </div>
-      </motion.div>
-      <div class="mt-4 ">
-        <div class="pt-10 mx-auto max-w-xl flex items-center justify-center px-10">
-          <div class="text-center">
-            <h1 class="md:text-5xl text-3xl font-bold">Cuando ir a la Sima de las Cotorras</h1>
-          </div>
-          <div class="pl-5 flex">
-            <img src={Calendario} class="pt-10" width="200px" />
+          <div className="pl-5 flex">
+            <img src={Calendario} className="pt-10" width="200px" />
           </div>
         </div>
       </div>
 
       <div className="font-bold md:p-20 md:text-3xl p-10 text-xl ">
 
-        <div class="text-justify opacity-60">
+        <div className="text-justify opacity-60">
           <ul>
             <li className="pb-7">
               Todo el año: La Sima de las Cotorras es un centro ecoturístico que
@@ -133,26 +117,26 @@ const LadingPage = () => {
 
 
         </div>
-        <div class="flex justify-around pl-20 pr-20">
-          <img src={Foto1} class="w-2/5" />
-          <img src={Foto2} class="w-2/5" />
+        <div className="flex justify-around pl-20 pr-20">
+          <img src={Foto1} className="w-2/5" />
+          <img src={Foto2} className="w-2/5" />
         </div>
-        <div class="mt-4  ">
-          <div class="pt-10 mx-auto max-w-xl flex items-center justify-center px-10">
-            <div class="text-center">
-              <h1 class="md:text-5xl text-3xl">Como llegar a la sima de las cotorras?</h1>
+        <div className="mt-4  ">
+          <div className="pt-10 mx-auto max-w-xl flex items-center justify-center px-10">
+            <div className="text-center">
+              <h1 className="md:text-5xl text-3xl">Como llegar a la sima de las cotorras?</h1>
             </div>
-            <div class=" flex">
-              <img src={Ubicacion} class="pt-10" width="200px" />
+            <div className=" flex">
+              <img src={Ubicacion} className="pt-10" width="200px" />
             </div>
           </div>
         </div>
-        <div class="text-justify opacity-60">
+        <div className="text-justify opacity-60">
           <ul>
             <li className="pb-20" >
               <h2 className="pb-10">Auto</h2>
 
-              <ul class="list-disc">
+              <ul className="list-disc">
                 <li className="pb-7">
                   Para llegar a la Sima de las Cotorras, sólo hay que caminar unos
                   pasos desde donde se deja el auto, pero desafortunadamente no
@@ -177,7 +161,7 @@ const LadingPage = () => {
             </li>
             <li>
               <h2 className="pb-10">Tour</h2>
-              <ul class="list-disc">
+              <ul className="list-disc">
                 <li className="pb-7" >
                   Tour: Hay diferentes agencias tanto en la Plaza de la Marimba de
                   Tuxtla como en los andadores turísticos de San Cristóbal,
@@ -203,17 +187,13 @@ const LadingPage = () => {
 
       {/* Sección para crear un nuevo comentario */}
 
-      <div className="bg-gray-200  text-black grid place-items-center font-bold m-10">
-        <div className="p-10">
-          <h1 className="md:text-3xl text-xl">Comentarios: </h1>
+      <div className="text-black grid place-items-center m-10">
+        <div className="md:p-10 p-5">
+          <h1 className="md:text-3xl text-lg font-bold">Comentarios: </h1>
         </div>
 
         <form>
-          <div className="pb-5">
-            <label htmlFor="commentid" className="md:text-2xl text-xl">
-              Dejar un comentario:
-            </label>
-          </div>
+
 
           <div className="text-center">
             <textarea
@@ -222,7 +202,8 @@ const LadingPage = () => {
               cols="60"
               rows="5"
               placeholder="Escribe un comentario..."
-              className="placeholder:text-black md:pl-3 bg-stone-200 md:text-xl md:w-full md:p-3 w-80 text-center"
+              className="placeholder:text-gray-600 md:pl-3 bg-stone-200 md:text-xl md:w-full 
+              md:p-3 w-80 text-center rounded-xl placeholder:text-justify p-3"
               onChange={e => setComentario(e.target.value)}
             ></textarea>
           </div>
@@ -230,7 +211,7 @@ const LadingPage = () => {
         </form>
 
         <div className="p-5">
-          <button className="bg-emerald-700 px-5 py-2 rounded-md text-white text-xl hover:bg-emerald-800" onClick={handleSubmit}>
+          <button className="bg-emerald-700 px-5 py-2 rounded-md text-white text-xl hover:bg-emerald-800 font-bold" onClick={handleSubmit}>
             Listo!
           </button>
         </div>
@@ -238,7 +219,7 @@ const LadingPage = () => {
 
       {/* Sección para ver todos los comentarios del sitio */}
 
-      <div>
+      <div className="">
 
         {comentarios.map((comentario, index) => {
           
@@ -250,7 +231,7 @@ const LadingPage = () => {
               userphoto={userphoto}
               comment={comment}
               date={date}
-              key={index}
+              key={index}              
             />
           );
         })}

@@ -29,6 +29,7 @@ const Reservas = () => {
   const [titulo, setTitulo] = useState("");
   const [descripcion, setDescripcion] = useState("");
   const [precio, setPrecio] = useState("");
+  const [idServicio, setIdServicio] = useState(0);
 
   const componenteOcultoRef = useRef(null);
 
@@ -52,24 +53,24 @@ const Reservas = () => {
     scrollToComponent();
     setMostrarCabaña(true);
 
-
   }
 
   const scrollToComponent = () => {
 
     if (componenteOcultoRef.current) {
 
-      componenteOcultoRef.current.scrollIntoView({ behavior : 'smooth'})
+      componenteOcultoRef.current.scrollIntoView({ behavior: 'smooth' })
 
     }
 
   }
 
-  const cambiarEstado = ({ nombre, precio, descripcion }) => {
+  const cambiarEstado = ({ id, nombre, precio, descripcion }) => {
 
     setTitulo(nombre);
     setDescripcion(descripcion);
     setPrecio(precio);
+    setIdServicio(id)
 
   }
 
@@ -83,7 +84,7 @@ const Reservas = () => {
         transition={{ duration: 0.3 }}
       >
         <div className="bg-gray-200 md:p-20 p-10 text-center md:m-10 m-5">
-          <h1 className="capitalize md:uppercase md:text-5xl text-2xl text-center font-bold">Menus de Servicios</h1>
+          <h1 className="capitalize md:uppercase md:text-5xl text-2xl text-center font-bold">Menú de Servicios</h1>
         </div>
       </motion.div>
       <div className="flex pt-4 pb-10">
@@ -170,7 +171,11 @@ const Reservas = () => {
 
       <div ref={componenteOcultoRef}>
 
-        {mostrarCabaña ? <CabñaInfo titulo={titulo} descripcion={descripcion} precio={precio} /> : ""}
+        {mostrarCabaña && (
+
+          <CabñaInfo titulo={titulo} descripcion={descripcion} precio={precio} idServicio = {idServicio}/>
+
+        )}
 
       </div>
 
