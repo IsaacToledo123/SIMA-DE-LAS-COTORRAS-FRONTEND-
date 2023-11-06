@@ -132,7 +132,7 @@ const Nav = () => {
           </li>
 
           {/* Sección principal */}
-          <li className="grid lg:grid-cols-3 grid-cols-1 text-center md:text-2xl font-bold p-2 text-xl">
+          <li className="grid lg:grid-cols-3 grid-cols-1 text-center md:text-2xl  font-semibold p-2 text-xl">
             {/* Foto de perfil */}
             <div className="pt-6 md:grid flex justify-center">
 

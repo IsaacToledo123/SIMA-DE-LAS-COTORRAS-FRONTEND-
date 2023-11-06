@@ -1,6 +1,11 @@
 import { useContext, useState, useEffect } from "react";
 import CabañaInfor from "../img/cabañaInfo.png";
+
 import Bañera from "../img/bañera.png";
+import Estacionamiento from "../img/estacionamiento.png";
+import Wifi from "../img/wifi.png";
+import Tamaño from "../img/tamaño.png";
+import Mascotas from "../img/mascotas.png";
 import { motion } from 'framer-motion'
 import { UsuarioContext } from "../context/UsuarioContext";
 import Swal from "sweetalert2";

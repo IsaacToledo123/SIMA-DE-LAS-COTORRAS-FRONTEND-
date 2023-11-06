@@ -141,17 +141,13 @@ const Reservas = () => {
 
         </div>
 
-        <div className="items-center">
-          {/* Sección aventuras */}
-
+        <div className="items-center pb-44">
           <div className="md:w-96 w-72 pb-10">
-
-            <img src={Aventura} alt="" />
-
+            <img src={Aventura} alt="" className=" " />
           </div>
 
           <div>
-            <h1 className="capitalize md:uppercase text-4xl pb-20 text-gray-800 opacity-50">
+            <h1 className="capitalize md:uppercase text-4xl pb-20 text-gray-800 opacity-50 ">
               Aventura
             </h1>
           </div>

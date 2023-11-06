@@ -1,14 +1,15 @@
-import React from 'react'
+import React from "react";
+import { useState } from "react";
 import Añadir from "../img/añadir.png";
+import CabñaInfo from "./CabñaInfo";
 
-function OpcionServicio({aventura, verServicio}) {
+function OpcionServicio({ aventura, verServicio}) {
+  const [mostrar, setMostrar] = useState(false);
 
       return (
 
-            <div className="flex items-center pb-10" onClick={() => verServicio(aventura)}>
-                  
-                  <div className="bg-gray-200 pl-4 h-10 w-60 text-center p-1 font-bold rounded-md">{aventura}</div>
-
+            <div className="flex items-center pb-10" onClick={e => {verServicio(aventura)}}>
+                  <div className="bg-gray-200 pl-4 h-10 w-60 text-center p-1">{aventura}</div>
                   <div>
                         <img src={Añadir} className="h-10 w-10 ml-4 hover:animate-spin hover:cursor-pointer"/>
                   </div>
@@ -17,4 +18,4 @@ function OpcionServicio({aventura, verServicio}) {
       )
 }
 
-export default OpcionServicio
+export default OpcionServicio;

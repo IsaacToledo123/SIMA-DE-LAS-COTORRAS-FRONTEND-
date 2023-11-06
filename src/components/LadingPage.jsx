@@ -80,7 +80,7 @@ const LadingPage = () => {
         </div>
       </div>
 
-      <div className="font-bold md:p-20 md:text-3xl p-10 text-xl ">
+      <div className=" md:p-40 md:text-3xl p-10 text-xl ">
 
         <div className="text-justify opacity-60">
           <ul>
