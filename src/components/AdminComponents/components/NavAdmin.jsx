@@ -6,10 +6,10 @@ const Nav = () => {
   return (
     <div>
       <nav className="flex justify-between px-10 shadow-md ">
-        <div class="pt-2 pl-16">
+        <div className="pt-2 pl-16">
           <img src={LogoEmpresa} alt="logo de la empresa" width="200px" />
         </div>
-        <div class=" flex   text-2xl">
+        <div className=" flex   text-2xl">
           <p className="pr-5 flex my-auto hover:font-semibold">
             <a href="/admin/MenuPrincipal">Vista Previa</a>
           </p>
@@ -18,7 +18,7 @@ const Nav = () => {
           </p>
         </div>
 
-        <div class="grid grid-cols-3">
+        <div className="grid grid-cols-3">
       
             <img src={Usuarios} alt="Foto de perfil" width="50px" className="flex my-auto"/>
           

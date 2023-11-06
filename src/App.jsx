@@ -8,13 +8,11 @@ import LadingPage from "./components/LadingPage";
 import AdminVista from "./components/AdminComponents/components/AdminVista";
 import NavAdmin from "./components/AdminComponents/components/NavAdmin";
 import IngresosView from "./components/AdminComponents/components/PaginaIngresos";
-// import Menu from "./components/AdminComponents/components/Menu";
+import Menu from "./components/AdminComponents/components/Menu";
 import GraficosSeccionados from "./components/AdminComponents/components/PaginaGraficas";
 import EgresosView from "./components/AdminComponents/components/PaginaEgresos";
 import ReservasView from "./components/AdminComponents/components/PaginaReservas";
-
 // import ReservasOption from './components/AdminComponents/components/ReservasOpcion'
-import Menu from './components/AdminComponents/components/Menu'
 function App() {
   return (
     <BrowserRouter>
@@ -33,7 +31,7 @@ function App() {
           <Route path="Graficas" element={<GraficosSeccionados />} />
           <Route path="paginaIngresos" element={<IngresosView />} />
           <Route path="Reservas" element={<ReservasView />} />
-          {/* <Route path="Menu" element={<Menu />} /> */}
+          <Route path="Menu" element={<Menu />} />
         </Route>
       </Routes>
       {/* <Registro></Registro> */}
