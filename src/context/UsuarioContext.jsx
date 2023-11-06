@@ -66,7 +66,6 @@ export function UsuariosContextProvider(props) {
                         return error
                   })
 
-
       }
 
       const autenticarUsuario = credenciales => {
