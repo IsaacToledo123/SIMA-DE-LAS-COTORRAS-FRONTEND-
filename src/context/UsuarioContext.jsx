@@ -50,7 +50,6 @@ export function UsuariosContextProvider(props) {
                         Authorization :`${token}`
                   },
                   
-
              })
 
                   .then(e => {

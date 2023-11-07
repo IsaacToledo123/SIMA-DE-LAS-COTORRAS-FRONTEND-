@@ -126,7 +126,7 @@ const Nav = () => {
 
             <p className="p-2">
 
-              <p>Actividad</p>
+              <Link to="/actividad-usuario">Actividad</Link>
 
             </p>
           </li>
@@ -158,17 +158,23 @@ const Nav = () => {
               {/* Cuerpo del inicio de sesión */}
               <div className="font-bold">
 
-                <h1 className="bg-green-700 rounded-md text-white p-5 text-center mb-10">Bienvenido {usuarioAutenticado.username}</h1>
+                {usuarioAutenticado && (
+                  <h1 className="bg-green-700 rounded-md text-white p-5 text-center mb-10">Bienvenido {usuarioAutenticado.username}</h1>
+                )}
 
                 <h1 className="text-center mb-10 text-gray-600">Información acerca de ti</h1>
                 <div className="flex justify-center">
-                  <img src={usuarioAutenticado.photo} alt="foto de perfil" className="w-64" />
+                  {usuarioAutenticado && (
+                    <img src={usuarioAutenticado.photo} alt="foto de perfil" className="w-64" />
+                  )}
                 </div>
-                <div className="pt-5 pb-5">
-                  <p className="text-gray-600 pb-2"><span className="text-green-800">Nombre de usuario: </span> {usuarioAutenticado.username}</p>
-                  <p className="text-gray-600 pb-2"><span className="text-green-800">Email: </span>{usuarioAutenticado.email}</p>
-                  <p className="text-gray-600 pb-2"><span className="text-green-800">Teléfono: </span> {usuarioAutenticado.phone}</p>
-                </div>
+                {usuarioAutenticado && (
+                  <div className="pt-5 pb-5">
+                    <p className="text-gray-600 pb-2"><span className="text-green-800">Nombre de usuario: </span> {usuarioAutenticado.username}</p>
+                    <p className="text-gray-600 pb-2"><span className="text-green-800">Email: </span>{usuarioAutenticado.email}</p>
+                    <p className="text-gray-600 pb-2"><span className="text-green-800">Teléfono: </span> {usuarioAutenticado.phone}</p>
+                  </div>
+                )}
 
               </div>
 
