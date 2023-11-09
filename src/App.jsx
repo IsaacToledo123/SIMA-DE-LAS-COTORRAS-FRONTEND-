@@ -28,7 +28,7 @@ function App() {
           
         </Route>
         <Route path="/admin" element={<NavAdmin />}>
-          <Route path="MenuPrincipal" element={<AdminVista />} />
+          <Route index element={<AdminVista />} />
           <Route path="paginaEgresos" element={<EgresosView />} />
           <Route path="Graficas" element={<GraficosSeccionados />} />
           <Route path="paginaIngresos" element={<IngresosView />} />
