@@ -113,7 +113,7 @@ export function UsuariosContextProvider(props) {
                   comentarios: comentarios,
                   autenticarUsuario: autenticarUsuario,
                   publicarComentario,
-                  usuarioAutenticado
+                  usuarioAutenticado            
 
             }}>
 
