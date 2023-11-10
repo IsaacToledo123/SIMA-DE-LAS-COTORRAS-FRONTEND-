@@ -15,7 +15,8 @@ import imagen_principal from "../img/sima_cotorras_principañ.webp";
 import Info from "./Info";
 
 const LadingPage = () => {
-  const { comentarios, publicarComentario } = useContext(UsuarioContext);
+
+  const { comentarios, publicarComentario, mensajePublicado ,setMensajePublicado } = useContext(UsuarioContext);
   const [comentario, setComentario] = useState("");
 
   const handleSubmit = async () => {
@@ -28,11 +29,20 @@ const LadingPage = () => {
       console.log(status);
 
       if (status == 200) {
-        Swal.fire(
-          "Excelente 🤩",
-          "Comentario publicado correctamente",
-          "success"
-        );
+
+        Swal.fire('Excelente 🤩', "Comentario publicado correctamente", 'success');
+
+        if (!mensajePublicado) {
+
+          setMensajePublicado(true)
+
+        } else {
+
+          setMensajePublicado(false)
+
+        }
+
+
       } else {
         //Aquí se abre el modal
         Swal.fire(
@@ -86,8 +96,8 @@ const LadingPage = () => {
               rows="5"
               placeholder="Escribe un comentario..."
               className="placeholder:text-gray-600 md:pl-3 bg-stone-200 md:text-xl md:w-full 
-              md:p-3 w-80 text-center rounded-xl placeholder:text-justify p-3"
-              onChange={(e) => setComentario(e.target.value)}
+              md:p-3 w-80  rounded-xl placeholder:text-justify p-3"
+              onChange={e => setComentario(e.target.value)}
             ></textarea>
           </div>
         </form>

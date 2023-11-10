@@ -19,6 +19,7 @@ import fotografias_cabaña5 from "../img/fotografias_cabaña/fotografia_cabaña5
 import fotografias_cabaña6 from "../img/fotografias_cabaña/fotografia_cabaña6.jpeg"
 import fotografias_cabaña7 from "../img/fotografias_cabaña/fotografia_cabaña7.jpeg"
 import fotografias_cabaña8 from "../img/fotografias_cabaña/fotografia_cabaña8.jpeg"
+import axios from "axios";
 
 const CabñaInfo = ({ titulo, descripcion, precio, idServicio }) => {
 
@@ -48,6 +49,32 @@ const CabñaInfo = ({ titulo, descripcion, precio, idServicio }) => {
     setCurrentIndex((prevIndex) => (prevIndex === images.length - 1 ? 0 : prevIndex + 1));
 
   };
+
+  const crearSesion = e => {
+
+    console.log(idServicio)
+
+    axios.post(`${API_URL}/api/create-checkout-session/${idServicio}/`)
+
+      .then(e => {
+
+        console.log(e.data)
+        window.location.href = e.data.session;
+
+      })
+      .catch(e => {
+
+        console.log(e);
+
+      })
+  }
+
+  //   <form
+  //   action={`${API_URL}/api/create-checkout-session/`}
+  //   method="POST"
+  //   className="flex justify-between"
+  // >
+
 
   useEffect(() => {
     // Check to see if this is a redirect back from Checkout
@@ -165,7 +192,7 @@ const CabñaInfo = ({ titulo, descripcion, precio, idServicio }) => {
           <div className=" border border-black p-2">
             <h2 className="">wifi gratis</h2>
             <div className="flex justify-center">
-              <img src={Bañera} className="h-7 pl-2" />
+              <img src={Wifi} className="h-7 pl-2" />
             </div>
           </div>
         </div>
@@ -173,7 +200,7 @@ const CabñaInfo = ({ titulo, descripcion, precio, idServicio }) => {
           <div className="border border-black p-2 ">
             <h2 className="">Estacionamiento</h2>
             <div className="flex justify-center">
-              <img src={Bañera} className="h-7 pl-2" />
+              <img src={Estacionamiento} className="h-7 pl-2" />
             </div>
           </div>
         </div>
@@ -182,7 +209,7 @@ const CabñaInfo = ({ titulo, descripcion, precio, idServicio }) => {
           <div className="border border-black  p-2">
             <h2 className="">Acepta Mascota</h2>
             <div className="flex justify-center">
-              <img src={Bañera} className="h-7 pl-2" />
+              <img src={Mascotas} className="h-7 pl-2" />
             </div>
           </div>
         </div>
@@ -190,11 +217,10 @@ const CabñaInfo = ({ titulo, descripcion, precio, idServicio }) => {
           <div className="border border-black p-2 ">
             <h2 className="">120 m^2 superficie</h2>
             <div className="flex justify-center">
-              <img src={Bañera} className="h-7 pl-2" />
+              <img src={Tamaño} className="h-7 pl-2" />
             </div>
           </div>
         </div>
-
 
       </div>
       <div className="">
@@ -220,7 +246,6 @@ const CabñaInfo = ({ titulo, descripcion, precio, idServicio }) => {
 
       </div>
 
-
       {/* Aquí pondremos el modal para el pago */}
       <Modal isOpen={modalPago} onClose={e => { setModalPago(false) }}>
 
@@ -238,15 +263,11 @@ const CabñaInfo = ({ titulo, descripcion, precio, idServicio }) => {
             </div>
           </div>
 
-          <form
-            action={`${API_URL}/api/create-checkout-session/`}
-            method="POST"
-            className="flex justify-between"
-          >
-
+          <div className="flex justify-between">
             <button
               type="submit"
               className="bg-green-500 rounded-md px-3 py-2 text-white font-mono"
+              onClick={crearSesion}
             >
               Confirmar
             </button>
@@ -258,11 +279,9 @@ const CabñaInfo = ({ titulo, descripcion, precio, idServicio }) => {
               Cancelar
             </button>
 
-          </form>
+          </div>
 
         </section>
-
-
 
       </Modal>
 

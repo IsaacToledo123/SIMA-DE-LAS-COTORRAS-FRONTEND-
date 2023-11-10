@@ -62,7 +62,7 @@ function ActividadUsuario() {
 
                               <FontAwesomeIcon icon={faHouseChimney} />
 
-                              </div>
+                              </div>      
 
                               {misReservacionesCabaña.map(cabaña => {
 
