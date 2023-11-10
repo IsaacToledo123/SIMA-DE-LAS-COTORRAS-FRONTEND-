@@ -12,7 +12,7 @@ import Menu from "./components/AdminComponents/components/Menu";
 import GraficosSeccionados from "./components/AdminComponents/components/PaginaGraficas";
 import EgresosView from "./components/AdminComponents/components/PaginaEgresos";
 import ReservasView from "./components/AdminComponents/components/PaginaReservas";
-
+import Ubicacion from "./components/ubicacion";
 // import ReservasOption from './components/AdminComponents/components/ReservasOpcion'
 function App() {
   return (
@@ -25,7 +25,8 @@ function App() {
           <Route path="/reservas" element={<Reservas />} />
           <Route path="/cabañasInfo" element={<CabañaInfo />} />
           <Route path="/actividad-usuario" element = {<ActividadUsuario />} />
-          
+          <Route path="/ubicacion" element = {<Ubicacion />} />
+
         </Route>
         <Route path="/admin" element={<NavAdmin />}>
           <Route path="MenuPrincipal" element={<AdminVista />} />
