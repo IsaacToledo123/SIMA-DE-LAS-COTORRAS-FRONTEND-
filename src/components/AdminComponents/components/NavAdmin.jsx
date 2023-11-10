@@ -11,7 +11,7 @@ const Nav = () => {
         </div>
         <div className=" flex   text-2xl">
           <p className="pr-5 flex my-auto hover:font-semibold">
-            <a href="/admin/MenuPrincipal">Vista Previa</a>
+            <a href="/admin">Vista Previa</a>
           </p>
           <p className="flex my-auto hover:font-semibold">
             <a href="/admin/Menu">Menu</a>
