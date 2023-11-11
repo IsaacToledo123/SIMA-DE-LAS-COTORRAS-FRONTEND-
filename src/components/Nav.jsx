@@ -6,6 +6,7 @@ import Modal from "./Modal";
 import { UsuarioContext } from "../context/UsuarioContext";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const Nav = () => {
 
@@ -54,6 +55,7 @@ const Nav = () => {
 
         Swal.fire('Excelente 🤩', "Credenciales correctas", 'success');
         localStorage.setItem("token", token);
+        window.location.href = "/"; 
 
       } else {
 
@@ -68,6 +70,23 @@ const Nav = () => {
     }
 
   };
+
+  const cerrarSesion = () => {
+
+    console.log("Vamos a cerrar sesión")
+    localStorage.removeItem('token');
+    window.location.href = "/";
+    toast.success('Nos vemos 🥺', {
+
+      position: "bottom-right",
+      style: {
+        background: '#101010',
+        color: '#fff'
+      }
+
+    })
+
+  }
 
 
   return (
@@ -132,9 +151,9 @@ const Nav = () => {
           </li>
 
           {/* Sección principal */}
-          <li className="grid lg:grid-cols-3 grid-cols-1 text-center md:text-2xl  font-semibold p-2 text-xl">
+          <li className="grid lg:grid-cols-3 grid-cols-1 text-center md:text-2xl p-2 text-xl">
             {/* Foto de perfil */}
-            <div className="pt-6 md:grid flex justify-center">
+            <div className="pt-3 md:grid flex justify-center">
 
               {usuarioAutenticado
                 ?
@@ -184,6 +203,16 @@ const Nav = () => {
               >Cerrar</button>
 
             </Modal>
+
+            {usuarioAutenticado && (
+              <div className="md:pt-5 pt-3">
+                <button
+                  className="text-red-800 rounded-md h-16 text-lg p-2"
+                  onClick={cerrarSesion}
+                >
+                  Cerrar sesión</button>
+              </div>
+            )}
 
             {/* Botón de ingreso */}
             {!usuarioAutenticado && (

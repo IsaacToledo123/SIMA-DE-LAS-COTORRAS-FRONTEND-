@@ -13,6 +13,7 @@ export function UsuariosContextProvider(props) {
       const [comentarios, setComentarios] = useState([]);
       const [autenticacion, setAutenticacion] = useState({});
       const [usuarioAutenticado, setUsuarioAutenticado] = useState({});
+      const [mensajePublicado, setMensajePublicado] = useState(false)
       
 
       useEffect(() => {
@@ -37,8 +38,7 @@ export function UsuariosContextProvider(props) {
                   .then(e => setUsuarioAutenticado(e.data.usuario))
                   .catch(e => console.log(e))
 
-      }, []);
-
+      }, [mensajePublicado]);
 
       const publicarComentario = comentario => {
 
@@ -113,7 +113,9 @@ export function UsuariosContextProvider(props) {
                   comentarios: comentarios,
                   autenticarUsuario: autenticarUsuario,
                   publicarComentario,
-                  usuarioAutenticado
+                  usuarioAutenticado,
+                  mensajePublicado,
+                  setMensajePublicado     
 
             }}>
 

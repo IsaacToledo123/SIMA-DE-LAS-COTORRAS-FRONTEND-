@@ -10,7 +10,7 @@ function Comentario({ username, userphoto, comment, date }) {
                               <h1 className="md:text-xl text-md">{username}</h1>
                               <img
                                     src={userphoto}
-                                    alt="Foto del usuario pt-2"
+                                    alt="Foto del usuario"
                                     className="md:w-24 w-14 pt-3"
                               />
 
