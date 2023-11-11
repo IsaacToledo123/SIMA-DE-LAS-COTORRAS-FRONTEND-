@@ -9,7 +9,7 @@ const Registro = () => {
 
   const token = localStorage.getItem('token')
 
-  const [imagen, setImagen] = useState({})
+  const [imagen, setImagen] = useState("");
   const [nombre, setNombre] = useState("");
   const [apellidos, setApellidos] = useState("");
   const [telefono, setTelefono] = useState("");
@@ -19,8 +19,8 @@ const Registro = () => {
   const [contraseña, setContraseña] = useState("");
   const [mensajeError, setMensajeError] = useState('');
   const [mensajeCorrecto, setMensajeCorrecto] = useState('');
-  const [mensajeErrorContraseña, setMensajeErrorContraseña] = useState('');  
-
+  const [mensajeErrorContraseña, setMensajeErrorContraseña] = useState('');
+  
   const crearUsuario = e => {
 
     e.preventDefault();
@@ -28,25 +28,45 @@ const Registro = () => {
     // validamos la edad del usuario
     const edadUsuario = parseInt(fechaNacimiento.split('-')[0])
     const añoActual = new Date().getFullYear()
+    const edadUsuarioActual = añoActual - edadUsuario
 
-
-    if ((añoActual - edadUsuario) < 18) {
+    if (edadUsuarioActual < 18) {
 
       Swal.fire('Lo sentimos', 'Está aplicación es para mayores de edad', 'error');
 
     } else {
 
-      const datosUsuario = {
+      let datosUsuario = {}
 
-        nombre,
-        apellidos,
-        telefono,
-        correo,
-        fechaNacimiento,
-        usuario,
-        contraseña,
-        imagen
-  
+      if (imagen.length == 0) {
+
+        datosUsuario = {
+
+          nombre,
+          apellidos,
+          telefono,
+          correo,
+          edadUsuarioActual,
+          usuario,
+          contraseña,          
+
+        }
+
+      } else {
+
+        datosUsuario = {
+
+          nombre,
+          apellidos,
+          telefono,
+          correo,
+          edadUsuarioActual,
+          usuario,
+          contraseña,
+          imagen
+
+        }
+
       }
 
       if (Object.values(datosUsuario).includes("")) {
