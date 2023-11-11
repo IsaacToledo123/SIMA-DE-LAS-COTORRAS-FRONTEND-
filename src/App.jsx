@@ -13,6 +13,7 @@ import GraficosSeccionados from "./components/AdminComponents/components/PaginaG
 import EgresosView from "./components/AdminComponents/components/PaginaEgresos";
 import ReservasView from "./components/AdminComponents/components/PaginaReservas";
 import Ubicacion from "./components/ubicacion";
+import Croquis from "./components/croquis";
 // import ReservasOption from './components/AdminComponents/components/ReservasOpcion'
 function App() {
   return (
@@ -25,7 +26,7 @@ function App() {
           <Route path="/reservas" element={<Reservas />} />
           <Route path="/cabañasInfo" element={<CabañaInfo />} />
           <Route path="/actividad-usuario" element = {<ActividadUsuario />} />
-          <Route path="/ubicacion" element = {<Ubicacion />} />
+          <Route path="/ubicacion" element = {<Croquis />} />
 
         </Route>
         <Route path="/admin" element={<NavAdmin />}>
@@ -35,6 +36,7 @@ function App() {
           <Route path="paginaIngresos" element={<IngresosView />} />
           <Route path="Reservas" element={<ReservasView />} />
           <Route path="Menu" element={<Menu />} />
+          <Route path="registro" element={<Registro />} />
         </Route>
       </Routes>
       

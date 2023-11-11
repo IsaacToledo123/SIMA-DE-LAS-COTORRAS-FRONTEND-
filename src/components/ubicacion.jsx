@@ -1,6 +1,6 @@
 import React from "react";
 import FondoMapa from '../img/fondoMapa.png';
-import Croquis from '../img/croquis.png'
+import Croquis from '../img/fotografias_cabaña/croquis.png'
 const Ubicacion = () => {
   return (
     <div className="w-full h-screen bg-cover bg-center bg-blur-md flex opacity-100 " style={{ backgroundImage: `url(${FondoMapa})` }}>

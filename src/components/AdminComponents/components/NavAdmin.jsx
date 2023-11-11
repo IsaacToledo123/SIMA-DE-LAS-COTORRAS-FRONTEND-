@@ -25,7 +25,7 @@ const Nav = () => {
 
          
             <button className="hover:shadow-md   text-xl ">
-              <a href="/registro">Registrase</a>
+              <a href="/admin/registro">Registrase</a>
             </button>
       
         </div>

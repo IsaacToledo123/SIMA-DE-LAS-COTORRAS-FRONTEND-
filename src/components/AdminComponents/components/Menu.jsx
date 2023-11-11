@@ -8,8 +8,8 @@ import { faChartBar, faMoneyBillAlt, faMoneyCheckAlt} from '@fortawesome/free-so
 
 const ColoredSections = () => {
   return (
-    <div className="flex flex-col w-screen h-screen bg-gray-700">
-      <div className="h-1/4 bg-red-400 mb-3 mt-3 rounded-lg flex items-center">
+    <div className="flex flex-col  h-screen bg-gray-700 ">
+      <div className="h-1/3 bg-red-400 mb-3 mt-3 rounded-lg flex items-center">
         <div className="w-1/3 p-4">
             <FontAwesomeIcon icon={faChartBar} className="text-8xl text-white" />
         </div>
@@ -22,7 +22,7 @@ const ColoredSections = () => {
         </div>
       </div>
 
-      <div className="h-1/4 bg-blue-400 mb-3 mt-3 rounded-lg flex items-center">
+      <div className="h-1/3 bg-blue-400 mb-3 mt-3 rounded-lg flex items-center">
         <div className="w-1/3 p-4">
             <FontAwesomeIcon icon={faMoneyBillAlt} className="text-8xl text-white" />
         </div>
@@ -35,7 +35,7 @@ const ColoredSections = () => {
         </div>
       </div>
 
-      <div className="h-1/4 bg-green-400 mb-3 mt-3 rounded-lg flex items-center">
+      <div className="h-1/3 bg-green-400 mb-3 mt-3 rounded-lg flex items-center">
         <div className="w-1/3 p-4">
             <FontAwesomeIcon icon={faMoneyCheckAlt} className="text-8xl text-white" />
         </div>
