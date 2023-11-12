@@ -26,7 +26,7 @@ function App() {
           <Route path="/reservas" element={<Reservas />} />
           <Route path="/cabañasInfo" element={<CabañaInfo />} />
           <Route path="/actividad-usuario" element = {<ActividadUsuario />} />
-          <Route path="/ubicacion" element = {<Croquis />} />
+          <Route path="/ubicacion" element = {<Ubicacion />} />
 
         </Route>
         <Route path="/admin" element={<NavAdmin />}>
