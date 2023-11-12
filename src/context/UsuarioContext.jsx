@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
-import { API_URL } from "../config";      
+import { API_URL } from "../config";
 
 export const UsuarioContext = createContext();
 
@@ -14,7 +14,13 @@ export function UsuariosContextProvider(props) {
       const [autenticacion, setAutenticacion] = useState({});
       const [usuarioAutenticado, setUsuarioAutenticado] = useState({});
       const [mensajePublicado, setMensajePublicado] = useState(false)
-      
+
+      const [misReservacionesAventura, setMisReservacionesAventura] = useState([]);
+      const [misReservacionesCabaña, setMisReservacionesCabaña] = useState([]);
+
+      console.log(misReservacionesAventura)
+      console.log(misReservacionesCabaña)
+
 
       useEffect(() => {
 
@@ -30,9 +36,9 @@ export function UsuariosContextProvider(props) {
             //Verificar si el usuario está autenticado
             axios.get(`${API_URL}/api/verificar-sesion/`, {
 
-                  headers : {
+                  headers: {
 
-                        Authorization : `${token}`
+                        Authorization: `${token}`
                   }
             })
                   .then(e => setUsuarioAutenticado(e.data.usuario))
@@ -40,24 +46,41 @@ export function UsuariosContextProvider(props) {
 
       }, [mensajePublicado]);
 
+      useEffect(() => {
+            
+            if ((usuarioAutenticado)) {
+
+                  axios.get(`${API_URL}/api/reservaciones-aventura/${usuarioAutenticado.id}/`)
+                        .then(e => setMisReservacionesAventura(e.data.reservaciones))
+                        .catch(e => console.log(e))
+
+
+
+                  axios.get(`${API_URL}/api/reservaciones-cabaña/${usuarioAutenticado.id}`)
+                        .then(e => setMisReservacionesCabaña(e.data.reservaciones))
+                        .catch(e => console.log(e))
+            }
+
+      }, [usuarioAutenticado])
+
       const publicarComentario = comentario => {
 
             // Le enviaremos el cuerpo y el token para autenticar si el usuario ha iniciado sesión
             return axios.post(`${API_URL}/api/usuarios-opinions/`, comentario, {
 
-                  headers : {
+                  headers: {
 
-                        Authorization :`${token}`
+                        Authorization: `${token}`
                   },
-                  
-             })
+
+            })
 
                   .then(e => {
 
                         console.log(e.data)
                         console.log(token)
 
-                        return e    
+                        return e
 
                   })
                   .catch(error => {
@@ -74,7 +97,7 @@ export function UsuariosContextProvider(props) {
                   .then(e => {
 
                         return e.data
-                        
+
                   })
                   .catch(error => {
 
@@ -115,7 +138,9 @@ export function UsuariosContextProvider(props) {
                   publicarComentario,
                   usuarioAutenticado,
                   mensajePublicado,
-                  setMensajePublicado     
+                  setMensajePublicado,
+                  misReservacionesAventura,
+                  misReservacionesCabaña
 
             }}>
 

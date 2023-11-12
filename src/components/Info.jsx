@@ -62,14 +62,14 @@ export default function Info() {
             {comoLlegarInfo.content.map((method, index) => (
               <article key={index} className="flex flex-col items-start justify-between">
                 <div className="flex items-center gap-x-4 text-xs">
-                  <FontAwesomeIcon icon={method.icon} className="text-2xl text-gray-600" />
+                  <FontAwesomeIcon icon={method.icon} className="text-3xl text-gray-600" />
                   <p className="font-medium text-gray-500">{method.method}</p>
                 </div>
                 <div className="group relative mt-3">
                   <p className="text-lg font-semibold leading-6 text-red-600">
                     {method.description}
                   </p>
-                  <ul className="mt-3 text-sm leading-6 text-gray-600">
+                  <ul className="mt-3 md:text-xl text-sm leading-6 text-gray-600">
                     {method.details.map((detail, idx) => (
                       <li key={idx}>{detail}</li>
                     ))}

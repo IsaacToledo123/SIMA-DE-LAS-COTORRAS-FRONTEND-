@@ -213,7 +213,7 @@ const Registro = () => {
 
       <div>
 
-        <div className="md:pl-20 md:pr-20 md:p-10 p-5">
+        <div className="md:pl-20 md:pr-20 md:p-10 px-5 pb-5 pt-10">
 
           <h1 className="bg-red-700 text-white font-bold md:text-5xl text-center py-5 text-2xl">Registro</h1>
 
@@ -225,7 +225,7 @@ const Registro = () => {
 
             <div className="md:p-24 p-8">
 
-              <div class="mb-5 flex flex-col">
+              <div className="mb-5 flex flex-col">
 
                 <label className="md:text-2xl text-xl font-inter text-gray-600 mb-1">Nombre:</label>
                 <input
@@ -235,38 +235,38 @@ const Registro = () => {
 
               </div>
 
-              <div class="mb-5 flex flex-col">
+              <div className="mb-5 flex flex-col">
 
                 <label className="md:text-2xl text-xl font-inter text-gray-600 mb-1">Apellidos:</label>
                 <input className="border border-black border-solid py-2  rounded-md px-2 text-lg" type="text" onChange={e => { setApellidos(e.target.value) }} />
 
               </div>
-              <div class="mb-5 flex flex-col">
+              <div className="mb-5 flex flex-col">
 
-                <label class="md:text-2xl text-xl font-inter text-gray-600 mb-1">Numero de telefono:</label>
-                <input class="border border-black border-solid py-2 rounded-md px-2 text-lg" type="text" onChange={handleChangeNumero} />
+                <label className="md:text-2xl text-xl font-inter text-gray-600 mb-1">Numero de telefono:</label>
+                <input className="border border-black border-solid py-2 rounded-md px-2 text-lg" type="text" onChange={handleChangeNumero} />
                 {mensajeError && <p className="bg-red-500 text-white p-1 mt-1 rounded-md">{mensajeError}</p>}
                 {mensajeCorrecto && <p className="bg-green-500 text-white p-1 rounded-md mt-1">{mensajeCorrecto}</p>}
               </div>
 
-              <div class="mb-5 flex flex-col">
-                <label class="md:text-2xl text-xl font-inter text-gray-600 mb-1">Correo electronico:</label>
-                <input class="border border-black border-solid py-2 rounded-md px-2 text-lg" type="email" onChange={e => { setCorreo(e.target.value) }} />
+              <div className="mb-5 flex flex-col">
+                <label className="md:text-2xl text-xl font-inter text-gray-600 mb-1">Correo electronico:</label>
+                <input className="border border-black border-solid py-2 rounded-md px-2 text-lg" type="email" onChange={e => { setCorreo(e.target.value) }} />
               </div>
 
-              <div class="mb-5 flex flex-col">
-                <label class="md:text-2xl text-xl font-inter text-gray-600 mb-1">Fecha de nacimiento:</label>
-                <input class="border border-black border-solid py-2 rounded-md px-2 text-lg" type="date" onChange={e => { setFechaNacimiento(e.target.value) }} />
+              <div className="mb-5 flex flex-col">
+                <label className="md:text-2xl text-xl font-inter text-gray-600 mb-1">Fecha de nacimiento:</label>
+                <input className="border border-black border-solid py-2 rounded-md px-2 text-lg" type="date" onChange={e => { setFechaNacimiento(e.target.value) }} />
               </div>
 
-              <div class="mb-5 flex flex-col">
-                <label class="md:text-2xl text-xl font-inter text-gray-600 mb-1">Usuario:</label>
-                <input class="border border-black border-solid py-2 rounded-md px-2 text-lg" type="text" onChange={e => { setUsuario(e.target.value) }} />
+              <div className="mb-5 flex flex-col">
+                <label className="md:text-2xl text-xl font-inter text-gray-600 mb-1">Usuario:</label>
+                <input className="border border-black border-solid py-2 rounded-md px-2 text-lg" type="text" onChange={e => { setUsuario(e.target.value) }} />
               </div>
 
-              <div class="mb-5 flex flex-col">
-                <label class="md:text-2xl text-xl font-inter text-gray-600 mb-1">Contraseña:</label>
-                <input class="border border-black border-solid py-2 rounded-md px-2 text-lg " type="password" onChange={handleChangePassword} />
+              <div className="mb-5 flex flex-col">
+                <label className="md:text-2xl text-xl font-inter text-gray-600 mb-1">Contraseña:</label>
+                <input className="border border-black border-solid py-2 rounded-md px-2 text-lg " type="password" onChange={handleChangePassword} />
                 {mensajeErrorContraseña && <p className="bg-red-500 text-white p-1 mt-1 rounded-md">{mensajeErrorContraseña}</p>}
               </div>
 
@@ -300,9 +300,9 @@ const Registro = () => {
                 )
               }
 
-              <div class="flex justify-center pt-10 ">
+              <div className="flex justify-center pt-10 ">
                 <button
-                  class="capitalize md:uppercase text-white text-2xl bg-red-800 opacity-90 rounded-lg h-20 w-3/4 hover:opacity-100"
+                  className="capitalize md:uppercase text-white text-2xl bg-red-800 opacity-90 rounded-lg h-20 w-3/4 hover:opacity-100"
                   onClick={crearUsuario}
                 >
                   Crear Cuenta

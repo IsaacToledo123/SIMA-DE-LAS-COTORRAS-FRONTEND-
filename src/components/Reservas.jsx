@@ -7,6 +7,8 @@ import OpcionServicio from "./OpcionServicio";
 import { AventuraContext } from "../context/AventuraContext";
 import { motion } from "framer-motion";
 import CabñaInfo from "../components/CabñaInfo"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMountainSun, faHouseChimney } from "@fortawesome/free-solid-svg-icons";
 
 const Reservas = () => {
   //configuraciones de animacion
@@ -88,6 +90,7 @@ const Reservas = () => {
         </div>
       </motion.div>
       <div className="flex pt-4 pb-10">
+
         <div className="w-full mx-4">
           <motion.div
             initial="hidden"
@@ -109,20 +112,14 @@ const Reservas = () => {
           </motion.div>
         </div>
       </div>
-      <div className="flex p-10">
-        <div className="bg-gray-200 pl-20 h-20 w-full"></div>
-        <div className="bg-red-500 pl-20 h-20 w-full"></div>
-        <div className="bg-green-500 pl-20 h-20 w-full"></div>
-      </div>
-
 
       <div className="grid grid-cols-1 md:grid-cols-2 place-items-center text-center">
 
         {/* Sección cabañas */}
-        <div className=" items-center pb-44">
+        <div className=" items-center">
 
-          <div className="md:w-96 w-72 pb-10">
-            <img src={Cabañas} alt="" />
+          <div className="">
+            <FontAwesomeIcon icon={faHouseChimney} />
           </div>
 
           <div>
@@ -141,10 +138,9 @@ const Reservas = () => {
 
         </div>
 
-        <div className="items-center pb-44">
-          <div className="md:w-96 w-72 pb-10">
-            <img src={Aventura} alt="" className=" " />
-          </div>
+        <div className="items-center">
+
+          <FontAwesomeIcon icon={faMountainSun} />
 
           <div>
             <h1 className="capitalize md:uppercase text-4xl pb-20 text-gray-800 opacity-50 ">
@@ -169,7 +165,7 @@ const Reservas = () => {
 
         {mostrarCabaña && (
 
-          <CabñaInfo titulo={titulo} descripcion={descripcion} precio={precio} idServicio = {idServicio}/>
+          <CabñaInfo titulo={titulo} descripcion={descripcion} precio={precio} idServicio={idServicio} />
 
         )}
 
