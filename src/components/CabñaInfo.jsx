@@ -58,7 +58,18 @@ const CabñaInfo = ({ titulo, descripcion, precio, idServicio }) => {
 
       .then(e => {
 
-        console.log(e.data)
+        const informacionServicio = {
+
+          idServicio,
+          titulo,
+          "idUsuario" : usuarioAutenticado.id
+
+        }
+
+        const infoServicio = JSON.stringify(informacionServicio)
+
+        localStorage.setItem('servicio', infoServicio);
+        
         window.location.href = e.data.session;
 
       })
@@ -74,22 +85,6 @@ const CabñaInfo = ({ titulo, descripcion, precio, idServicio }) => {
   //   method="POST"
   //   className="flex justify-between"
   // >
-
-
-  useEffect(() => {
-    // Check to see if this is a redirect back from Checkout
-    const query = new URLSearchParams(window.location.search);
-
-    if (query.get("success")) {
-      console.log("Order placed! You will receive an email confirmation.");
-    }
-
-    if (query.get("canceled")) {
-      console.log(
-        "Order canceled -- continue to shop around and checkout when you're ready."
-      );
-    }
-  }, []);
 
   const container = {
     hidden: { opacity: 0, x: -50 },
