@@ -241,6 +241,9 @@ import {
   faCalendarAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import ModalMeta from "./ModalMeta";
+import Cartitas from "./Cartas";
+import LatestReservations from "./UltimasR";
+
 
 const AdminVista = () => {
   const [showModal, setShowModal] = useState(false);
@@ -387,6 +390,11 @@ const AdminVista = () => {
           fields={modalFields}
         />
       )}
+
+      <div>
+        <Cartitas/>
+        <LatestReservations/>
+      </div>
     </div>
   );
 };
