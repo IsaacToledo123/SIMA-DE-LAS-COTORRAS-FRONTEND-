@@ -6,7 +6,7 @@ const IngresosView = () => {
     { id: 1, icon: faUtensils, nombre: 'Restaurante', fecha: '2023-01-15', monto: 50 },
     { id: 2, icon: faCar, nombre: 'Transporte', fecha: '2023-01-20', monto: 30 },
     { id: 3, icon: faHome, nombre: 'Aventura', fecha: '2023-02-01', monto: 800 },
-    { id: 6, icon: faHiking, nombre: 'Aventuras', fecha: '2023-02-20', monto: 120 },
+    { id: 6, icon: faHiking, nombre: 'Cabañas', fecha: '2023-02-20', monto: 120 },
   ];
 
   const subtotales = {};
