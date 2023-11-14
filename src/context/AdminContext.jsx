@@ -17,7 +17,15 @@ export function AdministradorContextProvider(props) {
                         Authorization: `${token}`
                   }
             })
-                  .then(e => console.log(e))
+                  .then(e => {
+
+                        if (e.status == 200) {
+
+                              setIngresos(e.data.Ingresos)
+
+                        }
+
+                  })
                   .catch(e => console.log(e))
 
       }, []);

@@ -144,7 +144,7 @@ const ModalMeta = ({ isOpen, onClose, title, fields }) => {
         <div className="bg-white p-4 rounded-lg w-96">
           <div className="flex justify-between">
             <h2 className="text-2xl font-bold mb-4">{title}</h2>
-            <button className="text-black cursor-pointer" onClick={onClose}>
+            <button className="text-black cursor-pointer hover:bg-red-700 hover:text-white rounded-full px-2 h-8" onClick={onClose}>
               X
             </button>
           </div>
