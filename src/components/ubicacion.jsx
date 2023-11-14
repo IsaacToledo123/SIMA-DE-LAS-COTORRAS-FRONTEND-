@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import CroquisComponent from "./croquis";
 import FondoMapa from "../img/imagenesCRoquis/fondoMapa.png";
-import Rapel from "../img/imagenesCRoquis/rapel.jpg";
-import Restaurant from "../img/imagenesCRoquis/local.png";
+import Rapel from "../img/imagenesCRoquis/rapeling.png";
+import Restaurant from "../img/imagenesCRoquis/restaurant.png";
+import Inicio from "../img/imagenesCRoquis/inicioCroquis2.png";
+import Cabañas from "../img/imagenesCRoquis/cabañasCro.png";
 import LogoEmpresa from "../img/logoP.png";
 import { Html5Qrcode, Html5QrcodeScanner } from "html5-qrcode";
 const Ubicacion = () => {
-  const [openHome, setOpenHome] = useState(null);
+ 
   const [scanResult, setScanResult] = useState(null);
   const [openRestaurant, setOpenRestaurant] = useState(null);
   const [openRapel, setOpenRapel] = useState(true);
@@ -34,16 +36,9 @@ const Ubicacion = () => {
       console.warn(err);
     }
   }, []);
-  const openModal = (reserva) => {
-    setOpenHome(reserva);
-  };
-
-  const closeModal = () => {
-    setOpenHome(null);
-  };
 
   const validateScanResult = (result) => {
-    if (result === "https://me-qr.com/B8DcIIIM") {
+    if (result === "https://me-qr.com/yTHDxyJB") {
       setOpenRapel(false);
       setScanResult("Rapel visitado Felicidades")
     }
@@ -52,7 +47,7 @@ const Ubicacion = () => {
   return (
     <div className="flex flex-col">
       <div className="flex p-10">
-        {/* Componente Izquierdo */}
+    
         <div className="w-1/4 m-0 ">
           <div className="text-2xl font-semibold flex flex-col text-center">
             <h1 className="">La sima de las cotorras</h1>
@@ -67,12 +62,12 @@ const Ubicacion = () => {
           </p>
         </div>
 
-        {/* Componente Central (CroquisComponent) */}
+    
         <div className="flex-1">
-          <CroquisComponent mostrar={openRapel} />
+          <CroquisComponent mostrar={openRapel}  />
         </div>
 
-        {/* Componente Derecho */}
+
         <div className="w-1/4">
           <div>
             <img src={LogoEmpresa} width="300px" />
@@ -83,7 +78,6 @@ const Ubicacion = () => {
               <img src={Rapel} className="w-10" />
               <h1
                 className="text-2xl pl-5 opacity-80 cursor-pointer hover:text-yellow-200"
-                onClick={() => openModal(1)}
               >
                 Rapel
               </h1>
@@ -95,13 +89,13 @@ const Ubicacion = () => {
               </h1>
             </div>
             <div className="flex pb-5">
-              <img src={Rapel} className="w-10" />
+              <img src={Cabañas} className="w-10" />
               <h1 className="text-2xl pl-5 opacity-80 cursor-pointer hover:text-yellow-200">
                 <a href="/reservas">Cabañas</a>
               </h1>
             </div>
             <div className="flex pb-5">
-              <img src={Rapel} className="w-10" />
+              <img src={Inicio} className="w-10" />
               <h1 className="text-2xl pl-5 cursor-pointer opacity-80 hover:text-yellow-200">
                 <a>Usted esta aqui</a>
               </h1>
@@ -118,11 +112,8 @@ const Ubicacion = () => {
           <div id="reader"></div>
         )}
 
-        {openHome && (
-          <div>
-            <div></div>
-          </div>
-        )}
+
+
     </div>
   );
 };
