@@ -4,22 +4,25 @@ import App from './App.jsx'
 import './index.css'
 import { AventuraContextProvider } from './context/AventuraContext.jsx'
 import { UsuariosContextProvider } from './context/UsuarioContext.jsx'
+import { AdministradorContextProvider } from './context/AdminContext.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
 
   <React.StrictMode>
 
-    <AventuraContextProvider>
+    <AdministradorContextProvider>
 
-      <UsuariosContextProvider>
+      <AventuraContextProvider>
 
-        <App />
+        <UsuariosContextProvider>
 
-      </UsuariosContextProvider>
+          <App />
 
+        </UsuariosContextProvider>
 
-
-    </AventuraContextProvider>
+      </AventuraContextProvider>
+      
+    </AdministradorContextProvider>
 
   </React.StrictMode>,
 

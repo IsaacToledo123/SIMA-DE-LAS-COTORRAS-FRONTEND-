@@ -13,7 +13,9 @@ import Croquis from "./components/croquis";
 import Layout from "./Layout";
 import Home from "./components/AdminComponents/components/Home";
 import TablaIngresosYReservaciones from "./components/AdminComponents/components/Increase";
-import TablaEgresos from "./components/AdminComponents/components/Decrease";
+import TablaEgresos from "./components/AdminComponents/components/Decrease"
+import Login from "./components/AdminComponents/components/Login";
+import ProtectedRoute from "./components/AdminComponents/components/ProtectedRoute";
 
 
 // import ReservasOption from './components/AdminComponents/components/ReservasOpcion'
@@ -39,22 +41,26 @@ function App() {
           <Route path="Menu" element={<Menu />} />
           </Route>*/}
 
-        <Route
-          path="/admin/*"
-          element={
-            <Layout>
+        {/* Se ha agregado */}
+        <Route path="/login" element={<Login />} />
+        <Route element={<ProtectedRoute/>}>
+          <Route
+            path="/admin/*"
+            element={
+              <Layout>
 
-              <Routes>
-                <Route index element={<Home />} />
-                <Route path="paginaEgresos" element={<TablaEgresos />} />
-                <Route path="Graficas" element={<GraficosSeccionados />} />
-                <Route path="paginaIngresos" element={<TablaIngresosYReservaciones />} />
-                <Route path="Reservas" element={<ReservasView />} />
-                <Route path="Menu" element={<Menu />} />
-              </Routes>
-            </Layout>
-          }
-        />
+                <Routes>
+                  <Route index element={<Home />} />
+                  <Route path="paginaEgresos" element={<TablaEgresos />} />
+                  <Route path="Graficas" element={<GraficosSeccionados />} />
+                  <Route path="paginaIngresos" element={<TablaIngresosYReservaciones />} />
+                  <Route path="Reservas" element={<ReservasView />} />
+                  <Route path="Menu" element={<Menu />} />
+                </Routes>
+              </Layout>
+            }
+          />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
