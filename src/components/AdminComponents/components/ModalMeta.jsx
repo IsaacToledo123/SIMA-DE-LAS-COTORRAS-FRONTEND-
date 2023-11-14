@@ -71,7 +71,10 @@
 
 
 
+import axios from "axios";
 import React, { useState } from "react";
+import Swal from "sweetalert2";
+import { API_URL } from "../../../config";
 
 const ModalMeta = ({ isOpen, onClose, title, fields }) => {
 
@@ -89,7 +92,45 @@ const ModalMeta = ({ isOpen, onClose, title, fields }) => {
 
   const [formState, setFormState] = useState(inicializaCamposStates());
 
+  // agregar un nuevo ingreso
   const handleAgregar = () => {
+
+    const monto = parseInt(formState.monto);
+    const token = localStorage.getItem('token');
+
+    if (!monto) {
+
+      Swal.fire('Ojo ahí', 'Debes ingresar números recuerda', 'warning')
+
+    } else {
+
+      // Haremos la petición a la base de datos
+      console.log("Haciendo la petición de la base de datos");
+      axios.post(`${API_URL}/api/administrador/agregar-ingreso/`, formState, {
+
+        headers: {
+
+          Authorization: `${token}`
+
+        }
+
+      })
+        .then(e => {
+
+          if (e.status == 200) {            
+
+            Swal.fire('Success', e.data.message, 'success');
+
+          }
+
+        })
+        .catch(e => {
+          
+          Swal.fire('Error', 'Al parecer algo salió mal', 'error');
+
+        })
+    }
+
     onClose();
   };
 
@@ -111,46 +152,46 @@ const ModalMeta = ({ isOpen, onClose, title, fields }) => {
             {fields.map((field) => (
               field.name !== "categoria" ? (
                 <div className="mb-4" key={field.name}>
-                <label
-                  htmlFor={field.name}
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  {field.label}:
-                </label>
-                
-                <input
-                  type={field.type}
-                  id={field.name}
-                  name={field.name}
-                  className="border rounded-md p-2 w-full"
-                  value={camposStates[field.name]}
-                  onChange={(e) => handleFieldChange(field.name, e.target.value)}
-                />
-              </div>
+                  <label
+                    htmlFor={field.name}
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    {field.label}:
+                  </label>
+
+                  <input
+                    type={field.type}
+                    id={field.name}
+                    name={field.name}
+                    className="border rounded-md p-2 w-full"
+                    value={camposStates[field.name]}
+                    onChange={(e) => handleFieldChange(field.name, e.target.value)}
+                  />
+                </div>
               ) : (
                 <div className="mb-4" key={field.name}>
-                <label
-                  htmlFor={field.name}
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  {field.label}:
-                </label>
-                
-                <select
-                  type={field.type}
-                  id={field.name}
-                  name={field.name}
-                  className="border rounded-md p-2 w-full"
-                  value={camposStates[field.name]}
-                  onChange={(e) => handleFieldChange(field.name, e.target.value)}
-                >
-                  {
-                    field.options.map( (option) =>(
-                      <option>{option}</option>
-                    ))
-                  }
-                </select>
-              </div>
+                  <label
+                    htmlFor={field.name}
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    {field.label}:
+                  </label>
+
+                  <select
+                    type={field.type}
+                    id={field.name}
+                    name={field.name}
+                    className="border rounded-md p-2 w-full"
+                    value={camposStates[field.name]}
+                    onChange={(e) => handleFieldChange(field.name, e.target.value)}
+                  >
+                    {
+                      field.options.map((option) => (
+                        <option>{option}</option>
+                      ))
+                    }
+                  </select>
+                </div>
               )
             ))}
             <button

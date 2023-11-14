@@ -58,13 +58,15 @@ const TablaIngresosYReservaciones = () => {
             name: "categoria",
             label: "Categoría",
             type: "select",
-            options: ["Restaurante", "Transporte", "Cabañas", "Aventuras"],
+            options: ["Restaurante", "Transporte", "Hospedaje", "Aventuras"],
           },
+          { name: "descripcion", label: "Descripción", type: "text"}
         ],
       },
     };
 
     const action = actionMap[type];
+    
     openModal(type, action.title, action.fields);
   };
 
@@ -73,7 +75,7 @@ const TablaIngresosYReservaciones = () => {
     0
   );
 
-  const handleAddIncome = () => {
+  const handleAddIncome = () => {    
     handleButtonClick("ingreso"); // Abre el modal para agregar ingreso
   };
 
@@ -82,6 +84,8 @@ const TablaIngresosYReservaciones = () => {
   };
 
   const handleAgregar = (formData) => {
+
+    console.log("Vamos a agregar un nuevo ingreso")
     // Agregar la nueva entrada a los datos existentes
     const newIncome = {
       id: ingresosData.length + 1,
@@ -183,7 +187,7 @@ const TablaIngresosYReservaciones = () => {
           title={modalTitle}
           fields={modalFields}
           onAgregar={handleAgregar}
-        />
+        />        
       )}
     </div>
   );
