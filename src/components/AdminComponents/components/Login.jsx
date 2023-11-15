@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock } from "@fortawesome/free-solid-svg-icons";
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import fondo_login from "../../../img/fondo_login.jpeg"     
+import fondo_login from "../../../img/fondo_cotorras.jpg"     
 
 const Login = () => {
 

@@ -1,16 +1,26 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
-import ImagenPrincipal from "../img/img1.png";
-import ImagenSecundaria from "../img/img2.png";
-import Cabañas from "../img/cabañas1.png";
-import Aventura from "../img/aventura.png";
+import React, { useContext, useEffect, useRef, useState } from "react";;
 import OpcionServicio from "./OpcionServicio";
 import { AventuraContext } from "../context/AventuraContext";
 import { motion } from "framer-motion";
 import CabñaInfo from "../components/CabñaInfo"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMountainSun, faHouseChimney } from "@fortawesome/free-solid-svg-icons";
+import ImagenesServicio from "./ImagenesServicio";
+import fotografias_cabaña1 from "../img/fotografias_cabaña/fotografia_cabaña5.jpeg"
+import fotografias_cabaña_2 from "../img/fotografias_cabaña/fotografía_cabaña1.1.jpeg"
+import fotografías_cabaña_3 from "../img/fotografias_cabaña/fotografia_cabaña3.1.jpeg"
+import rappel from "../img/aventuras/rappel.jpg"
+import medio_rappel from "../img/aventuras/rappel_2.jpg"
+import caminata from "../img/aventuras/PINTURA-MANITAS.jpg"
+import tirolesa from "../img/aventuras/tirolesa.jpeg"
+import paquete from "../img/aventuras/caminata.jpg"
+import gran_paqueta from "../img/aventuras/gran_paquete.jpg"
+
 
 const Reservas = () => {
+
+  const { aventuras, cabañas } = useContext(AventuraContext);
+
   //configuraciones de animacion
   const sublogo = {
     hidden: { opacity: 0, x: 50 },
@@ -25,153 +35,74 @@ const Reservas = () => {
     visible: { opacity: 1, x: 0 },
   };
 
-  const { aventuras, cabañas } = useContext(AventuraContext);
-  const [mostrarCabaña, setMostrarCabaña] = useState(false)
+  const imagenes = [
 
-  const [titulo, setTitulo] = useState("");
-  const [descripcion, setDescripcion] = useState("");
-  const [precio, setPrecio] = useState("");
-  const [idServicio, setIdServicio] = useState(0);
+    fotografias_cabaña1,
+    fotografias_cabaña_2,
+    fotografías_cabaña_3,
 
-  const componenteOcultoRef = useRef(null);
+  ]
 
-  const verServicio = servicio => {
+  const imagenesAventura = [
 
-    //¿Cabaña o aventura?
-    let servicioSeleccionado = aventuras.find(aventura => aventura.nombre == servicio)
+    rappel,
+    medio_rappel,
+    caminata,
+    tirolesa,
+    paquete,
+    gran_paqueta
 
-    if (servicioSeleccionado === undefined) {
+  ]
 
-      servicioSeleccionado = cabañas.find(cabaña => cabaña.nombre == servicio);
+  const verServicioCabaña = idServicio => {
 
-      cambiarEstado(servicioSeleccionado);
+    const cabaña = cabañas.find(c => c.id == idServicio);
+    
 
-    } else {
-
-      cambiarEstado(servicioSeleccionado);
-
-    }
-
-    scrollToComponent();
-    setMostrarCabaña(true);
 
   }
 
-  const scrollToComponent = () => {
+  const verServicioAventura = idServicio => {
 
-    if (componenteOcultoRef.current) {
-
-      componenteOcultoRef.current.scrollIntoView({ behavior: 'smooth' })
-
-    }
+    console.log(idServicio)
 
   }
 
-  const cambiarEstado = ({ id, nombre, precio, descripcion }) => {
-
-    setTitulo(nombre);
-    setDescripcion(descripcion);
-    setPrecio(precio);
-    setIdServicio(id)
-
-  }
 
 
   return (
-    <>
-      <motion.div
-        initial="hidden"
-        animate="visible"
-        variants={tituloAjustes}
-        transition={{ duration: 0.3 }}
-      >
-        <div className="bg-gray-200 md:p-20 p-10 text-center md:m-10 m-5">
-          <h1 className="capitalize md:uppercase md:text-5xl text-2xl text-center font-bold">Menú de Servicios</h1>
-        </div>
-      </motion.div>
-      <div className="flex pt-4 pb-10">
 
-        <div className="w-full mx-4">
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={sublogo2}
-            transition={{ duration: 0.3 }}
-          >
-            <img src={ImagenPrincipal} alt="" className="w-full h-auto" />
-          </motion.div>
-        </div>
-        <div className="w-full mx-4">
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={sublogo}
-            transition={{ duration: 0.3 }}
-          >
-            <img src={ImagenSecundaria} alt="" className="w-full h-auto" />
-          </motion.div>
-        </div>
-      </div>
+    <div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 place-items-center text-center">
+      <h1 className="text-3xl py-10 font-thin text-center">Cabañas</h1>
 
-        {/* Sección cabañas */}
-        <div className=" items-center">
+      <div className="grid md:grid-cols-3 grid-cols-1">
 
-          <div className="">
-            <FontAwesomeIcon icon={faHouseChimney} />
-          </div>
+        {cabañas.map((cabaña, index) => {
 
-          <div>
-            <h1 className="capitalize md:uppercase text-4xl pb-20 text-gray-800 opacity-50">
-              Cabañas
-            </h1>
-          </div>
+          return <ImagenesServicio nombre={cabaña.nombre} imagen={imagenes[index]} verServicio={verServicioCabaña} idServicio={cabaña.id} />
 
-          {cabañas.map(cabaña => {
-
-            const { id, nombre } = cabaña;
-
-            return <OpcionServicio aventura={nombre} verServicio={verServicio} key={id} />
-
-          })}
-
-        </div>
-
-        <div className="items-center">
-
-          <FontAwesomeIcon icon={faMountainSun} />
-
-          <div>
-            <h1 className="capitalize md:uppercase text-4xl pb-20 text-gray-800 opacity-50 ">
-              Aventura
-            </h1>
-          </div>
-
-          {aventuras.map((aventura) => {
-
-            const { id, nombre } = aventura;
-
-
-            return <OpcionServicio aventura={nombre} verServicio={verServicio} key={id} />;
-
-          })}
-
-        </div>
+        })}
 
       </div>
 
-      <div ref={componenteOcultoRef}>
+      <div>
+        
+      </div>
 
-        {mostrarCabaña && (
+      <h1 className="text-3xl py-10 font-thin text-center">Aventuras</h1>
 
-          <CabñaInfo titulo={titulo} descripcion={descripcion} precio={precio} idServicio={idServicio} />
+      <div className="grid md:grid-cols-2 grid-cols-1">
 
-        )}
+        {aventuras.map((aventura, index) => {
+
+          return <ImagenesServicio nombre={aventura.nombre} imagen={imagenesAventura[index]} verServicio={verServicioAventura} idServicio={aventura.id} />
+
+        })}
 
       </div>
 
-    </>
+    </div>
   );
 };
 

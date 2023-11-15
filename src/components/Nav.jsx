@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import Usuarios from "../img/usuarios.png";
 import LogoEmpresa from '../img/logoP.png'
@@ -10,7 +10,7 @@ import toast from "react-hot-toast";
 
 const Nav = () => {
 
-  const { autenticarUsuario, usuarioAutenticado } = useContext(UsuarioContext);
+  const { autenticarUsuario, usuarioAutenticado } = useContext(UsuarioContext); 
 
   // NavNar Responsive
   const [isOpen, setIsOpen] = useState(false);
@@ -150,6 +150,18 @@ const Nav = () => {
               <Link to="/reservas" onClick={toggleNavbar}>Reservas</Link>
 
             </p>
+{/* 
+            <p className="p-2">
+
+              <Link to="/cabañas" onClick={toggleNavbar}>Cabañas</Link>
+
+            </p>
+
+            <p className="p-2">
+
+              <Link to="/aventuras" onClick={toggleNavbar}>Aventuras</Link>
+
+            </p> */}
 
             <p className="p-2">
 

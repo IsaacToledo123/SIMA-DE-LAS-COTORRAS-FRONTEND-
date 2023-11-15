@@ -14,7 +14,6 @@ export function UsuariosContextProvider(props) {
       const [autenticacion, setAutenticacion] = useState({});
       const [usuarioAutenticado, setUsuarioAutenticado] = useState({});
       const [mensajePublicado, setMensajePublicado] = useState(false)
-
       const [misReservacionesAventura, setMisReservacionesAventura] = useState([]);
       const [misReservacionesCabaña, setMisReservacionesCabaña] = useState([]);
 
@@ -47,7 +46,7 @@ export function UsuariosContextProvider(props) {
       }, [mensajePublicado]);
 
       useEffect(() => {
-            
+
             if ((usuarioAutenticado)) {
 
                   axios.get(`${API_URL}/api/reservaciones-aventura/${usuarioAutenticado.id}/`)
@@ -140,7 +139,7 @@ export function UsuariosContextProvider(props) {
                   mensajePublicado,
                   setMensajePublicado,
                   misReservacionesAventura,
-                  misReservacionesCabaña
+                  misReservacionesCabaña,                  
 
             }}>
 
