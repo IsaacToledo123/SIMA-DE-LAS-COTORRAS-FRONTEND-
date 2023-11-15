@@ -27,6 +27,8 @@ const CabñaInfo = ({ titulo, descripcion, precio, idServicio }) => {
   const [modalPago, setModalPago] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  const cabaña = JSON.parse(localStorage.getItem('cabaña'));
+
   const images = [
     fotografias_cabaña1,
     fotografias_cabaña2,
@@ -54,7 +56,7 @@ const CabñaInfo = ({ titulo, descripcion, precio, idServicio }) => {
 
     console.log(idServicio)
 
-    axios.post(`${API_URL}/api/create-checkout-session/${idServicio}/`)
+    axios.post(`${API_URL}/api/create-checkout-session/${cabaña.id}/`)
 
       .then(e => {
 
@@ -62,14 +64,14 @@ const CabñaInfo = ({ titulo, descripcion, precio, idServicio }) => {
 
           idServicio,
           titulo,
-          "idUsuario" : usuarioAutenticado.id
+          "idUsuario": usuarioAutenticado.id
 
         }
 
         const infoServicio = JSON.stringify(informacionServicio)
 
         localStorage.setItem('servicio', infoServicio);
-        
+
         window.location.href = e.data.session;
 
       })
@@ -131,9 +133,9 @@ const CabñaInfo = ({ titulo, descripcion, precio, idServicio }) => {
         variants={tituloAjustes}
         transition={{ duration: 0.3 }}
       >
-        <div className="bg-red-800 p-5 text-center">
+        <div className="bg-red-800 p-5 text-center mb-10">
           <h1 className="capitalize md:uppercase text-4xl text-white font-inter font-bold">
-            {titulo}
+            {cabaña.nombre}
           </h1>
         </div>
       </motion.div>
@@ -143,11 +145,14 @@ const CabñaInfo = ({ titulo, descripcion, precio, idServicio }) => {
         variants={container}
         transition={{ duration: 0.3 }}
       >
-        <div className="pt-10">
+        {/* Sección de la cabaña */}
+        <div className="pt-10 grid sm:grid-cols-2 grid-cols-1 pb-10">
 
           {/* Aquí irá la imagen */}
 
-          <div className="w-64 h-64 mx-auto relative">
+          <div className="w-2/3 h-full mx-auto relative px-10">
+
+            <h1 className="text-3xl font-thin text-center pb-2">Fotografías: </h1>
 
             <img
               src={images[currentIndex]}
@@ -157,76 +162,82 @@ const CabñaInfo = ({ titulo, descripcion, precio, idServicio }) => {
 
             <button
               onClick={prevImage}
-              className="absolute top-1/2 left-0 transform -translate-y-1/2 px-2 py-1"
+              className="absolute top-1/2 left-0 transform -translate-y-1/2 text-3xl mt-10"
             >
               ⬅️
             </button>
 
             <button
               onClick={nextImage}
-              className="absolute top-1/2 right-0 transform -translate-y-1/2 px-2 py-1"
+              className="absolute top-1/2 right-0 transform -translate-y-1/2 text-3xl mt-10"
             >
               ➡️
             </button>
           </div>
 
+          <div className="px-10 md:text-xl text-lg text-center">
+
+            <h1 className="text-3xl font-thin text-center pt-20 md:pt-0">Descripción:</h1>
+
+            <div>
+              <p className="md:text-2xl text-justify opacity-70 md:p-10 text-lg p-2">
+                {cabaña.descripcion}
+              </p>
+            </div>
+
+            <div className="p-2">
+              <h1 className="text-3xl font-thin text-center pb-2">Ofrece: </h1>
+              <div className=" border border-black p-2">
+                <h2 className="">Bañera</h2>
+                <div className="flex justify-center">
+                  <img src={Bañera} className="h-7 pl-2" />
+                </div>
+              </div>
+            </div>
+            <div className="p-2">
+              <div className=" border border-black p-2">
+                <h2 className="">wifi gratis</h2>
+                <div className="flex justify-center">
+                  <img src={Wifi} className="h-7 pl-2" />
+                </div>
+              </div>
+            </div>
+            <div className="p-2">
+              <div className="border border-black p-2 ">
+                <h2 className="">Estacionamiento</h2>
+                <div className="flex justify-center">
+                  <img src={Estacionamiento} className="h-7 pl-2" />
+                </div>
+              </div>
+            </div>
+
+            <div className="p-2">
+              <div className="border border-black  p-2">
+                <h2 className="">Acepta Mascota</h2>
+                <div className="flex justify-center">
+                  <img src={Mascotas} className="h-7 pl-2" />
+                </div>
+              </div>
+            </div>
+            <div className="p-2">
+              <div className="border border-black p-2 ">
+                <h2 className="">120 m^2 superficie</h2>
+                <div className="flex justify-center">
+                  <img src={Tamaño} className="h-7 pl-2" />
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+
         </div>
+
+
       </motion.div>
 
-      <div className="grid md:grid-cols-5 px-10 py-5 grid-cols-1 md:text-xl font-bold text-lg text-center">
-
-        <div className="p-2">
-          <div className=" border border-black p-2">
-            <h2 className="">Bañera</h2>
-            <div className="flex justify-center">
-              <img src={Bañera} className="h-7 pl-2" />
-            </div>
-          </div>
-        </div>
-        <div className="p-2">
-          <div className=" border border-black p-2">
-            <h2 className="">wifi gratis</h2>
-            <div className="flex justify-center">
-              <img src={Wifi} className="h-7 pl-2" />
-            </div>
-          </div>
-        </div>
-        <div className="p-2">
-          <div className="border border-black p-2 ">
-            <h2 className="">Estacionamiento</h2>
-            <div className="flex justify-center">
-              <img src={Estacionamiento} className="h-7 pl-2" />
-            </div>
-          </div>
-        </div>
-
-        <div className="p-2">
-          <div className="border border-black  p-2">
-            <h2 className="">Acepta Mascota</h2>
-            <div className="flex justify-center">
-              <img src={Mascotas} className="h-7 pl-2" />
-            </div>
-          </div>
-        </div>
-        <div className="p-2">
-          <div className="border border-black p-2 ">
-            <h2 className="">120 m^2 superficie</h2>
-            <div className="flex justify-center">
-              <img src={Tamaño} className="h-7 pl-2" />
-            </div>
-          </div>
-        </div>
-
-      </div>
-      <div className="">
-        <h1 className="capitalize md:uppercase md:text-5xl text-3xl md:p-10 p-3 font-bold">Descripción</h1>
-        <p className="md:text-4xl text-justify opacity-70 md:p-10 text-lg p-5 font-bold">
-          {descripcion}
-        </p>
-      </div>
-
-      <div className="md:text-4xl text-2xl font-bold text-center">
-        <h1>Precio $ <span className="text-green-600">{precio}</span></h1>
+      <div className="md:text-4xl text-2xl text-center font-extralight">
+        <h1>Precio $ <span className="text-green-600">{cabaña.precio}</span></h1>
       </div>
 
       <div className="flex justify-center pb-10 pt-10 ">
@@ -244,7 +255,7 @@ const CabñaInfo = ({ titulo, descripcion, precio, idServicio }) => {
       {/* Aquí pondremos el modal para el pago */}
       <Modal isOpen={modalPago} onClose={e => { setModalPago(false) }}>
 
-        <h1 className="text-2xl font-medium text-center text-green-700">{titulo}</h1>
+        <h1 className="text-2xl font-medium text-center text-green-700">{cabaña.titulo}</h1>
         <section>
           <div className="product">
             <img
@@ -253,8 +264,8 @@ const CabñaInfo = ({ titulo, descripcion, precio, idServicio }) => {
               className="my-5"
             />
             <div className="description my-5">
-              <h3 className="md:text-2xl text-justify font-medium text-xl">{descripcion}</h3>
-              <h5 className="text-xl font-bold text-green-700 text-center my-3">Precio ${precio}</h5>
+              <h3 className="md:text-2xl text-justify text-xl">{cabaña.descripcion}</h3>
+              <h5 className="text-xl font-bold text-green-700 text-center my-3">Precio ${cabaña.precio}</h5>
             </div>
           </div>
 

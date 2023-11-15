@@ -15,11 +15,13 @@ import caminata from "../img/aventuras/PINTURA-MANITAS.jpg"
 import tirolesa from "../img/aventuras/tirolesa.jpeg"
 import paquete from "../img/aventuras/caminata.jpg"
 import gran_paqueta from "../img/aventuras/gran_paquete.jpg"
+import { Navigate } from "react-router-dom";
 
 
 const Reservas = () => {
 
   const { aventuras, cabañas } = useContext(AventuraContext);
+  const [verCabaña, setVerCabaña] = useState(false);
 
   //configuraciones de animacion
   const sublogo = {
@@ -57,8 +59,16 @@ const Reservas = () => {
   const verServicioCabaña = idServicio => {
 
     const cabaña = cabañas.find(c => c.id == idServicio);
-    
 
+    localStorage.setItem('cabaña', JSON.stringify(cabaña));
+
+    setVerCabaña(true);
+
+  }
+
+  if (verCabaña) {
+
+    return (<Navigate to="/cabañas" />)
 
   }
 
@@ -87,7 +97,7 @@ const Reservas = () => {
       </div>
 
       <div>
-        
+
       </div>
 
       <h1 className="text-3xl py-10 font-thin text-center">Aventuras</h1>
