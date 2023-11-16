@@ -6,11 +6,14 @@ import Modal from "./Modal";
 import { UsuarioContext } from "../context/UsuarioContext";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+
 import toast from "react-hot-toast";
 
 const Nav = () => {
 
-  const { autenticarUsuario, usuarioAutenticado } = useContext(UsuarioContext); 
+  const { autenticarUsuario, usuarioAutenticado } = useContext(UsuarioContext);
 
   // NavNar Responsive
   const [isOpen, setIsOpen] = useState(false);
@@ -89,20 +92,21 @@ const Nav = () => {
   }
 
   return (
+
     <div>
 
-      <div className="pt-10 grid grid-cols-2">
+      <div className="grid grid-cols-2">
 
-        <div className="lg:hidden pl-8">
-          <img src={LogoEmpresa} alt="logo de la empresa" width="300px" />
+        <div className="lg:hidden pl-8 bg-gray-800 md:pt-1 pt-2">
+          <img src={LogoEmpresa} alt="logo de la empresa" width="200px" />
         </div>
 
 
-        <div className="flex justify-end pr-10 items-center">
+        <div className="flex justify-end pr-10 items-center bg-gray-800 md:py-0 py-3">
           <button
             onClick={toggleNavbar}
             type="button"
-            className="lg:hidden bg-green-400 text-white p-3 rounded-md hover:bg-green-500"
+            className="lg:hidden text-white p-3 rounded-md"
           >
             <svg
               className="h-6 w-6"
@@ -121,59 +125,32 @@ const Nav = () => {
         </div>
       </div>
 
-      <nav>
+      <nav className="bg-gray-800 text-white shadow-xl">
 
         <ul
-          className={`md:flex md:justify-between md:px-10 shadow-md pb-10 ${isOpen ? 'block' : 'hidden'} pt-1 md:pt-0`}>
+          className={`md:flex md:justify-between md:px-10 shadow-md  ${isOpen ? 'block' : 'hidden'} pt-1 md:pt-0`}>
 
           <li className={`pt-2 lg:block hidden`}>
-            <img src={LogoEmpresa} alt="logo de la empresa" width="300px" />
+            <img src={LogoEmpresa} alt="logo de la empresa" width="250px" />
           </li>
 
 
-          <li className="grid lg:grid-cols-4 md:pt-10 md:text-2xl grid-cols-1 text-center font-extralight p-2 text-xl">
+          <li className="grid lg:grid-cols-4 md:pt-10 md:text-2xl grid-cols-1 text-center p-2 text-xl">
 
-            <p className="p-2">
+              <Link to="/" onClick={toggleNavbar} className="md:py-0 py-2">Información</Link>
 
-              <Link to="/" onClick={toggleNavbar}>Información</Link>
+              <Link to="/ubicacion" onClick={toggleNavbar} className="md:py-0 py-2">Ubicación</Link>
 
-            </p>
+              <Link to="/reservas" onClick={toggleNavbar} className="md:py-0 py-2">Reservas</Link>       
 
-            <p className="p-2">
-
-              <Link to="/ubicacion" onClick={toggleNavbar}>Ubicación</Link>
-
-            </p>
-
-            <p className="p-2">
-
-              <Link to="/reservas" onClick={toggleNavbar}>Reservas</Link>
-
-            </p>
-{/* 
-            <p className="p-2">
-
-              <Link to="/cabañas" onClick={toggleNavbar}>Cabañas</Link>
-
-            </p>
-
-            <p className="p-2">
-
-              <Link to="/aventuras" onClick={toggleNavbar}>Aventuras</Link>
-
-            </p> */}
-
-            <p className="p-2">
-
-              <Link to="/actividad-usuario" onClick={toggleNavbar}>Actividad</Link>
-
-            </p>
+              <Link to="/actividad-usuario" onClick={toggleNavbar} className="md:py-0 py-2">Actividad</Link>
+           
           </li>
 
           {/* Sección principal */}
-          <li className="grid lg:grid-cols-3 grid-cols-1 text-center md:text-2xl p-2 text-xl">
+          <li className="grid lg:grid-cols-3 grid-cols-1 text-center md:text-2xl px-1">
             {/* Foto de perfil */}
-            <div className="pt-3 md:grid flex justify-center">
+            <div className="pt-0 md:grid flex justify-center">
 
               {usuarioAutenticado
                 ?
@@ -185,7 +162,10 @@ const Nav = () => {
                   onClick={e => { setVerDatos(true) }}
                 />
                 :
-                <img src={Usuarios} alt="Foto de perfil" width="85px" />
+                <div className="flex justify-center items-center">
+                  <FontAwesomeIcon icon={faUser} className="md:h-12 h-8" />
+                </div>
+
               }
 
             </div>
@@ -227,7 +207,7 @@ const Nav = () => {
             {usuarioAutenticado && (
               <div className="md:pt-5 pt-3">
                 <button
-                  className="text-red-800 rounded-md h-16 text-lg p-2"
+                  className="bg-black rounded-md h-16 text-lg p-2 text-white hover:bg-red-900"
                   onClick={cerrarSesion}
                 >
                   Cerrar sesión</button>
@@ -238,7 +218,7 @@ const Nav = () => {
             {!usuarioAutenticado && (
               <div className="pt-10">
 
-                <button className="hover:shadow-xl text-xl" onClick={e => { setInicioSesionModal(true) }}>Ingresar</button>
+                <button className="md:text-2xl text-xl text font-bold" onClick={e => { setInicioSesionModal(true) }}>Ingresar</button>
 
                 <Modal isOpen={inicioSesionModal} onClose={e => { setInicioSesionModal(false) }}>
 
@@ -280,9 +260,9 @@ const Nav = () => {
 
             {/* Botón de registro */}
             {!usuarioAutenticado && (
-              <div className="pt-10">
+              <div className="py-10">
 
-                <button className="hover:shadow-xl text-xl"><a href="/registro">Registrase</a></button>
+                <button className="md:text-2xl font-bold text-xl"><a href="/registro">Registrase</a></button>
 
               </div>
 
@@ -295,6 +275,76 @@ const Nav = () => {
       < Outlet />
     </div>
   );
-};
+
+  // <div>
+  //   <div className="pt-4 pb-2 bg-gray-800">
+  //     <div className="container mx-auto flex items-center justify-between">
+  //       <div className="flex items-center">
+  //         <img src={LogoEmpresa} alt="logo de la empresa" width="120px" className="hidden lg:block" />
+  //         <button
+  //           onClick={toggleNavbar}
+  //           type="button"
+  //           className="lg:hidden text-white p-3 rounded-md hover:bg-green-500"
+  //         >
+  //           <svg
+  //             className="h-6 w-6"
+  //             fill="none"
+  //             viewBox="0 0 24 24"
+  //             stroke="currentColor"
+  //           >
+  //             <path
+  //               strokeLinecap="round"
+  //               strokeLinejoin="round"
+  //               strokeWidth="2"
+  //               d="M4 6h16M4 12h16M4 18h16"
+  //             />
+  //           </svg>
+  //         </button>
+  //       </div>
+
+  //       <div className="hidden lg:block">
+  //         <ul className="flex space-x-6 text-white">
+  //           <li><Link to="/" onClick={toggleNavbar}>Información</Link></li>
+  //           <li><Link to="/ubicacion" onClick={toggleNavbar}>Ubicación</Link></li>
+  //           <li><Link to="/reservas" onClick={toggleNavbar}>Reservas</Link></li>
+  //           <li><Link to="/actividad-usuario" onClick={toggleNavbar}>Actividad</Link></li>
+  //         </ul>
+  //       </div>
+
+  //       <div className="flex items-center">
+  //         {usuarioAutenticado ? (
+  //           <div className="flex items-center">
+  //             <img
+  //               src={usuarioAutenticado.photo}
+  //               alt="Foto de perfil"
+  //               className="w-10 h-10 rounded-full cursor-pointer"
+  //               onClick={() => setVerDatos(true)}
+  //             />
+  //             <button
+  //               className="ml-4 bg-black rounded-md h-10 text-sm text-white hover:bg-red-900"
+  //               onClick={cerrarSesion}
+  //             >
+  //               Cerrar sesión
+  //             </button>
+  //           </div>
+  //         ) : (
+  //           <div className="flex items-center">
+  //             <button
+  //               className="text-sm text-white font-thin mr-4"
+  //               onClick={() => setInicioSesionModal(true)}
+  //             >
+  //               Ingresar
+  //             </button>
+  //             <button className="text-sm font-thin"><a href="/registro">Registrarse</a></button>
+  //           </div>
+  //         )}
+  //       </div>
+  //     </div>
+  //   </div>
+
+  //   {/* Resto del contenido */}
+  //   <Outlet />
+  // </div>
+}
 
 export default Nav;

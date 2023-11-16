@@ -7,7 +7,7 @@ const ImagenesServicio = ({ nombre, imagen, verServicio, idServicio }) => {
                   <img
                         src={imagen}
                         alt="fotografía del servicio"
-                        className="group-hover:brightness-75"
+                        className="group-hover:brightness-75 object-cover"
                   />
                   <div class="absolute inset-0 flex items-center opacity-0 group-hover:opacity-100 transition-opacity justify-center">
                         <p class="text-white font-bold text-center text-2xl">{nombre}</p>

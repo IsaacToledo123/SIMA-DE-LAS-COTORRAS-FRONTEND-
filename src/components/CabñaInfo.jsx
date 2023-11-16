@@ -21,7 +21,7 @@ import fotografias_cabaña7 from "../img/fotografias_cabaña/fotografia_cabaña7
 import fotografias_cabaña8 from "../img/fotografias_cabaña/fotografia_cabaña8.jpeg"
 import axios from "axios";
 
-const CabñaInfo = ({ titulo, descripcion, precio, idServicio }) => {
+const CabñaInfo = () => {
 
   const { usuarioAutenticado } = useContext(UsuarioContext);
   const [modalPago, setModalPago] = useState(false);
@@ -38,6 +38,24 @@ const CabñaInfo = ({ titulo, descripcion, precio, idServicio }) => {
     fotografias_cabaña6,
     fotografias_cabaña7,
     fotografias_cabaña8
+  ]
+
+  const serviciosCabaña2 = [
+
+    { "Nombre": "Bañera", "imagen": Bañera },
+    { "Nombre": "Wifi Gratis", "imagen": Wifi },
+    { "Nombre": "Estacionamiento", "imagen": Estacionamiento },
+
+  ]
+
+  const serviciosCabaña3 = [
+
+    { "Nombre": "Bañera", "imagen": Bañera },
+    { "Nombre": " Wifi Gratis", "imagen": Wifi },
+    { "Nombre": "Estacionamiento", "imagen": Estacionamiento },
+    { "Nombre": "Acepta mascota", "imagen": Mascotas },
+    { "Nombre": "120 m^2 superficie", "imagen": Tamaño }
+
   ]
 
   const prevImage = () => {
@@ -185,48 +203,56 @@ const CabñaInfo = ({ titulo, descripcion, precio, idServicio }) => {
               </p>
             </div>
 
-            <div className="p-2">
-              <h1 className="text-3xl font-thin text-center pb-2">Ofrece: </h1>
-              <div className=" border border-black p-2">
-                <h2 className="">Bañera</h2>
-                <div className="flex justify-center">
-                  <img src={Bañera} className="h-7 pl-2" />
-                </div>
-              </div>
-            </div>
-            <div className="p-2">
-              <div className=" border border-black p-2">
-                <h2 className="">wifi gratis</h2>
-                <div className="flex justify-center">
-                  <img src={Wifi} className="h-7 pl-2" />
-                </div>
-              </div>
-            </div>
-            <div className="p-2">
-              <div className="border border-black p-2 ">
-                <h2 className="">Estacionamiento</h2>
-                <div className="flex justify-center">
-                  <img src={Estacionamiento} className="h-7 pl-2" />
-                </div>
-              </div>
+            <h1 className="text-3xl font-thin text-center py-2">Ofrece: </h1>
+            {/* INFORMACIÓN DE LAS CABAÑAS */}
+            <div>
+
+              {
+                cabaña.id == 2
+                  ?
+                  <div>
+
+                    {serviciosCabaña2.map(cabaña => {
+
+                      return <div className="border-b border-black">
+
+                        <div className="flex justify-center items-center py-2">
+
+                          <p className="px-5">{cabaña.Nombre}</p>
+
+                          <img src={cabaña.imagen} alt="logo" className="w-10" />
+
+                        </div>
+
+                      </div>
+
+                    })}
+
+                  </div>
+                  :
+
+                  <div>
+                    {serviciosCabaña3.map(cabaña => {
+
+                      return <div className="border-b border-black">
+
+                        <div className="flex justify-center items-center py-2">
+
+                          <p className="px-5">{cabaña.Nombre}</p>
+
+                          <img src={cabaña.imagen} alt="logo" className="w-10" />
+
+                        </div>
+
+                      </div>
+
+                    })}
+                  </div>
+              }
+
             </div>
 
-            <div className="p-2">
-              <div className="border border-black  p-2">
-                <h2 className="">Acepta Mascota</h2>
-                <div className="flex justify-center">
-                  <img src={Mascotas} className="h-7 pl-2" />
-                </div>
-              </div>
-            </div>
-            <div className="p-2">
-              <div className="border border-black p-2 ">
-                <h2 className="">120 m^2 superficie</h2>
-                <div className="flex justify-center">
-                  <img src={Tamaño} className="h-7 pl-2" />
-                </div>
-              </div>
-            </div>
+
 
           </div>
 

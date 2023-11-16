@@ -16,6 +16,7 @@ import tirolesa from "../img/aventuras/tirolesa.jpeg"
 import paquete from "../img/aventuras/caminata.jpg"
 import gran_paqueta from "../img/aventuras/gran_paquete.jpg"
 import { Navigate } from "react-router-dom";
+import Footer from "./Footer";
 
 
 const Reservas = () => {
@@ -112,6 +113,7 @@ const Reservas = () => {
 
       </div>
 
+        <Footer />
     </div>
   );
 };
