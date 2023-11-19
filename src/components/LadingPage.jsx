@@ -73,8 +73,8 @@ const LadingPage = () => {
         variants={container}
         transition={{ duration: 0.3 }}
       >
-        <div className="flex justify-center items-center pb-10 md:pt-36 pt-6 mx-10">
-          <img src={imagen_principal} alt="Sima de las cotorras logo" />
+        <div className="flex justify-center items-center pb-10 md:pt-10 pt-6 mx-10">
+          <img src={imagen_principal} alt="Sima de las cotorras logo" className="w-full"/>
         </div>
       </motion.div>
 
@@ -127,7 +127,7 @@ const LadingPage = () => {
 
         <div className="pt-10 text-center">
 
-        
+          
 
         </div>
 

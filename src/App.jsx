@@ -16,9 +16,8 @@ import TablaIngresosYReservaciones from "./components/AdminComponents/components
 import TablaEgresos from "./components/AdminComponents/components/Decrease"
 import Login from "./components/AdminComponents/components/Login";
 import ProtectedRoute from "./components/AdminComponents/components/ProtectedRoute";
-import Cabañas from "./components/Cabañas";
-import Aventuras from "./components/Aventuras";
 import CabñaInfo from "./components/CabñaInfo";
+import AventuraInfo from "./components/AventuraInfo";
 
 
 // import ReservasOption from './components/AdminComponents/components/ReservasOpcion'
@@ -34,7 +33,7 @@ function App() {
           <Route path="/actividad-usuario" element = {<ActividadUsuario />} />
           <Route path="/ubicacion" element = {<Ubicacion />} />
           <Route path="/cabañas" element = {<CabñaInfo />} />
-          <Route path="/aventuras" element = {<Aventuras />} />
+          <Route path="/aventuras" element = {<AventuraInfo />} />
         </Route>
 
         {/*<Route path="/admin" element={<NavAdmin />}>

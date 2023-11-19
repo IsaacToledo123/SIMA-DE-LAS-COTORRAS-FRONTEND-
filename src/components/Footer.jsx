@@ -5,7 +5,8 @@ import { faGlobe, faPhone, faEnvelope } from "@fortawesome/free-solid-svg-icons"
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-700 text-white p-6">
+
+    <footer className="bg-gray-700 text-white py-1">
       <div className="container mx-auto text-center">
 
         <div className='flex justify-center items-center py-5'>

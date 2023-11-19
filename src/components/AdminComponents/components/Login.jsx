@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock } from "@fortawesome/free-solid-svg-icons";
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import fondo_login from "../../../img/fondo_cotorras.jpg"     
+import fondo_login from "../../../img/fondo_cotorras.jpeg"     
 
 const Login = () => {
 
@@ -29,7 +29,7 @@ const Login = () => {
 
                               const token = e.data.token;
                               console.log(token);
-                              localStorage.setItem('token', token);
+                              localStorage.setItem('token-admin', token);
 
                               Swal.fire({
                                     icon: 'success',

@@ -8,7 +8,7 @@ export function AdministradorContextProvider(props) {
 
       const [ingresos, setIngresos] = useState([]);
       const API_URL = import.meta.env.VITE_REACT_APP_API_URL
-      const token = localStorage.getItem('token')
+      const token = localStorage.getItem('token-admin');
 
       useEffect(() => {
 

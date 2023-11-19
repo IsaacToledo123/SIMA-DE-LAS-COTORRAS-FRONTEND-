@@ -1,6 +1,6 @@
 import { useContext, useState, useEffect } from "react";
 import CabañaInfor from "../img/cabañaInfo.png";
-
+import Footer from "../components/Footer";
 import Bañera from "../img/bañera.png";
 import Estacionamiento from "../img/estacionamiento.png";
 import Wifi from "../img/wifi.png";
@@ -20,12 +20,17 @@ import fotografias_cabaña6 from "../img/fotografias_cabaña/fotografia_cabaña6
 import fotografias_cabaña7 from "../img/fotografias_cabaña/fotografia_cabaña7.jpeg"
 import fotografias_cabaña8 from "../img/fotografias_cabaña/fotografia_cabaña8.jpeg"
 import axios from "axios";
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const CabñaInfo = () => {
 
   const { usuarioAutenticado } = useContext(UsuarioContext);
   const [modalPago, setModalPago] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [fechaEntrada, setFechaEntrada] = useState(null);
+  const [diasReservacion, setDiasReservacion] = useState(0);
+  const [fechaSalida, setFechaSalida] = useState(null);
 
   const cabaña = JSON.parse(localStorage.getItem('cabaña'));
 
@@ -72,39 +77,56 @@ const CabñaInfo = () => {
 
   const crearSesion = e => {
 
-    console.log(idServicio)
+    if (fechaEntrada && diasReservacion) {
+      // Aquí puedes realizar la lógica para manejar la reserva
 
-    axios.post(`${API_URL}/api/create-checkout-session/${cabaña.id}/`)
+      const fechita = new Date(fechaEntrada)
+      const resultado = new Date(fechita.getTime())
+      resultado.setDate(resultado.getDate() + diasReservacion+1);      
 
-      .then(e => {
+      const anio = resultado.getFullYear();
+      const mes = (resultado.getMonth() + 1).toString().padStart(2, '0'); // Sumar 1 al mes ya que los meses van de 0 a 11
+      const dia = resultado.getDate().toString().padStart(2, '0');
 
-        const informacionServicio = {
+      const resultadoFormateado = `${anio}-${mes}-${dia}`;    
 
-          idServicio,
-          titulo,
-          "idUsuario": usuarioAutenticado.id
+      axios.post(`${API_URL}/api/create-checkout-session/${cabaña.id}/`)
 
-        }
+        .then(e => {
 
-        const infoServicio = JSON.stringify(informacionServicio)
+          const informacionServicio = {
 
-        localStorage.setItem('servicio', infoServicio);
+            "servicio": "cabaña",
+            "idServicio": cabaña.id,
+            "titulo": cabaña.nombre,
+            "idUsuario": usuarioAutenticado.id,
+            "precio_cabaña": cabaña.precio,
+            "fecha_entrada": fechaEntrada,
+            "fecha_salida": resultadoFormateado
 
-        window.location.href = e.data.session;
+          }
 
-      })
-      .catch(e => {
+          const infoServicio = JSON.stringify(informacionServicio)
 
-        console.log(e);
+          // Guardamos en localStorage el servicio que vamos a reservar
+          localStorage.setItem('servicio', infoServicio);
 
-      })
+          window.location.href = e.data.session;
+
+        })
+        .catch(e => {
+
+          console.log(e);
+
+        })
+
+    } else {
+
+      Swal.fire('Ojito ahí', 'Por favor, selecciona una fecha', 'info');
+
+    }
+
   }
-
-  //   <form
-  //   action={`${API_URL}/api/create-checkout-session/`}
-  //   method="POST"
-  //   className="flex justify-between"
-  // >
 
   const container = {
     hidden: { opacity: 0, x: -50 },
@@ -125,9 +147,10 @@ const CabñaInfo = () => {
 
       Swal.fire('Necesitas autenticarte', 'Por favor, inicia sesión primero', 'info');
 
+
     } else {
 
-      setModalPago(true)
+      crearSesion();
 
     }
 
@@ -152,7 +175,7 @@ const CabñaInfo = () => {
         transition={{ duration: 0.3 }}
       >
         <div className="bg-red-800 p-5 text-center mb-10">
-          <h1 className="capitalize md:uppercase text-4xl text-white font-inter font-bold">
+          <h1 className="capitalize md:uppercase md:text-4xl text-2xl text-white font-inter font-bold">
             {cabaña.nombre}
           </h1>
         </div>
@@ -164,133 +187,153 @@ const CabñaInfo = () => {
         transition={{ duration: 0.3 }}
       >
         {/* Sección de la cabaña */}
-        <div className="pt-10 grid sm:grid-cols-2 grid-cols-1 pb-10">
+        <div className="pt-5 grid sm:grid-cols-2 grid-cols-1 pb-10">
 
-          {/* Aquí irá la imagen */}
+          <div>
 
-          <div className="w-2/3 h-full mx-auto relative px-10">
+            {/* Sección de Imágenes */}
+            <div className="w-full md:w-2/3 h-full mx-auto relative px-10">
 
-            <h1 className="text-3xl font-thin text-center pb-2">Fotografías: </h1>
+              <h1 className="text-3xl font-thin text-center pb-4">Fotografías:</h1>
 
-            <img
-              src={images[currentIndex]}
-              alt={`Imagen ${currentIndex + 1}`}
-              className="w-full h-full object-cover"
-            />
+              <div className="relative overflow-hidden rounded-lg shadow-md">
 
-            <button
-              onClick={prevImage}
-              className="absolute top-1/2 left-0 transform -translate-y-1/2 text-3xl mt-10"
-            >
-              ⬅️
-            </button>
+                <img
+                  src={images[currentIndex]}
+                  alt={`Imagen ${currentIndex + 1}`}
+                  className="w-full h-full object-cover transition-transform duration-300 transform-gpu scale-100 hover:scale-105"
+                />
 
-            <button
-              onClick={nextImage}
-              className="absolute top-1/2 right-0 transform -translate-y-1/2 text-3xl mt-10"
-            >
-              ➡️
-            </button>
-          </div>
+                <div className="absolute top-1/2 left-0 transform -translate-y-1/2 text-3xl mt-10">
+                  <button onClick={prevImage} className="text-white focus:outline-none">
+                    ⬅️
+                  </button>
+                </div>
 
-          <div className="px-10 md:text-xl text-lg text-center">
+                <div className="absolute top-1/2 right-0 transform -translate-y-1/2 text-3xl mt-10">
+                  <button onClick={nextImage} className="text-white focus:outline-none">
+                    ➡️
+                  </button>
+                </div>
+              </div>
 
-            <h1 className="text-3xl font-thin text-center pt-20 md:pt-0">Descripción:</h1>
-
-            <div>
-              <p className="md:text-2xl text-justify opacity-70 md:p-10 text-lg p-2">
-                {cabaña.descripcion}
-              </p>
             </div>
 
-            <h1 className="text-3xl font-thin text-center py-2">Ofrece: </h1>
-            {/* INFORMACIÓN DE LAS CABAÑAS */}
-            <div>
+          </div>
 
-              {
-                cabaña.id == 2
-                  ?
-                  <div>
+          {/* Sección de Información */}
+          <div className="px-10 md:text-xl text-lg text-center md:border-l-2">
 
-                    {serviciosCabaña2.map(cabaña => {
+            <h1 className="text-3xl font-thin text-center pt-8 md:pt-0">Descripción:</h1>
 
-                      return <div className="border-b border-black">
+            <div className="mt-4">
 
-                        <div className="flex justify-center items-center py-2">
+              <p className="md:text-2xl text-justify md:p-5 text-lg p-2 font-medium text-gray-500">{cabaña.descripcion}</p>
 
-                          <p className="px-5">{cabaña.Nombre}</p>
+            </div>
 
-                          <img src={cabaña.imagen} alt="logo" className="w-10" />
+            <h1 className="text-3xl font-thin text-center py-2">Ofrece:</h1>
 
-                        </div>
+            {/* Información de las Cabañas */}
+            <div className="flex flex-col items-center">
 
-                      </div>
+              {cabaña.id === 2 ? (
 
-                    })}
+                <div className="w-full md:w-2/3 border rounded-lg overflow-hidden shadow-md my-4">
 
-                  </div>
-                  :
+                  {serviciosCabaña2.map((servicio, index) => (
 
-                  <div>
-                    {serviciosCabaña3.map(cabaña => {
+                    <div key={index} className="flex items-center justify-between py-2 border-b border-gray-500">
 
-                      return <div className="border-b border-black">
+                      <p className="px-5">{servicio.Nombre}</p>
 
-                        <div className="flex justify-center items-center py-2">
+                      <img src={servicio.imagen} alt="logo" className="w-10" />
 
-                          <p className="px-5">{cabaña.Nombre}</p>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="w-full md:w-2/3 border rounded-lg overflow-hidden shadow-md my-4">
 
-                          <img src={cabaña.imagen} alt="logo" className="w-10" />
+                  {serviciosCabaña3.map((servicio, index) => (
 
-                        </div>
+                    <div key={index} className="flex items-center justify-between py-2 border-b border-gray-500">
 
-                      </div>
+                      <p className="px-5">{servicio.Nombre}</p>
 
-                    })}
-                  </div>
-              }
+                      <img src={servicio.imagen} alt="logo" className="w-10" />
+
+                    </div>
+
+                  ))}
+                </div>
+              )}
 
             </div>
 
 
+            {/* Sección de las fechas para reservar */}
+
+            <div className="pt-5">
+
+              <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-600 mb-1">Fecha de Reservación:</label>
+                <input type="date" onChange={e => setFechaEntrada(e.target.value)} className="p-2 border-2 shadow-md rounded-md" />
+                {/* <DatePicker
+                  selected={fechaEntrada}
+                  onChange={(date) => setFechaEntrada(date)}
+                  selectsStart
+                  startDate={fechaEntrada}
+                  endDate={fechaSalida}
+                  className="p-2 border-2 shadow-md rounded-md w-full"
+                /> */}
+              </div>
+
+              <div className="mb-3">
+
+                <label className="block text-sm font-medium text-gray-600 mb-1">¿Cuántos días reservarás?:</label>
+                <input type="number" className="border-b-2 w-10 text-sm shadow-md text-center" onChange={e => { setDiasReservacion(+e.target.value) }} />
+
+              </div>
+
+            </div>
+
+            <div className="flex justify-center items-center space-x-4 pb-10 pt-10">
+
+              {/* Diseño del Precio */}
+
+              <div className="bg-gray-100 p-3 rounded-md">
+                <span className="text-lg font-semibold">Precio:</span>
+                <span className="text-2xl text-green-600 pl-3">${cabaña.precio}</span>
+              </div>
+
+              {/* Diseño del Botón */}
+              <button
+                className="px-6 py-3 rounded-md text-lg text-white bg-gray-700 hover:bg-gray-800 font-bold"
+                onClick={reservarServicio}
+              >
+                Reserva Ahora
+              </button>
+            </div>
 
           </div>
-
 
         </div>
-
 
       </motion.div>
 
-      <div className="md:text-4xl text-2xl text-center font-extralight">
-        <h1>Precio $ <span className="text-green-600">{cabaña.precio}</span></h1>
-      </div>
 
-      <div className="flex justify-center pb-10 pt-10 ">
-        <div className="p-5">
-          <button
-            className="pl-20 pr-20 p-2 rounded-md text-3xl text-white bg-green-600 hover:bg-green-700 font-bold"
-            onClick={reservarServicio}
-          >
-            Reserva Ahora
-          </button>
-        </div>
-
-      </div>
 
       {/* Aquí pondremos el modal para el pago */}
-      <Modal isOpen={modalPago} onClose={e => { setModalPago(false) }}>
+      {/* <Modal isOpen={modalPago} onClose={e => { setModalPago(false) }}>
 
-        <h1 className="text-2xl font-medium text-center text-green-700">{cabaña.titulo}</h1>
-        <section>
+        <h1 className="text-2xl font-medium text-center text-green-700">{cabaña.nombre}</h1>
+
+        <section className="">
+
           <div className="product">
-            <img
-              src={CabañaInfor}
-              alt="The cover of Stubborn Attachments"
-              className="my-5"
-            />
-            <div className="description my-5">
-              <h3 className="md:text-2xl text-justify text-xl">{cabaña.descripcion}</h3>
+
+            <div className="description my-5">              
               <h5 className="text-xl font-bold text-green-700 text-center my-3">Precio ${cabaña.precio}</h5>
             </div>
           </div>
@@ -315,7 +358,9 @@ const CabñaInfo = () => {
 
         </section>
 
-      </Modal>
+      </Modal> */}
+
+      <Footer />
 
     </div>
   );

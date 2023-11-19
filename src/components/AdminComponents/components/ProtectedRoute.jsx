@@ -4,7 +4,7 @@ import { jwtDecode } from "jwt-decode";
 
 const ProtectedRoute = () => {
 
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('token-admin');
       console.log("aqui" + token)
 
       if (!token) {

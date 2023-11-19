@@ -150,7 +150,7 @@ const Nav = () => {
           {/* Sección principal */}
           <li className="grid lg:grid-cols-3 grid-cols-1 text-center md:text-2xl px-1">
             {/* Foto de perfil */}
-            <div className="pt-0 md:grid flex justify-center">
+            <div className="pt-3 md:grid flex justify-center">
 
               {usuarioAutenticado
                 ?
@@ -207,7 +207,7 @@ const Nav = () => {
             {usuarioAutenticado && (
               <div className="md:pt-5 pt-3">
                 <button
-                  className="bg-black rounded-md h-16 text-lg p-2 text-white hover:bg-red-900"
+                  className="rounded-md h-16 text-xl p-2 text-white hover:bg-gray-900"
                   onClick={cerrarSesion}
                 >
                   Cerrar sesión</button>
@@ -233,13 +233,13 @@ const Nav = () => {
                       type="text"
                       placeholder="Ingresa tu nombre de usuario"
                       onChange={e => setUser(e.target.value)}
-                      className="px-5 py-3 border w-full mb-10"
+                      className="px-5 py-3 border w-full mb-10 text-black"
                     />
                     <input
                       type="password"
                       placeholder="Ingresa tu contraseña"
                       onChange={e => setPassword(e.target.value)}
-                      className="px-5 py-3 border w-full mb-10"
+                      className="px-5 py-3 border w-full mb-10 text-black"
                     />
                   </div>
 

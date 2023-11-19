@@ -23,6 +23,7 @@ const Reservas = () => {
 
   const { aventuras, cabañas } = useContext(AventuraContext);
   const [verCabaña, setVerCabaña] = useState(false);
+  const [verAventura, setVerAventura] = useState(false);
 
   //configuraciones de animacion
   const sublogo = {
@@ -75,7 +76,17 @@ const Reservas = () => {
 
   const verServicioAventura = idServicio => {
 
-    console.log(idServicio)
+    const aventura = aventuras.find(a => a.id == idServicio);
+
+    localStorage.setItem('aventura', JSON.stringify(aventura));
+
+    setVerAventura(true);
+
+  }
+
+  if (verAventura) {
+
+    return <Navigate to="/aventuras" />
 
   }
 

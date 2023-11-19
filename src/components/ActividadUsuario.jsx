@@ -24,12 +24,82 @@ function ActividadUsuario() {
 
                   // ===== Haremos la petición a la base de datos =====
                   const informacionServicio = JSON.parse((localStorage.getItem('servicio')))
+                  const API_URL = import.meta.env.VITE_REACT_APP_API_URL
 
                   if (informacionServicio) {
 
-                        Swal.fire('Success', "Order placed! You will receive an email confirmation.", 'success');
+                        if (informacionServicio.servicio === "cabaña") {
 
-                        // localStorage.removeItem('servicio')
+                              const informacion_para_pagar = {
+
+                                    "pago": {
+                                          "monto": informacionServicio.precio_cabaña,
+                                          "numero_transaccion": ""
+                                    },
+                                    "fecha_de_reservacion": informacionServicio.fecha_entrada,
+                                    "fecha_de_salida": informacionServicio.fecha_salida,
+                                    "usuario": informacionServicio.idUsuario,
+                                    "cabaña": informacionServicio.idServicio
+
+                              }
+
+                              axios.post(`${API_URL}/api/reservaciones-cabaña/`, informacion_para_pagar)
+
+                                    .then(e => {
+
+                                          if (e.data.status == 200) {
+
+                                                Swal.fire('Reservación Exitosa', 'El administrador verá su reservación', 'success')
+
+                                          }
+
+                                    })
+                                    .catch(e => {
+
+                                          console.log("Algo ha salido mal")
+
+                                    })
+
+
+                        } else {
+
+                              // Realizamos el pago pero por aventura
+                              console.log(informacionServicio);
+                              const informacion_para_pagar = {
+
+                                    "pago": {
+
+                                          "monto": informacionServicio.precio_servicio,
+                                          "numero_transaccion": ""
+
+                                    },
+                                    "aventura": informacionServicio.idServicio,
+                                    "usuario": informacionServicio.idUsuario,
+                                    "fecha_reservacion": informacionServicio.fecha_reservacion
+
+                              }
+                              
+                              axios.post(`${API_URL}/api/reservaciones-aventura/`, informacion_para_pagar)
+
+                                    .then(e => {
+
+                                          if (e.data.status == 200) {
+
+                                                Swal.fire('Reservación Exitosa', 'El administrador verá su reservación', 'success')
+
+                                          }
+
+                                    })
+                                    .catch(e => {
+
+                                          console.log("Algo ha salido mal")
+
+                                    })
+
+                        }
+
+                        // Eliminamos el servicio de localStorage
+                        localStorage.removeItem('servicio')
                   }
 
             }
