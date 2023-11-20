@@ -18,6 +18,7 @@ import Login from "./components/AdminComponents/components/Login";
 import ProtectedRoute from "./components/AdminComponents/components/ProtectedRoute";
 import CabñaInfo from "./components/CabñaInfo";
 import AventuraInfo from "./components/AventuraInfo";
+import UltimasR from "./components/AdminComponents/components/UltimasR";
 
 
 // import ReservasOption from './components/AdminComponents/components/ReservasOpcion'
@@ -60,6 +61,7 @@ function App() {
                   <Route path="paginaIngresos" element={<TablaIngresosYReservaciones />} />
                   <Route path="Reservas" element={<ReservasView />} />
                   <Route path="Menu" element={<Menu />} />
+                  <Route path="Reservaciones" element={<UltimasR />} />
                 </Routes>
               </Layout>
             }

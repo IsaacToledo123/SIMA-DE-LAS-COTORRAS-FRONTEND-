@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 import ModalMeta from "./ModalMeta";
+import { AdministradorContext } from "../../../context/AdminContext";
 
 const ingresosData = [
   {
@@ -7,7 +8,7 @@ const ingresosData = [
     category: "Restaurante",
     price: 2999,
   },
-  {
+  { 
     id: 2,
     category: "Transporte",
     price: 1999,
@@ -32,10 +33,33 @@ const reservacionData = [
 ];
 
 const TablaIngresosYReservaciones = () => {
+
+
   const [showModal, setShowModal] = useState(false);
   const [modalType, setModalType] = useState("");
   const [modalTitle, setModalTitle] = useState("");
   const [modalFields, setModalFields] = useState([]);
+  const [ingresosAdmin, setIngresosAdmin] = useState([]);
+
+  const { ingresosOrdenados, ganaciasByFechaPago } = useContext(AdministradorContext); 
+
+  useEffect(() => {
+    
+    // Obteniendo los ingresos en línea por semana
+    const fechaActual = new Date()
+    // const anio = fechaActual.getFullYear();
+    // const mes = (fechaActual.getMonth() + 1).toString().padStart(2, '0');
+    // const dia = (fechaActual.getDate() + 1).toString().padStart(2, '0');
+
+    // //Ordenar los ingresos por una semana
+    // const resultadoFormateado = `${anio}-${mes}-${dia}`;    
+    
+    const semanaPasada = new Date(fechaActual);
+    semanaPasada.setDate(fechaActual.getDate() - 7);
+    console.log(semanaPasada);
+    
+
+  }, []);
 
   const openModal = (type, title, fields) => {
     setModalType(type);
@@ -86,6 +110,7 @@ const TablaIngresosYReservaciones = () => {
   const handleAgregar = (formData) => {
 
     console.log("Vamos a agregar un nuevo ingreso")
+    console.log(formData)
     // Agregar la nueva entrada a los datos existentes
     const newIncome = {
       id: ingresosData.length + 1,
@@ -120,18 +145,23 @@ const TablaIngresosYReservaciones = () => {
               <th scope="col" className="px-6 py-3">
                 Precio
               </th>
+              <th scope="col" className="px-6 py-3">
+                Fecha
+              </th>
             </tr>
           </thead>
           <tbody>
-            {ingresosData.map((income) => (
+            {ingresosOrdenados.map((income) => (
               <tr
                 key={income.id}
                 className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+                title={income.descripcion}               
               >
                 <td className="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
-                  {income.category}
+                  {income.categoria}
                 </td>
-                <td className="px-6 py-4">{`$${income.price}`}</td>
+                <td className="px-6 py-4">{`$${income.monto}`}</td>
+                <td className="px-6 py-4">{`${income.fecha}`}</td>
               </tr>
             ))}
           </tbody>
@@ -156,18 +186,22 @@ const TablaIngresosYReservaciones = () => {
               <th className="py-2 px-4 bg-grey-lightest font-bold uppercase text-sm text-grey-light border-b border-grey-light text-right">
                 Monto
               </th>
+              <th className="py-2 px-4 bg-grey-lightest font-bold uppercase text-sm text-grey-light border-b border-grey-light text-center">
+                Servicio
+              </th>
             </tr>
           </thead>
           <tbody>
-            {reservacionData.map((reservation) => (
+            {ganaciasByFechaPago.map((reservation) => (
               <tr key={reservation.id} className="hover:bg-grey-lighter">
                 <td className="py-2 px-4 border-b border-grey-light">
-                  {reservation.name}
+                  {reservation.nombre_de_usuario}
                 </td>
-                <td className="py-2 px-4 border-b border-grey-light">
-                  {reservation.date}
+                <td className="py-2 px-4 border-b border-grey-light text-center">
+                  {reservation.fecha_de_pago}
                 </td>
-                <td className="py-2 px-4 border-b border-grey-light text-right">{`$${reservation.amount}`}</td>
+                <td className="py-2 px-4 border-b border-grey-light text-right">{`$${reservation.pago}`}</td>
+                <td className="py-2 px-4 border-b border-grey-light text-start">{`${reservation.nombre_servicio}`}</td>
               </tr>
             ))}
           </tbody>
