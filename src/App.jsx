@@ -16,7 +16,8 @@ import TablaIngresosYReservaciones from "./components/AdminComponents/components
 import TablaEgresos from "./components/AdminComponents/components/Decrease"
 import Login from "./components/AdminComponents/components/Login";
 import ProtectedRoute from "./components/AdminComponents/components/ProtectedRoute";
-
+import Socket from "./components/Socket";
+import RedirectMAPS from "./components/RedirectMAPS";
 
 // import ReservasOption from './components/AdminComponents/components/ReservasOpcion'
 function App() {

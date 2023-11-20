@@ -6,11 +6,12 @@ import Restaurant from "../img/imagenesCRoquis/restaurant.png";
 import Inicio from "../img/imagenesCRoquis/inicioCroquis2.png";
 import Cabañas from "../img/imagenesCRoquis/cabañasCro.png";
 import LogoEmpresa from "../img/logoP.png";
+import Swal from "sweetalert2";
 import { Html5Qrcode, Html5QrcodeScanner } from "html5-qrcode";
+import RedirectMAPS from './RedirectMAPS'
 const Ubicacion = () => {
- 
   const [scanResult, setScanResult] = useState(null);
-  const [openRestaurant, setOpenRestaurant] = useState(null);
+  const [openRestaurant, setOpenRestaurant] = useState(true);
   const [openRapel, setOpenRapel] = useState(true);
 
   useEffect(() => {
@@ -38,17 +39,27 @@ const Ubicacion = () => {
   }, []);
 
   const validateScanResult = (result) => {
-    if (result === "https://me-qr.com/yTHDxyJB") {
-      setOpenRapel(false);
-      setScanResult("Rapel visitado Felicidades")
+    switch (result) {
+      case "https://me-qr.com/yTHDxyJB":
+        setOpenRapel(false);
+
+        Swal.fire("Felicidades Rapel visitado");
+        break;
+      case "localhost:5173/ubicacion":
+        setOpenRestaurant(false);
+        Swal.fire("Felicidades Restaurant visitado");
+        break;
+        case "localhost:5173/reservas":
+          setOpenRestaurant(false);
+          Swal.fire("Felicidades Restaurant visitado");
+          break;
     }
   };
 
   return (
-    <div className="flex flex-col">
-      <div className="flex p-10">
-    
-        <div className="w-1/4 m-0 ">
+    <div className="flex flex-col ">
+      <div className="flex lg:flex-row">
+        <div className="lg:w-1/4 lg:m-0">
           <div className="text-2xl font-semibold flex flex-col text-center">
             <h1 className="">La sima de las cotorras</h1>
             <h2>Mapa turístico</h2>
@@ -62,13 +73,15 @@ const Ubicacion = () => {
           </p>
         </div>
 
-    
-        <div className="flex-1">
-          <CroquisComponent mostrar={openRapel}  />
+        <div className="flex-1 flex-col">
+          <div className="p-2">
+          <RedirectMAPS/>
+
+          </div>
+          <CroquisComponent mostrar={openRapel} restaurant={openRestaurant} />
         </div>
 
-
-        <div className="w-1/4">
+        <div className="lg:w-1/4">
           <div>
             <img src={LogoEmpresa} width="300px" />
           </div>
@@ -76,9 +89,7 @@ const Ubicacion = () => {
           <div className="flex flex-col p-10">
             <div className="flex pb-5">
               <img src={Rapel} className="w-10" />
-              <h1
-                className="text-2xl pl-5 opacity-80 cursor-pointer hover:text-yellow-200"
-              >
+              <h1 className="text-2xl pl-5 opacity-80 cursor-pointer hover:text-yellow-200">
                 Rapel
               </h1>
             </div>
@@ -102,18 +113,14 @@ const Ubicacion = () => {
             </div>
           </div>
         </div>
-        
       </div>
       {scanResult ? (
-          <div>
-            succes: <h1>{scanResult}</h1>
-          </div>
-        ) : (
-          <div id="reader"></div>
-        )}
-
-
-
+        <div>
+          succes: <h1>{scanResult}</h1>
+        </div>
+      ) : (
+        <div id="reader"></div>
+      )}
     </div>
   );
 };
