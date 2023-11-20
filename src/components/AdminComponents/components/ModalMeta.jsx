@@ -72,13 +72,16 @@
 
 
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Swal from "sweetalert2";
 import { API_URL } from "../../../config";
+import { AdministradorContext } from "../../../context/AdminContext";
 
 const ModalMeta = ({ isOpen, onClose, title, fields }) => {
 
   const camposStates = {};
+
+  const { setAgregadoIngreso, setAgregadoEgreso } = useContext(AdministradorContext);
 
   const inicializaCamposStates = () => {
 
@@ -95,41 +98,93 @@ const ModalMeta = ({ isOpen, onClose, title, fields }) => {
   // agregar un nuevo ingreso
   const handleAgregar = () => {
 
-    const monto = parseInt(formState.monto);
-    const token = localStorage.getItem('token');
+    if (title == "Agregar Ingreso") {
 
-    if (!monto) {
+      const monto = parseInt(formState.monto);
 
-      Swal.fire('Ojo ahí', 'Debes ingresar números recuerda', 'warning')
+      const token = localStorage.getItem('token-admin');
 
-    } else {
+      if (!monto) {
 
-      // Haremos la petición a la base de datos
-      console.log("Haciendo la petición de la base de datos");
-      axios.post(`${API_URL}/api/administrador/agregar-ingreso/`, formState, {
+        Swal.fire('Ojo ahí', 'Debes ingresar números recuerda', 'warning')
 
-        headers: {
+      } else {
 
-          Authorization: `${token}`
+        // Haremos la petición a la base de datos
+        console.log("Haciendo la petición de la base de datos");
 
-        }
+        axios.post(`${API_URL}/api/administrador/agregar-ingreso/`, formState, {
 
-      })
-        .then(e => {
+          headers: {
 
-          if (e.status == 200) {            
-
-            Swal.fire('Success', e.data.message, 'success');
+            Authorization: `${token}`
 
           }
 
         })
-        .catch(e => {
-          
-          Swal.fire('Error', 'Al parecer algo salió mal', 'error');
+          .then(e => {
+
+            if (e.status == 200) {
+
+              setAgregadoIngreso(true);
+              Swal.fire('Success', e.data.message, 'success');
+
+            }
+
+          })
+          .catch(e => {
+
+            Swal.fire('Error', 'Al parecer algo salió mal', 'error');
+
+          })
+      }
+
+    } else {
+
+      console.log("vamos a agregar un nuevo egreso")
+      console.log(formState);
+
+      const monto = parseInt(formState.monto);
+
+      const token = localStorage.getItem('token-admin');
+
+      if (!monto) {
+
+        Swal.fire('Ojo ahí', 'Debes ingresar números recuerda', 'warning')
+
+      } else {
+
+        // Haremos la petición a la base de datos
+        console.log("Haciendo la petición de la base de datos");
+
+        axios.post(`${API_URL}/api/administrador/egresos/`, formState, {
+
+          headers: {
+
+            Authorization: `${token}`
+
+          }
 
         })
+          .then(e => {
+
+            if (e.status == 200) {
+
+              setAgregadoEgreso(true);
+              Swal.fire('Success', e.data.message, 'success');
+
+            }
+
+          })
+          .catch(e => {
+
+            Swal.fire('Error', 'Al parecer algo salió mal', 'error');
+
+          })
+      }
+
     }
+
 
     onClose();
   };
@@ -144,7 +199,7 @@ const ModalMeta = ({ isOpen, onClose, title, fields }) => {
         <div className="bg-white p-4 rounded-lg w-96">
           <div className="flex justify-between">
             <h2 className="text-2xl font-bold mb-4">{title}</h2>
-            <button className="text-black cursor-pointer" onClick={onClose}>
+            <button className="text-black cursor-pointer hover:bg-red-700 hover:text-white rounded-full px-2 h-8" onClick={onClose}>
               X
             </button>
           </div>

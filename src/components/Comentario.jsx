@@ -2,33 +2,33 @@ function Comentario({ username, userphoto, comment, date }) {
 
       return (
 
-            <div className="md:p-10 p-5 font-thin">
+        <div className="bg-white rounded-lg p-4 mb-4 shadow-md">
 
-                  <div className="md:p-5 flex justify-center">
+          <div className="flex items-center">
 
-                        <div className="md:pr-10 pr-5">
-                              <h1 className="md:text-xl text-md">{username}</h1>
-                              <img
-                                    src={userphoto}
-                                    alt="Foto del usuario"
-                                    className="md:w-24 w-14 pt-3"
-                              />
+            <div className="pr-4">
+              <img
+                src={userphoto}
+                alt="Foto del usuario"
+                className="w-12 h-12 rounded-full"
+              />
+            </div>
 
-                        </div>
+            <div>
 
-                        <div>
-
-                              <p className="text-green-600">{date}</p>
-                              <div className="md:pl-5 pl-2 pt-5 border border-l-8 pb-5">
-                                    <p className="md:text-xl w-64 md:w-96 text-md">{comment}</p>
-                              </div>
-
-                        </div>
-                  </div>
+              <h1 className="text-lg font-semibold">{username}</h1>
+              <p className="text-gray-600 text-sm">{date}</p>
 
             </div>
 
-      )
-}
+          </div>
+          
+          <div className="mt-4">
+            <p className="text-sm">{comment}</p>
+          </div>
 
-export default Comentario;
+        </div>
+      );
+    }
+    
+    export default Comentario;

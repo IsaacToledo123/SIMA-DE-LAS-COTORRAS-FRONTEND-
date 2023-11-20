@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { AdministradorContext } from '../../../context/AdminContext';
 import ModalMeta from './ModalMeta';
 
 const egresosData = [
@@ -21,6 +22,9 @@ const egresosData = [
 
 
 const TablaEgresos = () => {
+
+  const {egresosOrdenados} = useContext(AdministradorContext);
+
   const [showModal, setShowModal] = useState(false);
   const [modalType, setModalType] = useState('');
   const [modalTitle, setModalTitle] = useState('');
@@ -47,8 +51,9 @@ const TablaEgresos = () => {
             name: 'categoria',
             label: 'Categoría',
             type: 'select',
-            options: ['Transporte', 'Alquiler', 'Compras', 'Trabajadores', 'Aventuras'],
+            options: ['Transporte', 'Alquiler', 'Compras', 'Trabajadores', 'Aventuras', 'Mantenimiento'],
           },
+          { name: "descripcion", label: "Descripción", type: "text"}
         ],
       },
     };
@@ -67,8 +72,10 @@ const TablaEgresos = () => {
     setShowModal(false);
   };
 
-  const handleAgregar = (formData) => {
+  const handleAgregarEgreso = (formData) => {
     // Agregar la nueva entrada a los datos existentes
+    console.log("Aquí vamos a agregar un nuevo egreso")
+    console.log(formData)
     const newEgreso = {
       id: egresosData.length + 1,
       category: formData.categoria,
@@ -102,18 +109,23 @@ const TablaEgresos = () => {
               <th scope="col" className="px-6 py-3">
                 Precio
               </th>
+              <th scope="col" className="px-6 py-3">
+                Fecha
+              </th>
             </tr>
           </thead>
           <tbody>
-            {egresosData.map((egreso) => (
+            {egresosOrdenados.map((egreso) => (
               <tr
                 key={egreso.id}
                 className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+                title={egreso.descripcion}
               >
                 <td className="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
-                  {egreso.category}
+                  {egreso.categoria}
                 </td>
-                <td className="px-6 py-4">{`$${egreso.price}`}</td>
+                <td className="px-6 py-4">{`$${egreso.monto}`}</td>
+                <td className="px-6 py-4">{`${egreso.fecha}`}</td>
               </tr>
             ))}
           </tbody>
@@ -132,7 +144,7 @@ const TablaEgresos = () => {
           onClose={handleCloseModal}
           title={modalTitle}
           fields={modalFields}
-          onAgregar={handleAgregar}
+          onAgregar={handleAgregarEgreso}
         />
       )}
     </div>

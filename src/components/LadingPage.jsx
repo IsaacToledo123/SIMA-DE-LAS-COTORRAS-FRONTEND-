@@ -13,10 +13,11 @@ import Swal from "sweetalert2";
 import Modal from "./Modal";
 import imagen_principal from "../img/sima_cotorras_principañ.webp";
 import Info from "./Info";
+import Footer from "./Footer";
 
 const LadingPage = () => {
 
-  const { comentarios, publicarComentario, mensajePublicado ,setMensajePublicado } = useContext(UsuarioContext);
+  const { comentarios, publicarComentario, mensajePublicado, setMensajePublicado } = useContext(UsuarioContext);
   const [comentario, setComentario] = useState("");
 
   const handleSubmit = async () => {
@@ -72,8 +73,8 @@ const LadingPage = () => {
         variants={container}
         transition={{ duration: 0.3 }}
       >
-        <div className="flex justify-center items-center pb-20 pt-10 mx-10">
-          <img src={imagen_principal} alt="Sima de las cotorras logo" />
+        <div className="flex justify-center items-center pb-10 md:pt-10 pt-6 mx-10">
+          <img src={imagen_principal} alt="Sima de las cotorras logo" className="w-full"/>
         </div>
       </motion.div>
 
@@ -82,29 +83,37 @@ const LadingPage = () => {
 
       {/* Sección para crear un nuevo comentario */}
 
-      <div className="text-black grid place-items-center m-10">
+      <div className="text-black grid place-items-center mb-10">
         <div className="md:p-10 p-5">
-          <h1 className="md:text-3xl text-lg font-bold">Comentarios: </h1>
+        <h1 className="font-extrabold text-5xl">Cuéntanos:</h1>
+          <h1 className="font-extrabold text-5xl">¿cómo te fue en tu visita?</h1>  
         </div>
 
-        <form>
-          <div className="text-center">
-            <textarea
-              id="commentid"
-              type="text"
-              cols="60"
-              rows="5"
-              placeholder="Escribe un comentario..."
-              className="placeholder:text-gray-600 md:pl-3 bg-stone-200 md:text-xl md:w-full 
+        <div className="text-center md:w-1/2 w-96">
+          <textarea
+            id="commentid"
+            type="text"
+            cols="60"
+            rows="5"
+            placeholder="Las vistas eran increibles ¡Sacamos muchas fotos!"
+            className="placeholder:text-gray-600 md:pl-3 border-2 md:text-xl md:w-full 
               md:p-3 w-80  rounded-xl placeholder:text-justify p-3"
-              onChange={e => setComentario(e.target.value)}
-            ></textarea>
-          </div>
+            onChange={e => setComentario(e.target.value)}
+          ></textarea>
+        </div>
+
+        <form className="pt-10 text-sm flex justify-center items-start md:w-1/2 w-96">
+          <input type="checkbox" id="checkbox" className="mt-1" />
+          <label htmlFor="checkbox" className="text-justify pl-5 ">
+            Certifico que esta opinión se basa en mi propia experiencia y es mi opinión genuina de este establecimiento, y que no tengo
+            ninguna relación personal ni comercial con este establecimiento ni me ofrecieron incentivo o pago alguno por escribir esta opinión.
+            Comprendo que Tripadvisor tiene una política de tolerancia cero con las opiniones falsas.
+          </label>
         </form>
 
         <div className="p-5">
           <button
-            className="bg-emerald-700 px-5 py-2 rounded-md text-white text-xl hover:bg-emerald-800 font-bold"
+            className="bg-black px-5 py-2 rounded-full text-white text-xl font-bold w-96 hover:bg-slate-700"
             onClick={handleSubmit}
           >
             Listo!
@@ -114,21 +123,34 @@ const LadingPage = () => {
 
       {/* Sección para ver todos los comentarios del sitio */}
 
-      <div className="">
-        {comentarios.map((comentario, index) => {
-          const { username, userphoto, comment, date } = comentario;
+      <div className="grid grid-cols-2">
 
-          return (
-            <Comentario
-              username={username}
-              userphoto={userphoto}
-              comment={comment}
-              date={date}
-              key={index}
-            />
-          );
-        })}
+        <div className="pt-10 text-center">
+
+          
+
+        </div>
+
+        <div className=" border-l-2 mb-10">
+          {comentarios.map((comentario, index) => {
+            const { username, userphoto, comment, date } = comentario;
+
+            return (
+              <Comentario
+                username={username}
+                userphoto={userphoto}
+                comment={comment}
+                date={date}
+                key={index}
+              />
+            );
+          })}
+        </div>
+
       </div>
+
+      <Footer />
+
     </div>
   );
 };

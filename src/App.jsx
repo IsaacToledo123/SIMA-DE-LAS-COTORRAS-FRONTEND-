@@ -16,8 +16,10 @@ import TablaIngresosYReservaciones from "./components/AdminComponents/components
 import TablaEgresos from "./components/AdminComponents/components/Decrease"
 import Login from "./components/AdminComponents/components/Login";
 import ProtectedRoute from "./components/AdminComponents/components/ProtectedRoute";
-import Socket from "./components/Socket";
-import RedirectMAPS from "./components/RedirectMAPS";
+import CabñaInfo from "./components/CabñaInfo";
+import AventuraInfo from "./components/AventuraInfo";
+import UltimasR from "./components/AdminComponents/components/UltimasR";
+
 
 // import ReservasOption from './components/AdminComponents/components/ReservasOpcion'
 function App() {
@@ -31,6 +33,8 @@ function App() {
           <Route path="/cabañasInfo" element={<CabañaInfo />} />
           <Route path="/actividad-usuario" element = {<ActividadUsuario />} />
           <Route path="/ubicacion" element = {<Ubicacion />} />
+          <Route path="/cabañas" element = {<CabñaInfo />} />
+          <Route path="/aventuras" element = {<AventuraInfo />} />
         </Route>
 
         {/*<Route path="/admin" element={<NavAdmin />}>
@@ -57,6 +61,7 @@ function App() {
                   <Route path="paginaIngresos" element={<TablaIngresosYReservaciones />} />
                   <Route path="Reservas" element={<ReservasView />} />
                   <Route path="Menu" element={<Menu />} />
+                  <Route path="Reservaciones" element={<UltimasR />} />
                 </Routes>
               </Layout>
             }
