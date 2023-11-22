@@ -137,20 +137,20 @@ const Nav = () => {
 
           <li className="grid lg:grid-cols-4 md:pt-10 md:text-2xl grid-cols-1 text-center p-2 text-xl">
 
-              <Link to="/" onClick={toggleNavbar} className="md:py-0 py-2">Información</Link>
+            <Link to="/" onClick={toggleNavbar} className="md:py-0 py-2">Información</Link>
 
-              <Link to="/ubicacion" onClick={toggleNavbar} className="md:py-0 py-2">Ubicación</Link>
+            <Link to="/ubicacion" onClick={toggleNavbar} className="md:py-0 py-2">Ubicación</Link>
 
-              <Link to="/reservas" onClick={toggleNavbar} className="md:py-0 py-2">Reservas</Link>       
+            <Link to="/reservas" onClick={toggleNavbar} className="md:py-0 py-2">Reservas</Link>
 
-              <Link to="/actividad-usuario" onClick={toggleNavbar} className="md:py-0 py-2">Actividad</Link>
-           
+            <Link to="/actividad-usuario" onClick={toggleNavbar} className="md:py-0 py-2">Actividad</Link>
+
           </li>
 
           {/* Sección principal */}
           <li className="grid lg:grid-cols-3 grid-cols-1 text-center md:text-2xl px-1">
             {/* Foto de perfil */}
-            <div className="pt-3 md:grid flex justify-center">
+            <div className="pt-3 pb-2 md:grid flex justify-center">
 
               {usuarioAutenticado
                 ?
@@ -224,7 +224,7 @@ const Nav = () => {
 
                   {/* Cuerpo del inicio de sesión */}
 
-                  <h1 className="bg-red-700 rounded-md text-white p-5 text-center mb-10">Bienvenido de nuevo!</h1>
+                  {/* <h1 className="bg-red-700 rounded-md text-white p-5 text-center mb-10">Bienvenido de nuevo!</h1>
 
                   <h1 className="text-center mb-10">Inicio de Sesión</h1>
 
@@ -250,6 +250,46 @@ const Nav = () => {
                       <button onClick={handleSubmit}>Login</button>
 
                     </div>
+                  </div> */}
+
+                  <div className="p-8 rounded bg-gray-800 text-white h-96">
+                    <h1 className="text-2xl font-semibold mb-4">Bienvenido de nuevo</h1>
+                    <form onSubmit={handleSubmit}>
+                      <div className="mb-4">
+                        <label htmlFor="username" className="block text-sm font-medium text-gray-500">
+                          Nombre de Usuario
+                        </label>
+                        <input
+                          type="text"
+                          id="username"
+                          name="username"
+                          //value={username}
+                          onChange={(e) => setUser(e.target.value)}
+                          className="mt-1 p-2 w-full border rounded-md text-black"
+                          required
+                        />
+                      </div>
+                      <div className="mb-4">
+                        <label htmlFor="password" className="block text-sm font-medium text-gray-500">
+                          Contraseña
+                        </label>
+                        <input
+                          type="password"
+                          id="password"
+                          name="password"
+                          //value={password}
+                          onChange={(e) => setPassword(e.target.value)}
+                          className="mt-1 p-2 w-full border rounded-md text-black"
+                          required
+                        />
+                      </div>
+                      <button
+                        type="submit"
+                        className="bg-blue-500 text-white px-4 py-2 mt-5 rounded-md hover:bg-blue-600"
+                      >
+                        Iniciar Sesión
+                      </button>
+                    </form>
                   </div>
 
                 </Modal>

@@ -1,9 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faBookmark } from "@fortawesome/free-solid-svg-icons";
+import { AdministradorContext } from "../../../context/AdminContext";
 
 const ReservasView = () => {
   const [selectedReserva, setSelectedReserva] = useState(null);
+  const { arregloAgrupadoByUser } = useContext(AdministradorContext);
+  const [sumaTotal, setSumaTotal] = useState(0);
+
+  console.log(arregloAgrupadoByUser)
 
   const reservas = [
     {
@@ -65,7 +70,7 @@ const ReservasView = () => {
         { nombre: "Caminata", precio: 1200 },
       ],
       pagado: true,
-    },{
+    }, {
       nombre: "Sara Mandujano",
       fechas: "22-10-23 - 24-10-23",
       total: 3200,
@@ -80,6 +85,13 @@ const ReservasView = () => {
   ];
 
   const openModal = (reserva) => {
+
+    console.log(reserva.pagos);
+    
+    const suma = reserva.pagos.reduce((acumulador, elemento) => acumulador + Number(elemento), 0);
+
+    setSumaTotal(suma);
+
     setSelectedReserva(reserva);
   };
 
@@ -93,7 +105,7 @@ const ReservasView = () => {
         RESERVAS
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {reservas.map((reserva, index) => (
+        {arregloAgrupadoByUser.map((reserva, index) => (          
           <div
             key={index}
             className="bg-white rounded-lg shadow-md border border-gray-200"
@@ -104,11 +116,12 @@ const ReservasView = () => {
             <div className="p-4">
               <div className="flex items-center mb-2">
                 <FontAwesomeIcon icon={faUser} className="text-blue-500 mr-2" />
-                <h3 className="text-xl font-semibold">{reserva.nombre}</h3>
+                <h3 className="text-xl font-semibold">{reserva.nombre_de_usuario}</h3>
               </div>
-              <p>Fechas: {reserva.fechas}</p>
-              <p>Total de Usuarios: {reserva.totalUsuarios}</p>
-              <p>Total: ${reserva.total}</p>
+              <p>Fechas: {reserva.fecha_reservacion}</p>
+              <p>Teléfono: {reserva.telefonos[0]}</p>
+              {/* <p>Total de Usuarios: {reserva.totalUsuarios}</p> */}
+              {/* <p className="font-bold">Total: ${sumaTotal}</p> */}
               <button
                 className="bg-blue-500 text-white py-2 px-4 rounded mt-2"
                 onClick={() => openModal(reserva)}
@@ -125,7 +138,7 @@ const ReservasView = () => {
           <div className="modal-container bg-white w-11/12 max-w-md mx-auto rounded shadow-lg p-4">
             <div className="modal-header flex justify-between items-center border-b-2 border-gray-300 pb-2">
               <h2 className="text-2xl font-bold">
-                Detalles de Reserva - {selectedReserva.nombre}
+                Detalles de Reserva - {selectedReserva.nombre_de_usuario}
               </h2>
               <button
                 className="modal-close bg-blue-500 text-white py-2 px-4 rounded"
@@ -144,14 +157,14 @@ const ReservasView = () => {
                 </thead>
                 <tbody>
                   {selectedReserva.servicios.map((servicio, index) => (
-                    <tr key={index}>
-                      <td>{servicio.nombre}</td>
-                      <td>${servicio.precio}</td>
+                    <tr key={index} className="text-center">
+                      <td>{servicio}</td>                                            
+                      <td>{selectedReserva.pagos[index]}</td>                      
                     </tr>
                   ))}
                 </tbody>
               </table>
-              <p className="font-bold mt-4">Total: ${selectedReserva.total}</p>
+              <p className="font-bold mt-4">Total: ${sumaTotal}</p>
             </div>
           </div>
         </div>

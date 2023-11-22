@@ -16,6 +16,7 @@ export function UsuariosContextProvider(props) {
       const [mensajePublicado, setMensajePublicado] = useState(false)
       const [misReservacionesAventura, setMisReservacionesAventura] = useState([]);
       const [misReservacionesCabaña, setMisReservacionesCabaña] = useState([]);
+      const [misReservaciones, setMisReservaciones] = useState([]);
 
       console.log(misReservacionesAventura)
       console.log(misReservacionesCabaña)
@@ -61,6 +62,38 @@ export function UsuariosContextProvider(props) {
             }
 
       }, [usuarioAutenticado])
+
+      useEffect(() => {
+
+            // Vamos a ordenar ambos arreglos
+            //const arregloOrdenado = [...misReservacionesCabaña, ...misReservacionesAventura];
+
+            function renombrarClaves(objeto, mapeo) {
+                  return Object.fromEntries(
+                        Object.entries(objeto).map(([clave, valor]) => [mapeo[clave] || clave, valor])
+                  );
+            }
+
+            // Aplicamos la función de mapeo a cada elemento de los arreglos
+            const nuevoArray1 = misReservacionesCabaña.map(elemento => renombrarClaves(elemento, {
+                  apellido_de_usuario: 'apellido_usuario',
+                  fecha_de_estancia: 'fecha_servicio',
+                  nombre_cabaña: 'nombre_servicio',
+                  precio_cabaña: 'precio_servicio'
+            }));
+
+            const nuevoArray2 = misReservacionesAventura.map(elemento => renombrarClaves(elemento, {
+                  apellido_usuario: 'apellido_usuario',
+                  fecha_aventura: 'fecha_servicio',
+                  nombre_aventura: 'nombre_servicio',
+                  precio_aventura : 'precio_servicio'
+            }));
+
+            const arregloOrdenado = [...nuevoArray1, ...nuevoArray2];            
+            setMisReservaciones(arregloOrdenado);
+
+
+      }, [misReservacionesCabaña, misReservacionesAventura]);
 
       const publicarComentario = comentario => {
 
@@ -139,7 +172,8 @@ export function UsuariosContextProvider(props) {
                   mensajePublicado,
                   setMensajePublicado,
                   misReservacionesAventura,
-                  misReservacionesCabaña,                  
+                  misReservacionesCabaña,
+                  misReservaciones
 
             }}>
 
