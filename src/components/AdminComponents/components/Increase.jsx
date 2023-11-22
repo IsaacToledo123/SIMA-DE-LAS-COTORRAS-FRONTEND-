@@ -34,30 +34,27 @@ const reservacionData = [
 
 const TablaIngresosYReservaciones = () => {
 
-
   const [showModal, setShowModal] = useState(false);
   const [modalType, setModalType] = useState("");
   const [modalTitle, setModalTitle] = useState("");
   const [modalFields, setModalFields] = useState([]);
   const [ingresosAdmin, setIngresosAdmin] = useState([]);
+  const [sumaTotal, setSumaTotal] = useState(0);
 
   const { ingresosOrdenados, ganaciasByFechaPago } = useContext(AdministradorContext); 
 
   useEffect(() => {
-    
-    // Obteniendo los ingresos en línea por semana
-    const fechaActual = new Date()
-    // const anio = fechaActual.getFullYear();
-    // const mes = (fechaActual.getMonth() + 1).toString().padStart(2, '0');
-    // const dia = (fechaActual.getDate() + 1).toString().padStart(2, '0');
 
-    // //Ordenar los ingresos por una semana
-    // const resultadoFormateado = `${anio}-${mes}-${dia}`;    
+    console.log(ingresosOrdenados)
     
+    const fechaActual = new Date()
+
     const semanaPasada = new Date(fechaActual);
     semanaPasada.setDate(fechaActual.getDate() - 7);
-    console.log(semanaPasada);
-    
+
+    const suma = ingresosOrdenados.reduce((acumulador, elemento) => acumulador + Number(elemento.monto), 0);
+
+    setSumaTotal(suma);
 
   }, []);
 
@@ -210,7 +207,7 @@ const TablaIngresosYReservaciones = () => {
 
       <div className="mt-4 p-4 bg-gradient-to-r from-slate-600 to-slate-800 rounded-md shadow-md">
         <p className="text-lg font-semibold text-white dark:text-gray-300">
-          Total de Ingresos: ${totalIncomes}
+          Total de Ingresos: ${sumaTotal}
         </p>
       </div>
 

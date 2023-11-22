@@ -9,10 +9,8 @@ import Swal from 'sweetalert2';
 
 function ActividadUsuario() {
 
-      const { misReservacionesAventura, misReservacionesCabaña } = useContext(UsuarioContext);
-
-      console.log(misReservacionesAventura)
-      console.log(misReservacionesCabaña)
+      const { misReservaciones } = useContext(UsuarioContext);
+      const getRandomColor = () => '#' + Math.floor(Math.random()*16777215).toString(16);
 
       useEffect(() => {
             // Check to see if this is a redirect back from Checkout
@@ -78,7 +76,7 @@ function ActividadUsuario() {
                                     "fecha_reservacion": informacionServicio.fecha_reservacion
 
                               }
-                              
+
                               axios.post(`${API_URL}/api/reservaciones-aventura/`, informacion_para_pagar)
 
                                     .then(e => {
@@ -118,7 +116,11 @@ function ActividadUsuario() {
 
                   <div className='md:p-10 p-2'>
 
-                        {misReservacionesAventura.length == 0 && misReservacionesCabaña.length == 0
+                        <h1 className="text-4xl uppercase font-bold text-emerald-700 text-center mb-4 mt-4">
+                              MIS RESERVAS
+                        </h1>
+
+                        {misReservaciones.length == 0
                               ?
                               <div className='grid grid-cols-1 place-items-center pt-10'>
 
@@ -132,68 +134,31 @@ function ActividadUsuario() {
 
                               </div>
                               :
-                              <div>
+                              <div className=''>
 
-                                    <div className='my-5 rounded-xl'>
+                                    <div className='rounded-xl'>
 
-                                          <div className='pl-10 grid grid-cols-2 place-items-center'>
-                                                <FontAwesomeIcon icon={faHouseChimney} className='h-10' />
-                                                <p className='font-thin md:text-2xl'>Reservación de cabañas:</p>
-                                          </div>
+                                          {misReservaciones.length > 0 && (
 
-                                          {misReservacionesCabaña.length > 0
-                                                ?
-                                                <div className='md:p-10 p-2'>
+                                                <div className='md:p-5 p-2 grid lg:md:grid-cols-3 grid-cols-1 md:grid-cols-2'>
 
-                                                      {misReservacionesCabaña.map(cabaña => {
+                                                      {misReservaciones.map(reservacion => {
 
-                                                            const { nombre_cabaña, fecha_de_pago, precio_cabaña, fecha_de_estancia } = cabaña;
+                                                            const { nombre_servicio, fecha_de_pago, precio_servicio, fecha_servicio } = reservacion;
 
-                                                            return (<MisReservaciones servicio={nombre_cabaña} fecha_de_pago={fecha_de_pago} precio_servicio={precio_cabaña} fecha_servicio={fecha_de_estancia} key={cabaña.id} />)
+                                                            return (<MisReservaciones servicio={nombre_servicio} fecha_de_pago={fecha_de_pago} precio_servicio={precio_servicio} fecha_servicio={fecha_servicio}/>)
                                                       })}
 
                                                 </div>
-                                                :
-                                                <div>
+                                          )
 
-                                                      <h1 className='font-thin'>Aún no has reservado alguna cabaña</h1>
-
-                                                </div>
                                           }
-                                    </div>
-
-                                    <div className='my-5 rounded-xl'>
-
-                                          <div className='pl-10 grid grid-cols-2 place-items-center'>
-                                                <FontAwesomeIcon icon={faMountainSun} className='h-10' />
-                                                <p className='font-thin md:text-2xl'>Reservación de aventuras:</p>
-                                          </div>
-
-                                          {misReservacionesAventura.length > 0
-                                                ?
-                                                <div className='md:p-10 p-2'>
-
-                                                      {misReservacionesAventura.map(aventura => {
-
-                                                            const { nombre_aventura, fecha_de_pago, precio_aventura, fecha_aventura } = aventura;
-
-                                                            return (<MisReservaciones servicio={nombre_aventura} fecha_de_pago={fecha_de_pago} precio_servicio={precio_aventura} fecha_servicio={fecha_aventura} key={aventura.id} />)
-                                                      })}
-                                                </div>
 
 
-                                                :
-                                                <div>
-
-                                                      <h1 className='font-thin'>Aún no has reservado alguna aventura</h1>
-
-                                                </div>
-                                          }
                                     </div>
 
                               </div>
                         }
-
 
                   </div>
 

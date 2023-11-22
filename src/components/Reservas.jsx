@@ -90,13 +90,13 @@ const Reservas = () => {
 
   }
 
-
-
   return (
 
     <div>
 
-      <h1 className="text-3xl py-10 font-thin text-center">Cabañas</h1>
+      <h1 className="text-4xl uppercase font-bold text-emerald-700 text-center mb-4 mt-4 pt-4">
+        CABAÑAS
+      </h1>
 
       <div className="grid md:grid-cols-3 grid-cols-1">
 
@@ -111,8 +111,9 @@ const Reservas = () => {
       <div>
 
       </div>
-
-      <h1 className="text-3xl py-10 font-thin text-center">Aventuras</h1>
+      <h1 className="text-4xl uppercase font-bold text-emerald-700 text-center mb-4 mt-4 pt-4">
+        AVENTURAS
+      </h1>
 
       <div className="grid md:grid-cols-2 grid-cols-1">
 
@@ -124,7 +125,7 @@ const Reservas = () => {
 
       </div>
 
-        <Footer />
+      <Footer />
     </div>
   );
 };

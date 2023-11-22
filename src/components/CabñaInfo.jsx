@@ -21,6 +21,7 @@ import fotografias_cabaña7 from "../img/fotografias_cabaña/fotografia_cabaña7
 import fotografias_cabaña8 from "../img/fotografias_cabaña/fotografia_cabaña8.jpeg"
 import axios from "axios";
 import DatePicker from 'react-datepicker';
+import { toast } from 'react-hot-toast'
 import 'react-datepicker/dist/react-datepicker.css';
 
 const CabñaInfo = () => {
@@ -77,48 +78,65 @@ const CabñaInfo = () => {
 
   const crearSesion = e => {
 
+    // Fecha de entrada
     if (fechaEntrada && diasReservacion) {
-      // Aquí puedes realizar la lógica para manejar la reserva
 
       const fechita = new Date(fechaEntrada)
       const resultado = new Date(fechita.getTime())
-      resultado.setDate(resultado.getDate() + diasReservacion+1);      
+      resultado.setDate(resultado.getDate() + diasReservacion + 1);
 
       const anio = resultado.getFullYear();
       const mes = (resultado.getMonth() + 1).toString().padStart(2, '0'); // Sumar 1 al mes ya que los meses van de 0 a 11
       const dia = resultado.getDate().toString().padStart(2, '0');
 
-      const resultadoFormateado = `${anio}-${mes}-${dia}`;    
+      // Fecha de salida
+      const resultadoFormateado = `${anio}-${mes}-${dia}`;
 
-      axios.post(`${API_URL}/api/create-checkout-session/${cabaña.id}/`)
+      // === Hay que comprobar primero si esa fecha no está reservada ya === //
+      axios.get(`${API_URL}/api/verificar-reservacion/${cabaña.id}/${fechaEntrada}/`)
 
         .then(e => {
 
-          const informacionServicio = {
+          if (e.status == 200) {
+            
+            axios.post(`${API_URL}/api/create-checkout-session/${cabaña.id}/`, { 'servicio': 'aventura' })
 
-            "servicio": "cabaña",
-            "idServicio": cabaña.id,
-            "titulo": cabaña.nombre,
-            "idUsuario": usuarioAutenticado.id,
-            "precio_cabaña": cabaña.precio,
-            "fecha_entrada": fechaEntrada,
-            "fecha_salida": resultadoFormateado
+              .then(e => {
+
+                const informacionServicio = {
+
+                  "servicio": "cabaña",
+                  "idServicio": cabaña.id,
+                  "titulo": cabaña.nombre,
+                  "idUsuario": usuarioAutenticado.id,
+                  "precio_cabaña": cabaña.precio,
+                  "fecha_entrada": fechaEntrada,
+                  "fecha_salida": resultadoFormateado
+
+                }
+
+                const infoServicio = JSON.stringify(informacionServicio)
+
+                // Guardamos en localStorage el servicio que vamos a reservar
+                localStorage.setItem('servicio', infoServicio);
+
+                window.location.href = e.data.session;
+
+              })
+              .catch(e => {
+
+                console.log(e);
+
+              })
+
+          } else {
+
+            Swal.fire('oh no🥺', e.data.message, 'info')
 
           }
 
-          const infoServicio = JSON.stringify(informacionServicio)
-
-          // Guardamos en localStorage el servicio que vamos a reservar
-          localStorage.setItem('servicio', infoServicio);
-
-          window.location.href = e.data.session;
-
         })
-        .catch(e => {
-
-          console.log(e);
-
-        })
+        .catch(e => console.log(e))
 
     } else {
 

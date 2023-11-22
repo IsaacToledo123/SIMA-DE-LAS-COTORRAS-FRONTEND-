@@ -171,7 +171,15 @@ const ModalMeta = ({ isOpen, onClose, title, fields }) => {
             if (e.status == 200) {
 
               setAgregadoEgreso(true);
-              Swal.fire('Success', e.data.message, 'success');
+              toast.success(e.data.message, {
+
+                position: "bottom-right",
+                style: {
+                  background: '#101010',
+                  color: '#fff'
+                }
+          
+              })
 
             }
 

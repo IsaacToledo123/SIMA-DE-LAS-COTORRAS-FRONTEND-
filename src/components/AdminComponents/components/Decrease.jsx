@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { AdministradorContext } from '../../../context/AdminContext';
 import ModalMeta from './ModalMeta';
 
@@ -29,6 +29,15 @@ const TablaEgresos = () => {
   const [modalType, setModalType] = useState('');
   const [modalTitle, setModalTitle] = useState('');
   const [modalFields, setModalFields] = useState([]);
+  const [sumaTotal, setSumaTotal] = useState(0);
+
+  useEffect(() => {
+
+    const suma = egresosOrdenados.reduce((acumulador, elemento) => acumulador + Number(elemento.monto), 0);
+
+    setSumaTotal(suma);
+
+  }, []);
 
   const openModal = (type, title, fields) => {
     setModalType(type);
@@ -134,7 +143,7 @@ const TablaEgresos = () => {
 
       <div className="mt-4 p-4 bg-gradient-to-r from-slate-600 to-slate-800 rounded-md shadow-md">
         <p className="text-lg font-semibold text-white dark:text-gray-300">
-          Total de Egresos: ${totalEgresos}
+          Total de Egresos: ${sumaTotal}
         </p>
       </div>
 
