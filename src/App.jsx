@@ -19,6 +19,8 @@ import ProtectedRoute from "./components/AdminComponents/components/ProtectedRou
 import CabñaInfo from "./components/CabñaInfo";
 import AventuraInfo from "./components/AventuraInfo";
 import UltimasR from "./components/AdminComponents/components/UltimasR";
+import MapaGoogle from "./components/mapaGoogle";
+import Socket from './components/Socket'
 
 
 // import ReservasOption from './components/AdminComponents/components/ReservasOpcion'
@@ -32,7 +34,7 @@ function App() {
           <Route path="/reservas" element={<Reservas />} />
           <Route path="/cabañasInfo" element={<CabañaInfo />} />
           <Route path="/actividad-usuario" element = {<ActividadUsuario />} />
-          <Route path="/ubicacion" element = {<Ubicacion />} />
+          <Route path="/ubicacion" element = {<Ubicacion/>} />
           <Route path="/cabañas" element = {<CabñaInfo />} />
           <Route path="/aventuras" element = {<AventuraInfo />} />
         </Route>

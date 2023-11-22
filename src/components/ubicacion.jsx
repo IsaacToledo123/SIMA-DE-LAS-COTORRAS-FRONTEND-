@@ -1,18 +1,44 @@
 import { useState, useEffect } from "react";
 import CroquisComponent from "./croquis";
-import FondoMapa from "../img/imagenesCRoquis/fondoMapa.png";
 import Rapel from "../img/imagenesCRoquis/rapeling.png";
 import Restaurant from "../img/imagenesCRoquis/restaurant.png";
-import Inicio from "../img/imagenesCRoquis/inicioCroquis2.png";
+import Inicio from "../img/imagenesCRoquis/hogar.png";
 import Cabañas from "../img/imagenesCRoquis/cabañasCro.png";
+import Tirolesa from "../img/imagenesCRoquis/tirolina.png";
+import Mirador from "../img/imagenesCRoquis/paisaje.png";
+
+
 import LogoEmpresa from "../img/logoP.png";
 import Swal from "sweetalert2";
 import { Html5Qrcode, Html5QrcodeScanner } from "html5-qrcode";
-import RedirectMAPS from './RedirectMAPS'
+import RedirectMAPS from "./RedirectMAPS";
+import MapaGoogle from "./mapaGoogle";
 const Ubicacion = () => {
   const [scanResult, setScanResult] = useState(null);
   const [openRestaurant, setOpenRestaurant] = useState(true);
   const [openRapel, setOpenRapel] = useState(true);
+
+  const [openTirolesa, setopenTirolesa] = useState(true);
+  const [openCabañas, setopenCabañas] = useState(true);
+  const [openMirador, setopenMirador] = useState(true);
+  const [mapas, setMapas] = useState(false);
+
+  const [width, setWidth] = useState(window.innerWidth);
+  const breakpoint = 880;
+
+  useEffect(() => {
+    const handleWindowResize = () => {
+      setWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleWindowResize);
+
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
+  }, []);
+
+  const isMobile = width < breakpoint;
 
   useEffect(() => {
     const scanner = new Html5QrcodeScanner("reader", {
@@ -26,7 +52,6 @@ const Ubicacion = () => {
     scanner.render(success, error);
 
     function success(result) {
-      scanner.clear();
       setScanResult(result);
       if (result) {
         validateScanResult(result);
@@ -41,52 +66,53 @@ const Ubicacion = () => {
   const validateScanResult = (result) => {
     switch (result) {
       case "https://me-qr.com/yTHDxyJB":
-        setOpenRapel(false);
+        if (openRapel == true) {
+          setOpenRapel(false);
+          Swal.fire("Felicidades Rapel visitado");
+        }
 
-        Swal.fire("Felicidades Rapel visitado");
         break;
       case "localhost:5173/ubicacion":
         setOpenRestaurant(false);
         Swal.fire("Felicidades Restaurant visitado");
         break;
-        case "localhost:5173/reservas":
-          setOpenRestaurant(false);
-          Swal.fire("Felicidades Restaurant visitado");
-          break;
+      case "https://www.tirolesa.com":
+        setopenTirolesa(false);
+        Swal.fire("Felicidades Tirolesa visitado");
+        break;
+      case "https://www.Cabañas.com":
+        if (openCabañas === true) {
+          setopenCabañas(false);
+          Swal.fire("Felicidades Cabañas visitado");
+        }
+
+        break;
+      case "https://www.Mirador.com":
+        setopenMirador(false);
+        Swal.fire("Felicidades Mirador visitado");
+        break;
     }
   };
-
+  
   return (
-    <div className="flex flex-col ">
-      <div className="flex lg:flex-row">
-        <div className="lg:w-1/4 lg:m-0">
-          <div className="text-2xl font-semibold flex flex-col text-center">
-            <h1 className="">La sima de las cotorras</h1>
-            <h2>Mapa turístico</h2>
-          </div>
-          <p className="text-justify text-2xl p-10 opacity-80">
-            La Sima de las Cotorras es un fascinante destino turístico que
-            combina la emoción de la naturaleza con comodidades modernas.
-            Situada en un entorno natural impresionante, esta joya mexicana
-            ofrece una experiencia única para los visitantes en busca de
-            aventuras auténticas y relajación.
-          </p>
-        </div>
-
-        <div className="flex-1 flex-col">
-          <div className="p-2">
-          <RedirectMAPS/>
-
-          </div>
-          <CroquisComponent mostrar={openRapel} restaurant={openRestaurant} />
-        </div>
-
-        <div className="lg:w-1/4">
-          <div>
+    <div className="flex flex-col p-10 ">
+      <div className="flex flex-col lg:flex-row pb-10">
+        <div className="lg:w-1/4 flex justify-center" >
+         
+          <div className="flex flex-col p-10">
+          <div className="">
             <img src={LogoEmpresa} width="300px" />
           </div>
 
-          <div className="flex flex-col p-10">
+            <div className="pt-10 pb-10">
+              <RedirectMAPS />
+            </div>
+            <div className="flex pb-5">
+              <img src={Inicio} className="w-10" />
+              <h1 className="text-2xl pl-5 cursor-pointer opacity-80 hover:text-yellow-200">
+                <a>Usted inicia aqui</a>
+              </h1>
+            </div>
             <div className="flex pb-5">
               <img src={Rapel} className="w-10" />
               <h1 className="text-2xl pl-5 opacity-80 cursor-pointer hover:text-yellow-200">
@@ -106,12 +132,35 @@ const Ubicacion = () => {
               </h1>
             </div>
             <div className="flex pb-5">
-              <img src={Inicio} className="w-10" />
+              <img src={Tirolesa} className="w-10" />
               <h1 className="text-2xl pl-5 cursor-pointer opacity-80 hover:text-yellow-200">
-                <a>Usted esta aqui</a>
+                <a>Tirolesa</a>
+              </h1>
+            </div>
+            <div className="flex pb-10">
+              <img src={Mirador} className="w-10" />
+              <h1 className="text-2xl pl-5 cursor-pointer opacity-80 hover:text-yellow-200">
+                <a>Mirador</a>
               </h1>
             </div>
           </div>
+        </div>
+        <div className="flex lg:w-24">
+
+        </div>
+        <div className="flex lg:w-3/5 flex-col pt-10">
+          
+          {isMobile ? (
+            <MapaGoogle />
+          ) : (
+            <CroquisComponent
+              mostrar={openRapel}
+              restaurant={openRestaurant}
+              mirador={openMirador}
+              tirolesa={openTirolesa}
+              cabañas={openCabañas}
+            />
+          )}
         </div>
       </div>
       {scanResult ? (
@@ -119,7 +168,7 @@ const Ubicacion = () => {
           succes: <h1>{scanResult}</h1>
         </div>
       ) : (
-        <div id="reader"></div>
+        <div id="reader">{}</div>
       )}
     </div>
   );

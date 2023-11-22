@@ -1,13 +1,21 @@
 import { useState } from "react";
-import Croquis from "../img/imagenesCRoquis/croquis.png";
+import Croquis from "../img/imagenesCRoquis/nuevoDei.png";
 import Rapel from "../img/imagenesCRoquis/rapeling.png";
 import Restaurant from "../img/imagenesCRoquis/restaurant.png";
-import Inicio from "../img/imagenesCRoquis/inicioCroquis2.png";
+import Inicio from "../img/imagenesCRoquis/hogar.png";
 import Cabañas from "../img/imagenesCRoquis/cabañasCro.png";
+import Tirolesa from "../img/imagenesCRoquis/tirolina.png";
+import Mirador from "../img/imagenesCRoquis/paisaje.png";
 
-const CroquisComponent = ({ mostrar, restaurant }) => {
+const CroquisComponent = ({
+  mostrar,
+  restaurant,
+  tirolesa,
+  cabañas,
+  mirador,
+}) => {
   const [openHome, setOpenHome] = useState(false);
-
+  const [url, setUrl] = useState(null);
   const openModal = () => {
     setOpenHome(true);
   };
@@ -20,33 +28,79 @@ const CroquisComponent = ({ mostrar, restaurant }) => {
     <div className="relative flex items-center justify-center ">
       <div className="max-w-full mx-4 relative">
         <img src={Croquis} alt="Croquis" className="w-full h-auto rounded-lg" />
-
         <>
           {mostrar && (
-            <img
-              src={Rapel}
-              alt="Rapel"
-              className="absolute bottom-10 md:bottom-16 right-10 md:right-60 w-12 md:w-16 rounded-lg cursor-pointer transform hover:scale-110 transition-transform duration-300 ease-in-out"
-            />
+            <a
+              href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
+                "16.807769944625164, -93.47504349365884"
+              )}`}
+            >
+              <img
+                src={Rapel}
+                alt="Rapel"
+                className="absolute bottom-10 md:bottom-60 right-4 md:right-64 w-12 md:w-20 rounded-lg cursor-pointer transform hover:scale-110 transition-transform duration-300 ease-in-out"
+              />
+            </a>
           )}
           {restaurant && (
-            <img
-              src={Restaurant}
-              alt="Restaurant"
-              className="absolute top-32 md:top-48 right-6 md:right-32 w-12 md:w-16 rounded-lg cursor-pointer transform hover:scale-110 transition-transform duration-300 ease-in-out"
-            />
+            <a
+              href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
+                "16.80710384584042, -93.47489094383528"
+              )}`}
+            >
+              <img
+                src={Restaurant}
+                alt="Restaurant"
+                className="absolute top-48 right-40 w-20  rounded-lg cursor-pointer transform hover:scale-110 transition-transform duration-300 ease-in-out "
+              />
+            </a>
+          )}
+          {cabañas && (
+            <a
+              href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
+                "16.806546235973663, -93.47387897624012"
+              )}`}
+            >
+              <img
+                src={Cabañas}
+                alt="Cabañas"
+                className="absolute top-2 right-56  w-20  rounded-lg cursor-pointer transform hover:scale-110 transition-transform duration-300 ease-in-out "
+              />
+            </a>
+          )}
+          {tirolesa && (
+            <a
+              href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
+                "16.808159651260574, -93.47540601714782"
+              )}`}
+            >
+              <img
+                src={Tirolesa}
+                alt="Tirolesa"
+                className="absolute bottom-20 right-10 md:right-72 w-20  rounded-lg cursor-pointer transform hover:scale-110 transition-transform duration-300 ease-in-out "
+              />
+            </a>
           )}
 
-          <img
-            src={Cabañas}
-            alt="Cabañas"
-            className="absolute top-4 md:top-10 right-20 md:right-48 w-12 md:w-16 rounded-lg cursor-pointer transform hover:scale-110 transition-transform duration-300 ease-in-out"
-          />
+          {mirador && (
+            <a
+              href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
+                "16.807936299999998, -93.47453564662692"
+              )}`}
+            >
+              <img
+                src={Mirador}
+                alt="Mirador"
+                className="absolute bottom-72 left-48 w-20 rounded-lg cursor-pointer transform hover:scale-110 transition-transform duration-300 ease-in-out "
+              />
+            </a>
+          )}
+
           <img
             src={Inicio}
             alt="Inicio"
             onClick={openModal}
-            className="absolute bottom-20 md:bottom-40 left-6 md:left-32 w-16 md:w-24 rounded-lg cursor-pointer transform hover:scale-110 transition-transform duration-300 ease-in-out"
+            className="absolute bottom-60 left-24  w-20 rounded-lg cursor-pointer transform hover:scale-110 transition-transform duration-300 ease-in-out "
           />
         </>
       </div>
