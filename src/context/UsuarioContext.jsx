@@ -1,11 +1,10 @@
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
-import { API_URL } from "../config";
+//import { API_URL } from "../config";
 
 export const UsuarioContext = createContext();
 
 const token = localStorage.getItem('token');
-
 
 export function UsuariosContextProvider(props) {
 
@@ -17,6 +16,7 @@ export function UsuariosContextProvider(props) {
       const [misReservacionesAventura, setMisReservacionesAventura] = useState([]);
       const [misReservacionesCabaña, setMisReservacionesCabaña] = useState([]);
       const [misReservaciones, setMisReservaciones] = useState([]);
+      const API_URL = import.meta.env.VITE_REACT_APP_API_URL
 
       console.log(misReservacionesAventura)
       console.log(misReservacionesCabaña)

@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import Swal from "sweetalert2";
 import axios from "axios";
-import { API_URL } from "../config/index"
+//import { API_URL } from "../config/index"
 import { Navigate } from "react-router-dom";
 import LandingPage from "../components/LadingPage"
 
@@ -20,7 +20,8 @@ const Registro = () => {
   const [mensajeError, setMensajeError] = useState('');
   const [mensajeCorrecto, setMensajeCorrecto] = useState('');
   const [mensajeErrorContraseña, setMensajeErrorContraseña] = useState('');
-  
+  const API_URL = import.meta.env.VITE_REACT_APP_API_URL
+
   const crearUsuario = e => {
 
     e.preventDefault();
@@ -48,7 +49,7 @@ const Registro = () => {
           correo,
           edadUsuarioActual,
           usuario,
-          contraseña,          
+          contraseña,
 
         }
 
@@ -213,68 +214,71 @@ const Registro = () => {
 
       <div>
 
-        <div className="md:pl-20 md:pr-20 md:p-10 px-5 pb-5 pt-10">
+        <form className="flex justify-center bg-gray-100 items-center pt-10 lg:h-screen pb-10">
 
-          <h1 className="bg-red-700 text-white font-bold md:text-5xl text-center py-5 text-2xl">Registro</h1>
+          <div className="grid md:p-10 p-2 shadow-xl bg-white">
 
-        </div>
+            <h1 className="text-3xl text-center pt-5 pb-10 font-bold px-5">CREA TU PROPIA CUENTA</h1>
 
-        <form className="flex flex-col">
+            <div className="grid md:grid-cols-2 grid-cols-1">
 
-          <div className="grid md:grid-cols-2 grid-cols-1 md:p-10 p-2">
+              <div className="mb-5 flex flex-col mx-5">
 
-            <div className="md:p-24 p-8">
-
-              <div className="mb-5 flex flex-col">
-
-                <label className="md:text-2xl text-xl font-inter text-gray-600 mb-1">Nombre:</label>
+                <label className="text-md font-inter text-gray-600 mb-1">Nombre:</label>
                 <input
-                  className="border border-black border-solid py-2 rounded-md px-2 text-lg"
+                  className="border py-2 rounded-md px-2 text-lg shadow-md border-b-2"
                   type="text" onChange={e => { setNombre(e.target.value) }}
                 />
 
               </div>
 
-              <div className="mb-5 flex flex-col">
+              <div className="mb-5 flex flex-col mx-5">
 
-                <label className="md:text-2xl text-xl font-inter text-gray-600 mb-1">Apellidos:</label>
-                <input className="border border-black border-solid py-2  rounded-md px-2 text-lg" type="text" onChange={e => { setApellidos(e.target.value) }} />
+                <label className="text-md text-gray-600 mb-1">Apellidos:</label>
+                <input className="border py-2  rounded-md px-2 text-lg shadow-md border-b-2" type="text" onChange={e => { setApellidos(e.target.value) }} />
 
               </div>
-              <div className="mb-5 flex flex-col">
+              <div className="mb-5 flex flex-col mx-5">
 
-                <label className="md:text-2xl text-xl font-inter text-gray-600 mb-1">Numero de telefono:</label>
-                <input className="border border-black border-solid py-2 rounded-md px-2 text-lg" type="text" onChange={handleChangeNumero} />
-                {mensajeError && <p className="bg-red-500 text-white p-1 mt-1 rounded-md">{mensajeError}</p>}
-                {mensajeCorrecto && <p className="bg-green-500 text-white p-1 rounded-md mt-1">{mensajeCorrecto}</p>}
+                <label className="text-md text-gray-600 mb-1">Numero de telefono:</label>
+                <input className="border py-2 rounded-md px-2 text-lg shadow-md border-b-2" type="text" onChange={handleChangeNumero} />
+                {mensajeError && <p className="bg-red-500 text-white p-1 mt-1 rounded-md w-80">{mensajeError}</p>}
+                {mensajeCorrecto && <p className="bg-green-500 text-white p-1 rounded-md mt-1 w-80">{mensajeCorrecto}</p>}
               </div>
 
-              <div className="mb-5 flex flex-col">
-                <label className="md:text-2xl text-xl font-inter text-gray-600 mb-1">Correo electronico:</label>
-                <input className="border border-black border-solid py-2 rounded-md px-2 text-lg" type="email" onChange={e => { setCorreo(e.target.value) }} />
+              <div className="mb-5 flex flex-col mx-5">
+                <label className="text-md text-gray-600 mb-1">Correo electronico:</label>
+                <input className="border py-2 rounded-md px-2 text-lg shadow-md border-b-2" type="email" onChange={e => { setCorreo(e.target.value) }} />
               </div>
 
-              <div className="mb-5 flex flex-col">
-                <label className="md:text-2xl text-xl font-inter text-gray-600 mb-1">Fecha de nacimiento:</label>
-                <input className="border border-black border-solid py-2 rounded-md px-2 text-lg" type="date" onChange={e => { setFechaNacimiento(e.target.value) }} />
+              <div className="mb-5 flex flex-col mx-5">
+                <label className="text-md text-gray-600 mb-1">Fecha de nacimiento:</label>
+                <input className="border py-2 rounded-md px-2 text-lg shadow-md border-b-2" type="date" onChange={e => { setFechaNacimiento(e.target.value) }} />
               </div>
 
-              <div className="mb-5 flex flex-col">
-                <label className="md:text-2xl text-xl font-inter text-gray-600 mb-1">Usuario:</label>
-                <input className="border border-black border-solid py-2 rounded-md px-2 text-lg" type="text" onChange={e => { setUsuario(e.target.value) }} />
+              <div className="mb-5 flex flex-col mx-5">
+                <label className="text-md text-gray-600 mb-1">Usuario:</label>
+                <input className="border py-2 rounded-md px-2 text-lg shadow-md border-b-2" type="text" onChange={e => { setUsuario(e.target.value) }} />
               </div>
 
-              <div className="mb-5 flex flex-col">
-                <label className="md:text-2xl text-xl font-inter text-gray-600 mb-1">Contraseña:</label>
-                <input className="border border-black border-solid py-2 rounded-md px-2 text-lg " type="password" onChange={handleChangePassword} />
-                {mensajeErrorContraseña && <p className="bg-red-500 text-white p-1 mt-1 rounded-md">{mensajeErrorContraseña}</p>}
+              <div className="mb-5 flex flex-col mx-5">
+                <label className="text-md text-gray-600 mb-1">Contraseña:</label>
+                <input className="border py-2 rounded-md px-2 text-lg shadow-md border-b-2" type="password" onChange={handleChangePassword} />
+                {mensajeErrorContraseña && <p className="bg-red-500 text-white p-1 mt-1 rounded-md w-80">{mensajeErrorContraseña}</p>}
               </div>
 
-            </div>
+              <div className="flex justify-center items-center flex-col pt-1">
 
-            <div className="md:p-10 grid grid-cols-1 justify-center p-2">
+                <label
+                  htmlFor="habitacion"
+                  className="text-black hover:cursor-pointer text-center rounded-md text-md border border-gray-300 shadow-md"
+                >
+                  <div>
+                    <span className="flex justify-center items-center py-3 px-16 text-gray-500">Selecciona una imagen</span>
+                  </div>
 
-              <div className="flex mt-2 justify-center items-center">
+                </label>
+
                 <input
                   type="file"
                   id="habitacion"
@@ -282,27 +286,24 @@ const Registro = () => {
                   accept="image/*"
                   className="hidden"
                 />
-                <label
-                  htmlFor="habitacion"
-                  className="bg-red-800 text-white hover:cursor-pointer h-20 w-72 text-center font-bold rounded-md text-xl hover:bg-red-900"
-                >
-                  <div>
-                    <span className="flex justify-center items-center pt-5">Selecciona una imagen</span>
-                  </div>
 
-                </label>
               </div>
 
+            </div>
 
-              {
-                imagen && (
-                  <img src={imagen} alt="" className="pt-5" />
-                )
-              }
+            <div className="md:p-10 grid grid-cols-1 justify-center p-2">
+
+              <div className="flex justify-center">
+                {
+                  imagen && (                    
+                    <img src={imagen} alt="" className="pt-5 w-56 h-60" />
+                  )
+                }
+              </div>
 
               <div className="flex justify-center pt-10 ">
                 <button
-                  className="capitalize md:uppercase text-white text-2xl bg-red-800 opacity-90 rounded-lg h-20 w-3/4 hover:opacity-100"
+                  className="md:uppercase text-white text-2xl bg-gray-800 opacity-90 rounded-lg h-16 w-full hover:opacity-100 font-bold"
                   onClick={crearUsuario}
                 >
                   Crear Cuenta
@@ -310,8 +311,11 @@ const Registro = () => {
               </div>
 
             </div>
+
           </div>
+
         </form>
+
       </div>
     </div>
   );

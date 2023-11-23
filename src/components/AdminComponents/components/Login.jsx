@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock } from "@fortawesome/free-solid-svg-icons";
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import fondo_login from "../../../img/fondo_cotorras.jpeg"     
+import fondo_login from "../../../img/fondo_cotorras.jpg"     
 
 const Login = () => {
 
@@ -70,7 +70,7 @@ const Login = () => {
                                     <input
                                           type="text"
                                           placeholder='username'
-                                          className='placeholder:text-xl border-b-2 border-white text-lg text-white px-3 py-2 bg-transparent placeholder:text-white'
+                                          className='placeholder:text-xl border-b-2 border-white text-lg text-white px-3 py-2 bg-transparent placeholder:text-white outline-none'
                                           onChange={e => setUsername(e.target.value)}
                                     />
                               </div>
@@ -81,7 +81,7 @@ const Login = () => {
                                     <input
                                           type="password"
                                           placeholder='password'
-                                          className='placeholder:text-xl border-b-2 border-white text-lg text-white px-3 py-2 bg-transparent placeholder:text-white'
+                                          className='placeholder:text-xl border-b-2 border-white text-lg text-white px-3 py-2 bg-transparent placeholder:text-white outline-none'
                                           onChange={e => setPassword(e.target.value)}
                                     />
 
@@ -95,12 +95,9 @@ const Login = () => {
 
                         </div>
 
-
                   </div>
 
-
             </div>
-
       )
 
 }

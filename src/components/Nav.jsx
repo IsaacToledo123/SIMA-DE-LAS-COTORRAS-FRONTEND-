@@ -175,27 +175,30 @@ const Nav = () => {
             <Modal isOpen={verDatos} onClose={e => { setVerDatos(false) }}>
 
               {/* Cuerpo del inicio de sesión */}
-              <div className="font-bold">
+              <div className="text-gray-800 bg-white p-8 rounded">
 
-                {usuarioAutenticado && (
-                  <h1 className="bg-green-700 rounded-md text-white p-5 text-center mb-10">Bienvenido {usuarioAutenticado.username}</h1>
-                )}
+                <h1 className="text-center mb-8 text-gray-600 text-2xl">Información acerca de ti</h1>
 
-                <h1 className="text-center mb-10 text-gray-600">Información acerca de ti</h1>
-                <div className="flex justify-center">
+                <div className="flex justify-center mb-8">
                   {usuarioAutenticado && (
-                    <img src={usuarioAutenticado.photo} alt="foto de perfil" className="w-64" />
+                    <img src={usuarioAutenticado.photo} alt="foto de perfil" className="w-64 rounded-full" />
                   )}
                 </div>
+
                 {usuarioAutenticado && (
-                  <div className="pt-5 pb-5">
-                    <p className="text-gray-600 pb-2"><span className="text-green-800">Nombre de usuario: </span> {usuarioAutenticado.username}</p>
-                    <p className="text-gray-600 pb-2"><span className="text-green-800">Email: </span>{usuarioAutenticado.email}</p>
-                    <p className="text-gray-600 pb-2"><span className="text-green-800">Teléfono: </span> {usuarioAutenticado.phone}</p>
+                  <div>
+                    <p className="text-gray-800 pb-4">
+                      <span className="">Nombre de usuario: </span> {usuarioAutenticado.username}
+                    </p>
+                    <p className="text-gray-800 pb-4">
+                      <span className="">Email: </span> {usuarioAutenticado.email}
+                    </p>
+                    <p className="text-gray-800 pb-4">
+                      <span className="">Teléfono: </span> {usuarioAutenticado.phone}
+                    </p>
                   </div>
                 )}
-
-              </div>
+              </div>  
 
               <button
                 onClick={e => setVerDatos(false)}
@@ -252,9 +255,12 @@ const Nav = () => {
                     </div>
                   </div> */}
 
-                  <div className="p-8 rounded bg-gray-800 text-white h-96">
-                    <h1 className="text-2xl font-semibold mb-4">Bienvenido de nuevo</h1>
+                  <div className="p-8 rounded text-black h-96">
+
+                    <h1 className="text-2xl mb-4 py-2">Bienvenido de nuevo</h1>
+
                     <form onSubmit={handleSubmit}>
+
                       <div className="mb-4">
                         <label htmlFor="username" className="block text-sm font-medium text-gray-500">
                           Nombre de Usuario
@@ -265,7 +271,7 @@ const Nav = () => {
                           name="username"
                           //value={username}
                           onChange={(e) => setUser(e.target.value)}
-                          className="mt-1 p-2 w-full border rounded-md text-black"
+                          className="mt-1 p-2 w-full border rounded-md text-black shadow-md focus:outline-none"
                           required
                         />
                       </div>
@@ -279,13 +285,13 @@ const Nav = () => {
                           name="password"
                           //value={password}
                           onChange={(e) => setPassword(e.target.value)}
-                          className="mt-1 p-2 w-full border rounded-md text-black"
+                          className="mt-1 p-2 w-full border rounded-md text-black focus:outline-none shadow-md"
                           required
                         />
                       </div>
                       <button
                         type="submit"
-                        className="bg-blue-500 text-white px-4 py-2 mt-5 rounded-md hover:bg-blue-600"
+                        className="bg-blue-500 text-white px-4 py-2 mt-5 rounded-md hover:bg-blue-600 w-full"
                       >
                         Iniciar Sesión
                       </button>

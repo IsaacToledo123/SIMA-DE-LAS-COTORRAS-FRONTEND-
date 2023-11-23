@@ -148,9 +148,9 @@ const TablaIngresosYReservaciones = () => {
             </tr>
           </thead>
           <tbody>
-            {ingresosOrdenados.map((income) => (
+            {ingresosOrdenados.map((income, index) => (
               <tr
-                key={income.id}
+                key={index}
                 className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
                 title={income.descripcion}               
               >
@@ -188,7 +188,7 @@ const TablaIngresosYReservaciones = () => {
               </th>
             </tr>
           </thead>
-          <tbody>
+          <tbody key={1}>
             {ganaciasByFechaPago.map((reservation) => (
               <tr key={reservation.id} className="hover:bg-grey-lighter">
                 <td className="py-2 px-4 border-b border-grey-light">

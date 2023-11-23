@@ -7,7 +7,6 @@ import Cabañas from "../img/imagenesCRoquis/cabañasCro.png";
 import Tirolesa from "../img/imagenesCRoquis/tirolina.png";
 import Mirador from "../img/imagenesCRoquis/paisaje.png";
 
-
 import LogoEmpresa from "../img/logoP.png";
 import Swal from "sweetalert2";
 import { Html5Qrcode, Html5QrcodeScanner } from "html5-qrcode";

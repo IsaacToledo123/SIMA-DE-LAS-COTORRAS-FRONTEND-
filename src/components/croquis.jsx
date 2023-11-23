@@ -38,7 +38,7 @@ const CroquisComponent = ({
               <img
                 src={Rapel}
                 alt="Rapel"
-                className="absolute bottom-10 md:bottom-60 right-4 md:right-64 w-12 md:w-20 rounded-lg cursor-pointer transform hover:scale-110 transition-transform duration-300 ease-in-out"
+                className="absolute bottom-10 md:bottom-60 right-4 md:right-64 w-12 md:w-20 rounded-lg cursor-pointer transform hover:scale-110 transition-transform duration-300 ease-in-out animate-pulse"
               />
             </a>
           )}
@@ -51,7 +51,7 @@ const CroquisComponent = ({
               <img
                 src={Restaurant}
                 alt="Restaurant"
-                className="absolute top-48 right-40 w-20  rounded-lg cursor-pointer transform hover:scale-110 transition-transform duration-300 ease-in-out "
+                className="absolute top-48 right-40 w-20  rounded-lg cursor-pointer transform hover:scale-110 transition-transform duration-300 ease-in-out animate-pulse"
               />
             </a>
           )}
@@ -64,7 +64,7 @@ const CroquisComponent = ({
               <img
                 src={Cabañas}
                 alt="Cabañas"
-                className="absolute top-2 right-56  w-20  rounded-lg cursor-pointer transform hover:scale-110 transition-transform duration-300 ease-in-out "
+                className="absolute top-2 right-56  w-20  rounded-lg cursor-pointer transform hover:scale-110 transition-transform duration-300 ease-in-out animate-pulse"
               />
             </a>
           )}
@@ -77,7 +77,7 @@ const CroquisComponent = ({
               <img
                 src={Tirolesa}
                 alt="Tirolesa"
-                className="absolute bottom-20 right-10 md:right-72 w-20  rounded-lg cursor-pointer transform hover:scale-110 transition-transform duration-300 ease-in-out "
+                className="absolute bottom-20 right-10 md:right-72 w-20  rounded-lg cursor-pointer transform hover:scale-110 transition-transform duration-300 ease-in-out animate-pulse"
               />
             </a>
           )}
@@ -91,7 +91,7 @@ const CroquisComponent = ({
               <img
                 src={Mirador}
                 alt="Mirador"
-                className="absolute bottom-72 left-48 w-20 rounded-lg cursor-pointer transform hover:scale-110 transition-transform duration-300 ease-in-out "
+                className="absolute bottom-72 left-48 w-20 rounded-lg cursor-pointer transform hover:scale-110 transition-transform duration-300 ease-in-out animate-pulse"
               />
             </a>
           )}
@@ -100,7 +100,7 @@ const CroquisComponent = ({
             src={Inicio}
             alt="Inicio"
             onClick={openModal}
-            className="absolute bottom-60 left-24  w-20 rounded-lg cursor-pointer transform hover:scale-110 transition-transform duration-300 ease-in-out "
+            className="absolute bottom-60 left-24  w-20 rounded-lg cursor-pointer transform hover:scale-110 transition-transform duration-300 ease-in-out animate-pulse"
           />
         </>
       </div>

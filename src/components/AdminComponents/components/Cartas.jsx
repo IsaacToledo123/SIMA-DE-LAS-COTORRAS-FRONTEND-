@@ -1,7 +1,7 @@
 const data = {
   totalCollected: 5000,
-  totalServices: 100,
-  totalCustomers: 50,
+  totalServices: 23,
+  totalCustomers: 6,
 };
 
 export default function Cartitas() {

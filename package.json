@@ -30,8 +30,10 @@
     "react-leaflet": "^4.2.1",
     "react-modal": "^3.16.1",
     "react-router-dom": "^6.16.0",
+    "react-slick": "^0.29.0",
     "react-transition-group": "^4.4.5",
     "recharts": "^2.9.1",
+    "slick-carousel": "^1.8.1",
     "socket.io-client": "^4.7.2",
     "sweetalert2": "^11.9.0"
   },

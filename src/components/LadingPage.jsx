@@ -11,9 +11,9 @@ import { UsuarioContext } from "../context/UsuarioContext";
 import Comentario from "../components/Comentario";
 import Swal from "sweetalert2";
 import Modal from "./Modal";
-import imagen_principal from "../img/sima_cotorras_principañ.webp";
 import Info from "./Info";
 import Footer from "./Footer";
+import Carousel from "./Carrusel";
 
 const LadingPage = () => {
 
@@ -65,19 +65,19 @@ const LadingPage = () => {
     hidden: { opacity: 0, y: -50 },
     visible: { opacity: 1, y: 0 },
   };
+
+
   return (
     <div className="">
-      <motion.div
+      {/* <motion.div
         initial="hidden"
         animate="visible"
         variants={container}
         transition={{ duration: 0.3 }}
       >
-        <div className="flex justify-center items-center pb-10 md:pt-10 pt-6 mx-10">
-          <img src={imagen_principal} alt="Sima de las cotorras logo" className="w-full"/>
-        </div>
-      </motion.div>
+      </motion.div> */}
 
+      <Carousel />
       {/*Nueva implementacion para la Informacion*/}
       <Info />
 
@@ -85,8 +85,8 @@ const LadingPage = () => {
 
       <div className="text-black grid place-items-center mb-10">
         <div className="md:p-10 p-5">
-        <h1 className="font-extrabold text-5xl">Cuéntanos:</h1>
-          <h1 className="font-extrabold text-5xl">¿cómo te fue en tu visita?</h1>  
+          <h1 className="font-extrabold text-5xl">Cuéntanos:</h1>
+          <h1 className="font-extrabold text-5xl">¿cómo te fue en tu visita?</h1>
         </div>
 
         <div className="text-center md:w-1/2 w-96">
@@ -123,12 +123,42 @@ const LadingPage = () => {
 
       {/* Sección para ver todos los comentarios del sitio */}
 
-      <div className="grid grid-cols-2">
+      <div className="grid md:grid-cols-2">
 
-        <div className="pt-10 text-center">
+        <div className="pt-10 text-center bg-gray-10 p-8 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-gray-600 mb-4">Contacto</h2>
+          <p className="text-lg text-gray-700">Para mayor información puede contactarse con</p>
+          <p className="py-1">Teléfono: <strong className="text-gray-600">9681064463</strong></p>
+          <p className="py-1">Correo: <strong className="text-gray-600">simadelascotorrasoficial@gmail.com</strong></p>
+          <p className="py-1">Facebook: <strong className="text-gray-600">simadelascotorrasoficial</strong></p>
 
-          
+          <div className="my-8 border-b border-gray-300"></div>
 
+          <div className="mb-6">
+            <h2 className="text-2xl font-bold text-gray-600 mb-2">Horarios de Operación</h2>
+            <p className="text-gray-700">Abierto todos los días de la semana, de <strong>8:00 AM a 6:00 PM</strong></p>
+          </div>
+
+          <div className="my-8 border-b border-gray-300"></div>
+
+          <div className="">
+            <h2 className="text-2xl font-bold text-gray-600 mb-4">Creadores de la Web</h2>
+
+            <div className="mb-4">
+              <p className="text-lg font-semibold">Desarrollador web</p>
+              <p className="text-gray-700">Christopher Yahir Moreno Moreno - <a href="https://github.com/xChrisxY" className="text-gray-600 hover:underline">[Enlace al perfil de GitHub]</a></p>
+            </div>
+
+            <div className="mb-4">
+              <p className="text-lg font-semibold">Desarrollador web</p>
+              <p className="text-gray-700">Sara Mandujano Bolivar - <a href="https://github.com/SaraMandujano" className="text-gray-600 hover:underline">[Enlace al perfil de GitHub]</a></p>
+            </div>
+
+            <div>
+              <p className="text-lg font-semibold">Desarrollador web</p>
+              <p className="text-gray-700">Isaac Toledo Castillo - <a href="https://github.com/IsaacToledoC" className="text-gray-600 hover:underline">[Enlace al perfil de GitHub]</a></p>
+            </div>
+          </div>
         </div>
 
         <div className=" border-l-2 mb-10">

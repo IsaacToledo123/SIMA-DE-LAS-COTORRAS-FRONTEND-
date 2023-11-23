@@ -45,13 +45,13 @@ const GraficosSeccionados = () => {
         { data: egresosAgrupadosPorCategoria, title: 'Egresos por semana', chartType: 'bar' },
         { data: cabañasAgrupadoSemana, title: 'Reservaciones de hospedaje', chartType: 'pie' },
         { data: agrupadosPorCategoria, title: 'Ingresos por semana', chartType: 'bar' },
-        { data: dataReservas, title: 'Reservas en línea', chartType: 'pie' },
-        { data: dataEgresosDia, title: 'Egresos por semana', chartType: 'bar' },
+        // { data: dataReservas, title: 'Reservas en línea', chartType: 'pie' },
+        // { data: dataEgresosDia, title: 'Egresos por semana', chartType: 'bar' },
       ].map((chart, index) => (
         <div key={index} className="border p-4 rounded-lg bg-white">
           <h2 className="text-xl font-semibold mb-4">{chart.title}</h2>
           {chart.chartType === 'pie' ? (
-            <PieChart width={400} height={300}>
+            <PieChart width={600} height={400}>
               <Pie dataKey="value" data={chart.data} cx="50%" cy="50%" outerRadius={80} label fill="#8884d8">
                 {chart.data.map((entry, i) => (
                   <Cell key={`cell-${i}`} fill={getRandomColor()} />
@@ -60,7 +60,7 @@ const GraficosSeccionados = () => {
               <Tooltip />
             </PieChart>
           ) : (
-            <BarChart width={400} height={300} data={chart.data}>
+            <BarChart width={600} height={400} data={chart.data}>
               <XAxis dataKey="name" />
               <YAxis />
               <Tooltip />

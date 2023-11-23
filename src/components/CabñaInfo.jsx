@@ -10,7 +10,6 @@ import { motion } from 'framer-motion'
 import { UsuarioContext } from "../context/UsuarioContext";
 import Swal from "sweetalert2";
 import Modal from "./Modal";
-import { API_URL } from "../config";
 import fotografias_cabaña1 from "../img/fotografias_cabaña/fotografia_cabaña1.jpeg"
 import fotografias_cabaña2 from "../img/fotografias_cabaña/fotografia_cabaña2.jpeg"
 import fotografias_cabaña3 from "../img/fotografias_cabaña/fotografia_cabaña3.jpeg"
@@ -32,6 +31,8 @@ const CabñaInfo = () => {
   const [fechaEntrada, setFechaEntrada] = useState(null);
   const [diasReservacion, setDiasReservacion] = useState(0);
   const [fechaSalida, setFechaSalida] = useState(null);
+  // const API_URL = import.meta.vite.
+  const API_URL = import.meta.env.VITE_REACT_APP_API_URL
 
   const cabaña = JSON.parse(localStorage.getItem('cabaña'));
 
