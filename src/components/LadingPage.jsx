@@ -148,7 +148,7 @@ const LadingPage = () => {
 
         <div className=" border-l-2 mb-10">
 
-          {comentarios.map((comentario, index) => {
+          {!comentarios ? null: comentarios.map((comentario, index) => {
             const { username, userphoto, comment, date } = comentario;
 
             return (

@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendar, faDollar, faMoneyBill, faUser, faBookmark } from "@fortawesome/free-solid-svg-icons";
 import CartaUsuario from "./components/CartaUsuario";
 
-const socket = new WebSocket('ws://localhost:8000/ws/notifications/sala1/');
+const socket = new WebSocket(`wss://${import.meta.env.VITE_SOCKET}/ws/notifications/sala1/`);
 const username = localStorage.getItem('username');
 
 const ListaUsuarios = () => {
