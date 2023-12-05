@@ -4,11 +4,9 @@ import { jwtDecode } from "jwt-decode";
 
 const ProtectedRoute = () => {
 
-      const token = localStorage.getItem('token-admin');
-      console.log("aqui" + token)
+      const token = localStorage.getItem('token-admin');      
 
-      if (!token) {
-            console.log("Primer condicion")
+      if (!token) {            
             return <Navigate to="/login" />
 
       }
@@ -16,8 +14,7 @@ const ProtectedRoute = () => {
       const decodeToken = jwtDecode(token);
       const currentTime = Date.now() / 1000;
 
-      if (decodeToken.exp < currentTime) {
-            console.log("Segunda condicion")
+      if (decodeToken.exp < currentTime) {            
             return <Navigate to="/login" />
 
       }

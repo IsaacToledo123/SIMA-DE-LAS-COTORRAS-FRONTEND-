@@ -85,8 +85,6 @@ const Registro = () => {
 
       } else {
 
-        // Haciendo la petición de la base de datos
-
         axios.post(`${API_URL}/api/usuarios/`, datosUsuario)
 
           .then(e => {
@@ -112,6 +110,8 @@ const Registro = () => {
             Swal.fire("Oh no!", "La no cuenta ha sido creada satisfactoriamente", 'error')
 
           })
+
+        // Aquí trabajamos el websocket
 
       }
 
@@ -214,7 +214,7 @@ const Registro = () => {
 
       <div>
 
-        <form className="flex justify-center bg-gray-100 items-center pt-10 lg:h-screen pb-10">
+        <form className="flex justify-center bg-gray-100 items-center lg:h-screen pb-10">
 
           <div className="grid md:p-10 p-2 shadow-xl bg-white">
 
@@ -240,14 +240,14 @@ const Registro = () => {
               </div>
               <div className="mb-5 flex flex-col mx-5">
 
-                <label className="text-md text-gray-600 mb-1">Numero de telefono:</label>
+                <label className="text-md text-gray-600 mb-1">Numero de teléfono:</label>
                 <input className="border py-2 rounded-md px-2 text-lg shadow-md border-b-2" type="text" onChange={handleChangeNumero} />
                 {mensajeError && <p className="bg-red-500 text-white p-1 mt-1 rounded-md w-80">{mensajeError}</p>}
                 {mensajeCorrecto && <p className="bg-green-500 text-white p-1 rounded-md mt-1 w-80">{mensajeCorrecto}</p>}
               </div>
 
               <div className="mb-5 flex flex-col mx-5">
-                <label className="text-md text-gray-600 mb-1">Correo electronico:</label>
+                <label className="text-md text-gray-600 mb-1">Correo electrónico:</label>
                 <input className="border py-2 rounded-md px-2 text-lg shadow-md border-b-2" type="email" onChange={e => { setCorreo(e.target.value) }} />
               </div>
 
@@ -295,7 +295,7 @@ const Registro = () => {
 
               <div className="flex justify-center">
                 {
-                  imagen && (                    
+                  imagen && (
                     <img src={imagen} alt="" className="pt-5 w-56 h-60" />
                   )
                 }

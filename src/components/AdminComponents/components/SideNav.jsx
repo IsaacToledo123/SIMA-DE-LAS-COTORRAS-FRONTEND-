@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserGroup, faHome, faMoneyBillAlt, faPowerOff, faCrow, faPieChart, faDollarSign } from '@fortawesome/free-solid-svg-icons';
+import { faUserGroup, faHome, faMoneyBillAlt, faPowerOff, faCrow, faPieChart, faDollarSign, faMessage, faUser, faDollar } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 
@@ -8,7 +8,9 @@ const links = [
   { name: 'Ingreso', icon: faDollarSign, to: '/admin/paginaIngresos' },
   { name: 'Egreso', icon: faMoneyBillAlt, to: '/admin/paginaEgresos' },
   { name: 'Reservas', icon: faUserGroup, to: '/admin/Reservas' },
-  { name: 'Gráficas', icon: faPieChart, to: '/admin/Graficas' }
+  { name: 'Gráficas', icon: faPieChart, to: '/admin/Graficas' },
+  { name: 'Chat', icon: faMessage, to: '/admin/chat' },
+  { name: 'Pagos', icon: faDollar, to: '/admin/usuarios'}
 ];
 
 const NavLinks = () => {

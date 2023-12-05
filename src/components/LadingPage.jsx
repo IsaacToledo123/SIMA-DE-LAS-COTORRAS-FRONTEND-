@@ -1,11 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
 
-/*import ImagenLading from "../img/imagenLading.png";
-import Calendario from "../img/calendario.png";
-import Ubicacion from "../img/ubicacion.png";
-import Foto1 from "../img/foto1.png";
-import Mapa from "../img/mapa.png";
-import Foto2 from "../img/foto2.png";*/
 import { motion } from "framer-motion";
 import { UsuarioContext } from "../context/UsuarioContext";
 import Comentario from "../components/Comentario";
@@ -20,14 +14,12 @@ const LadingPage = () => {
   const { comentarios, publicarComentario, mensajePublicado, setMensajePublicado } = useContext(UsuarioContext);
   const [comentario, setComentario] = useState("");
 
+
   const handleSubmit = async () => {
     try {
       const dataComment = { comment: comentario };
 
       const { data, status } = await publicarComentario(dataComment);
-
-      console.log(data);
-      console.log(status);
 
       if (status == 200) {
 
@@ -68,14 +60,7 @@ const LadingPage = () => {
 
 
   return (
-    <div className="">
-      {/* <motion.div
-        initial="hidden"
-        animate="visible"
-        variants={container}
-        transition={{ duration: 0.3 }}
-      >
-      </motion.div> */}
+    <div>      
 
       <Carousel />
       {/*Nueva implementacion para la Informacion*/}
@@ -162,6 +147,7 @@ const LadingPage = () => {
         </div>
 
         <div className=" border-l-2 mb-10">
+
           {comentarios.map((comentario, index) => {
             const { username, userphoto, comment, date } = comentario;
 
@@ -175,6 +161,7 @@ const LadingPage = () => {
               />
             );
           })}
+
         </div>
 
       </div>

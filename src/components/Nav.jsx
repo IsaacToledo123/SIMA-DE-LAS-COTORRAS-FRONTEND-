@@ -56,6 +56,7 @@ const Nav = () => {
 
       if (message == "El usuario se ha autenticado correctamente") {
 
+        localStorage.setItem('username', credenciales.username);
         Swal.fire('Excelente 🤩', "Credenciales correctas", 'success');
         localStorage.setItem("token", token);
         window.location.href = "/";
@@ -78,6 +79,7 @@ const Nav = () => {
 
     console.log("Vamos a cerrar sesión")
     localStorage.removeItem('token');
+    localStorage.removeItem('username');
     window.location.href = "/";
     toast.success('Nos vemos 🥺', {
 
@@ -135,7 +137,7 @@ const Nav = () => {
           </li>
 
 
-          <li className="grid lg:grid-cols-4 md:pt-10 md:text-2xl grid-cols-1 text-center p-2 text-xl">
+          <li className="grid lg:grid-cols-5 md:pt-10 md:text-2xl grid-cols-1 text-center p-2 text-xl">
 
             <Link to="/" onClick={toggleNavbar} className="md:py-0 py-2">Información</Link>
 
@@ -144,6 +146,8 @@ const Nav = () => {
             <Link to="/reservas" onClick={toggleNavbar} className="md:py-0 py-2">Reservas</Link>
 
             <Link to="/actividad-usuario" onClick={toggleNavbar} className="md:py-0 py-2">Actividad</Link>
+
+            <Link to="/chat" onClick={toggleNavbar} className="md:py-0 py-2">Chat</Link>
 
           </li>
 

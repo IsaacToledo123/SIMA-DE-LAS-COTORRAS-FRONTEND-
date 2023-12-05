@@ -11,12 +11,31 @@ import ModalMeta from "./ModalMeta";
 import Cartitas from "./Cartas";
 import LatestReservations from "./UltimasR";
 
-
 const AdminVista = () => {
+
+  console.log(socket)
+
   const [showModal, setShowModal] = useState(false);
   const [modalType, setModalType] = useState("");
   const [modalTitle, setModalTitle] = useState("");
   const [modalFields, setModalFields] = useState([]);
+  const [notification, setNotification] = useState('');
+
+  // useEffect(() => {
+
+  //   socket.onmessage = (event) => {
+  //     const data = JSON.parse(event.data);
+  //     console.log(data);
+  //     setNotification(data.message);
+  //   };
+
+
+  //   return () => {
+
+  //     socket.close();
+
+  //   };
+  // }, []);
 
   const openModal = (type, title, fields) => {
     setModalType(type);
@@ -40,8 +59,10 @@ const AdminVista = () => {
             type: "text",
           },
           { name: "monto", label: "Monto", type: "number" },
-          { name: "categoria", label: "Categoría", type: "select",
-            options:["Restaurante","Transporte", "Cabañas", "Aventuras"]},
+          {
+            name: "categoria", label: "Categoría", type: "select",
+            options: ["Restaurante", "Transporte", "Cabañas", "Aventuras"]
+          },
         ],
       },
       "ver-ingresos": {
@@ -61,15 +82,17 @@ const AdminVista = () => {
             type: "text",
           },
           { name: "monto", label: "Monto", type: "number" },
-          { name: "categoria", label: "Categoría", type: "text",
-            options:["Transporte", "Alquiler", "Compras", "Trabajadores", "Aventuras"] },
+          {
+            name: "categoria", label: "Categoría", type: "text",
+            options: ["Transporte", "Alquiler", "Compras", "Trabajadores", "Aventuras"]
+          },
         ],
       }
     };
 
     const action = actionMap[type];
     openModal(type, action.title, action.fields);
-    
+
   };
 
   /*const [ingresosTotales, setIngresosTotales] = useState(0);
@@ -114,9 +137,9 @@ const AdminVista = () => {
           >
             Agregar Ingreso
           </button>
-          <Link 
-               className="font-lato uppercase text-gray-500 font-bold cursor-pointer text-xl"
-              to="/admin/paginaIngresos">VER INGRESOS</Link>
+          <Link
+            className="font-lato uppercase text-gray-500 font-bold cursor-pointer text-xl"
+            to="/admin/paginaIngresos">VER INGRESOS</Link>
         </div>
         <div className="flex flex-col items-center" key="egresos">
           <div className="w-24 h-24 bg-green-500 rounded-full flex items-center justify-center text-white text-6xl mb-4">
@@ -128,25 +151,25 @@ const AdminVista = () => {
           >
             Agregar Egresos
           </button>
-          <Link 
-               className="font-lato uppercase text-gray-500 font-bold cursor-pointer text-xl"
-              to="/admin/paginaEgresos">VER EGRESOS</Link>
+          <Link
+            className="font-lato uppercase text-gray-500 font-bold cursor-pointer text-xl"
+            to="/admin/paginaEgresos">VER EGRESOS</Link>
         </div>
         <div className="flex flex-col items-center" key="reservas">
           <div className="w-24 h-24 bg-green-500 rounded-full flex items-center justify-center text-white text-6xl mb-4">
             <FontAwesomeIcon icon={faCalendarAlt} />
           </div>
-            <Link 
-               className="font-lato uppercase text-gray-500 font-bold cursor-pointer text-xl"
-              to="/admin/Reservas">RESERVAS</Link>
+          <Link
+            className="font-lato uppercase text-gray-500 font-bold cursor-pointer text-xl"
+            to="/admin/Reservas">RESERVAS</Link>
         </div>
         <div className="flex flex-col items-center" key="graficas">
           <div className="w-24 h-24 bg-green-500 rounded-full flex items-center justify-center text-white text-6xl mb-4">
             <FontAwesomeIcon icon={faChartPie} />
           </div>
-          <Link 
-          className="font-lato uppercase text-gray-500 font-bold cursor-pointer text-xl"
-           to="/admin/Graficas">GRAFICAS</Link> 
+          <Link
+            className="font-lato uppercase text-gray-500 font-bold cursor-pointer text-xl"
+            to="/admin/Graficas">GRAFICAS</Link>
         </div>
       </div>
       {showModal && (
@@ -159,8 +182,8 @@ const AdminVista = () => {
       )}
 
       <div>
-        <Cartitas/>
-        <LatestReservations/>
+        <Cartitas />
+        <LatestReservations />
       </div>
     </div>
   );

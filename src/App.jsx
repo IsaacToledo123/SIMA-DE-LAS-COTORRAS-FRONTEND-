@@ -20,8 +20,9 @@ import CabñaInfo from "./components/CabñaInfo";
 import AventuraInfo from "./components/AventuraInfo";
 import UltimasR from "./components/AdminComponents/components/UltimasR";
 import MapaGoogle from "./components/mapaGoogle";
-import Socket from './components/Socket'
-
+//import Socket from './components/Socket'
+import Chat from "./components/Chat"
+import ListaUsuarios from "./components/AdminComponents/ListaUsuarios";
 
 // import ReservasOption from './components/AdminComponents/components/ReservasOpcion'
 function App() {
@@ -37,18 +38,9 @@ function App() {
           <Route path="/ubicacion" element = {<Ubicacion/>} />
           <Route path="/cabañas" element = {<CabñaInfo />} />
           <Route path="/aventuras" element = {<AventuraInfo />} />
+          <Route path="/chat" element= {<Chat />} />      
         </Route>
-
-        {/*<Route path="/admin" element={<NavAdmin />}>
-          <Route index element={<AdminVista />} />
-          <Route path="paginaEgresos" element={<EgresosView />} />
-          <Route path="Graficas" element={<GraficosSeccionados />} />
-          <Route path="paginaIngresos" element={<IngresosView />} />
-          <Route path="Reservas" element={<ReservasView />} />
-          <Route path="Menu" element={<Menu />} />
-          </Route>*/}
-
-        {/* Se ha agregado */}
+        
         <Route path="/login" element={<Login />} />
         <Route element={<ProtectedRoute/>}>
           <Route
@@ -64,6 +56,8 @@ function App() {
                   <Route path="Reservas" element={<ReservasView />} />
                   <Route path="Menu" element={<Menu />} />
                   <Route path="Reservaciones" element={<UltimasR />} />
+                  <Route path="chat" element= {<Chat />} />
+                  <Route path="usuarios" element = {<ListaUsuarios />} />
                 </Routes>
               </Layout>
             }

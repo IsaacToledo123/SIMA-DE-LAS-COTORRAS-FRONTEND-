@@ -1,0 +1,8 @@
+.appear{
+      animation: appear 1s ease duration timing-function delay iteration-count direction fill-mode;
+}
+
+@keyframes appear {
+      from{opacity: 0;}
+      to{opacity: 1;}
+}

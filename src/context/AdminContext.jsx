@@ -22,18 +22,10 @@ export function AdministradorContextProvider(props) {
       const [aventurasAgrupadoSemana, setAventurasAgrupadoSemana] = useState([]);
       const [cabañasAgrupadoSemana, setCabañasAgrupadoSemana] = useState([]);
 
-      const fechaActual = new Date()
+      const fechaActual = new Date();
       const semanaPasada = new Date(fechaActual);
       semanaPasada.setDate(fechaActual.getDate() - 7);
-      const token = localStorage.getItem('token-admin')
-      const mensaje = "" + localStorage.getItem('token-admin')
-
-      useEffect(() => {
-
-            console.log("El token es:::" + localStorage.getItem('token-admin'))
-
-      }, [])
-
+      const token = localStorage.getItem('token-admin');
 
 
       useEffect(() => {
@@ -58,11 +50,12 @@ export function AdministradorContextProvider(props) {
             })
                   .then(e => setIngresos(e.data.Ingresos))
                   .catch(e => {
-                        console.log(e)
+
                         if (e.response) {
                               // La solicitud fue realizada y el servidor respondió con un estado de e
                               console.error('Error de respuesta del servidor:', e.response.data);
                               console.error('Estado de e:', e.response.status);
+
                         } else if (e.request) {
                               // La solicitud fue realizada pero no se recibió respuesta
                               console.error('No se recibió respuesta del servidor:', e.request);
@@ -72,13 +65,9 @@ export function AdministradorContextProvider(props) {
                         }
                   })
 
-
-
-      }, [token, agregadoIngreso, reservasAventuras, reservasCabañas]);
+      }, [token, agregadoIngreso]);
 
       useEffect(() => {
-
-            console.log("El tojken es " + token)
 
             axios.get(`${API_URL}/api/administrador/egresos/`, {
 
@@ -92,12 +81,9 @@ export function AdministradorContextProvider(props) {
                   .then(e => setEgresos(e.data.egresos))
                   .catch(e => console.log(e));
 
-      }, [agregadoEgreso, token, reservasAventuras, reservasCabañas]);
+      }, [agregadoEgreso, token]);
 
       useEffect(() => {
-
-            console.log("Aqui los ingresos")
-            console.log(ingresos);
 
             const ingresosSort = ingresos.sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
 
@@ -229,7 +215,6 @@ export function AdministradorContextProvider(props) {
                   value: valor
             }));
 
-            console.log(arregloModificadoCabaña)
             setCabañasAgrupadoSemana(arregloModificadoCabaña);
 
       }, [reservasCabañas, reservasAventuras]);
@@ -287,7 +272,7 @@ export function AdministradorContextProvider(props) {
             // Convertir el objeto agrupado de nuevo a un arreglo
             setArregloAgrupadoByUser(Object.values(objetosAgrupados).flat());
 
-      }, [arregloOrdenado])
+      }, [arregloOrdenado]);
 
 
       useEffect(() => {
@@ -338,7 +323,6 @@ export function AdministradorContextProvider(props) {
                   value: valor
             }));
 
-            console.log("Los egresos por semana son así: ")
             setEsgresosAgrupadosPorCategoria(arregloModificado);
 
       }, [egresos, token])

@@ -18,9 +18,6 @@ export function UsuariosContextProvider(props) {
       const [misReservaciones, setMisReservaciones] = useState([]);
       const API_URL = import.meta.env.VITE_REACT_APP_API_URL
 
-      console.log(misReservacionesAventura)
-      console.log(misReservacionesCabaña)
-
 
       useEffect(() => {
 
@@ -58,7 +55,7 @@ export function UsuariosContextProvider(props) {
 
                   axios.get(`${API_URL}/api/reservaciones-cabaña/${usuarioAutenticado.id}`)
                         .then(e => setMisReservacionesCabaña(e.data.reservaciones))
-                        .catch(e => console.log(e))
+                        .catch(e => console.log(e))         
             }
 
       }, [usuarioAutenticado])

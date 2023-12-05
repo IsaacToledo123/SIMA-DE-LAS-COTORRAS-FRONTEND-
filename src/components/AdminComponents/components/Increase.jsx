@@ -45,7 +45,8 @@ const TablaIngresosYReservaciones = () => {
 
   useEffect(() => {
 
-    console.log(ingresosOrdenados)
+    console.log("Ingresos ordenados");
+    console.log(ingresosOrdenados);
     
     const fechaActual = new Date()
 

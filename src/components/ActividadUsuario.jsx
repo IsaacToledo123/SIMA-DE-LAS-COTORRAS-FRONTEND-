@@ -7,10 +7,33 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMountainSun, faHouseChimney, faSadCry, faFaceSmileWink } from "@fortawesome/free-solid-svg-icons";
 import Swal from 'sweetalert2';
 
+const socket = new WebSocket('ws://localhost:8000/ws/notifications/sala1/');
+const username = localStorage.getItem('username');
+
 function ActividadUsuario() {
 
-      const { misReservaciones } = useContext(UsuarioContext);
-      const getRandomColor = () => '#' + Math.floor(Math.random()*16777215).toString(16);
+      const { misReservaciones, usuarioAutenticado } = useContext(UsuarioContext);
+      console.log(usuarioAutenticado)
+      const getRandomColor = () => '#' + Math.floor(Math.random() * 16777215).toString(16);
+
+      useEffect(() => {
+
+            console.log("El socket es: ");
+            console.log(socket)
+
+            socket.onopen = event => {
+
+                  console.log('websocket conectado ' + event);
+
+            }
+
+            socket.onclose = event => {
+
+                  console.log('websocket desconectado ' + event);
+
+            }
+
+      }, []);
 
       useEffect(() => {
             // Check to see if this is a redirect back from Checkout
@@ -40,6 +63,12 @@ function ActividadUsuario() {
                                     "cabaña": informacionServicio.idServicio
 
                               }
+
+                              socket.send(JSON.stringify({
+
+                                    message: `El usuario ${username} desea reservar una ${informacionServicio.servicio} el [${informacionServicio.fecha_entrada}] de $${informacionServicio.precio_cabaña}`,
+
+                              }));
 
                               axios.post(`${API_URL}/api/reservaciones-cabaña/`, informacion_para_pagar)
 
@@ -76,6 +105,12 @@ function ActividadUsuario() {
                                     "fecha_reservacion": informacionServicio.fecha_reservacion
 
                               }
+
+                              socket.send(JSON.stringify({
+
+                                    message: `El usuario ${usuarioAutenticado.username} desea reservar una ${informacionServicio.servicio} el ${informacionServicio.fecha_reservacion} a ${informacionServicio.precio_servicio}`,
+
+                              }));
 
                               axios.post(`${API_URL}/api/reservaciones-aventura/`, informacion_para_pagar)
 
@@ -146,7 +181,7 @@ function ActividadUsuario() {
 
                                                             const { nombre_servicio, fecha_de_pago, precio_servicio, fecha_servicio } = reservacion;
 
-                                                            return (<MisReservaciones servicio={nombre_servicio} fecha_de_pago={fecha_de_pago} precio_servicio={precio_servicio} fecha_servicio={fecha_servicio}/>)
+                                                            return (<MisReservaciones servicio={nombre_servicio} fecha_de_pago={fecha_de_pago} precio_servicio={precio_servicio} fecha_servicio={fecha_servicio} />)
                                                       })}
 
                                                 </div>

@@ -32,7 +32,7 @@ const Carousel = () => {
       return (
             <div
                   id="carouselExampleCaptions"
-                  className="relative"
+                  className="relative "
                   data-te-carousel-init
                   data-te-ride="carousel"
             >
@@ -48,7 +48,7 @@ const Carousel = () => {
                                     data-te-carousel-item
                                     style={{ backfaceVisibility: 'hidden' }}
                               >
-                                    <img src={image} className="block w-full" alt={`Slide ${index + 1}`} />
+                                    <img src={image} className="block w-full " alt={`Slide ${index + 1}`} />
                               </div>
                         ))}
                   </div>
