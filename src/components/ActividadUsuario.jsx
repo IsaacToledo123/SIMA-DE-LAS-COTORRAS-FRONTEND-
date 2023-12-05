@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMountainSun, faHouseChimney, faSadCry, faFaceSmileWink } from "@fortawesome/free-solid-svg-icons";
 import Swal from 'sweetalert2';
 
-const socket = new WebSocket('ws://localhost:8000/ws/notifications/sala1/');
+const socket = new WebSocket(`ws://${import.meta.env.VITE_REACT_APP_API_URL}/ws/notifications/sala1/`);
 const username = localStorage.getItem('username');
 
 function ActividadUsuario() {

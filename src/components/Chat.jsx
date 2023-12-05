@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react'
 import { UsuarioContext } from "../context/UsuarioContext";
 // Podemos hacer que el nombre de la sala sea dinámico
-const chatSocket = new WebSocket('ws://localhost:8000/ws/chat/chat_sala1/');
+const chatSocket = new WebSocket(`ws://${import.meta.env.VITE_REACT_APP_API_URL}/ws/chat/chat_sala1/`);
 const username = localStorage.getItem('username');
 
 function Chat() {
